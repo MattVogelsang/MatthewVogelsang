@@ -72,6 +72,35 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
     }
   }, [currentTrack]);
 
+  // Enhanced auto-play with user interaction
+  useEffect(() => {
+    const handleUserInteraction = () => {
+      if (audioRef.current && !isPlaying) {
+        audioRef.current.play().then(() => {
+          setIsPlaying(true);
+        }).catch((error) => {
+          console.log('Auto-play still blocked:', error);
+        });
+        // Remove event listeners after first interaction
+        document.removeEventListener('click', handleUserInteraction);
+        document.removeEventListener('keydown', handleUserInteraction);
+        document.removeEventListener('touchstart', handleUserInteraction);
+      }
+    };
+
+    // Add event listeners for user interaction
+    document.addEventListener('click', handleUserInteraction);
+    document.addEventListener('keydown', handleUserInteraction);
+    document.addEventListener('touchstart', handleUserInteraction);
+
+    // Cleanup
+    return () => {
+      document.removeEventListener('click', handleUserInteraction);
+      document.removeEventListener('keydown', handleUserInteraction);
+      document.removeEventListener('touchstart', handleUserInteraction);
+    };
+  }, [isPlaying]);
+
   const togglePlay = () => {
     if (audioRef.current) {
       if (isPlaying) {

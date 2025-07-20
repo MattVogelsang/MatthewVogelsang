@@ -42,16 +42,16 @@ body {
 /* Typing animation */
 @keyframes typing {
   0% {
-    width: 0;
+    width: 0ch;
   }
-  20% {
-    width: 100%;
+  10% {
+    width: 13ch;
   }
-  80% {
-    width: 100%;
+  90% {
+    width: 13ch;
   }
   100% {
-    width: 100%;
+    width: 13ch;
   }
 }
 
@@ -59,9 +59,9 @@ body {
   overflow: hidden;
   border-right: 2px solid;
   white-space: nowrap;
-  animation: typing 50s steps(50, end), blink-caret-typing 1s step-end infinite;
+  animation: typing 8s steps(13, end), blink-caret-sync 0.62s step-end infinite;
   display: inline-block;
-  max-width: 100%;
+  max-width: fit-content;
   word-wrap: break-word;
   hyphens: auto;
   min-width: 0;
@@ -72,13 +72,13 @@ body {
 /* Responsive typing animation */
 @media (max-width: 768px) {
   .typing-animation {
-    animation: typing 45s steps(40, end), blink-caret-typing 1s step-end infinite;
+    animation: typing 7s steps(13, end), blink-caret-sync 0.54s step-end infinite;
   }
 }
 
 @media (min-width: 1024px) {
   .typing-animation {
-    animation: typing 55s steps(60, end), blink-caret-typing 1s step-end infinite;
+    animation: typing 9s steps(13, end), blink-caret-sync 0.69s step-end infinite;
   }
 }
 
@@ -92,6 +92,16 @@ body {
 }
 
 @keyframes blink-caret-typing {
+  0%, 50% {
+    border-color: var(--primary);
+  }
+  51%, 100% {
+    border-color: transparent;
+  }
+}
+
+/* Synchronized cursor blink that matches typing speed */
+@keyframes blink-caret-sync {
   0%, 50% {
     border-color: var(--primary);
   }

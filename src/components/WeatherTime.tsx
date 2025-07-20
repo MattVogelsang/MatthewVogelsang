@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Clock, MapPin, Thermometer, Droplets, Wind } from 'lucide-react';
+import { Clock, MapPin, Thermometer, Droplets, Wind, ChevronDown, ChevronUp } from 'lucide-react';
 
 interface WeatherData {
   location: string;
@@ -21,6 +21,10 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [showDetails, setShowDetails] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(() => {
+    const saved = localStorage.getItem('weatherMinimized');
+    return saved ? JSON.parse(saved) : false;
+  });
 
   useEffect(() => {
     // Update time every second
@@ -135,6 +139,11 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
     return () => clearInterval(timeInterval);
   }, []);
 
+  // Save minimized state to localStorage
+  useEffect(() => {
+    localStorage.setItem('weatherMinimized', JSON.stringify(isMinimized));
+  }, [isMinimized]);
+
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString('en-US', {
       hour: '2-digit',
@@ -170,18 +179,27 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
     <div className="fixed bottom-20 md:bottom-4 left-2 md:left-4 z-40">
       <div 
         className={`glass rounded-2xl shadow-2xl p-4 transition-all duration-500 hover:scale-105 ${
-          showDetails ? 'w-72 md:w-80' : 'w-auto'
+          isMinimized ? 'w-auto' : showDetails ? 'w-72 md:w-80' : 'w-auto'
         } ${darkMode ? 'text-white' : 'text-gray-800'}`}
-        onMouseEnter={() => setShowDetails(true)}
-        onMouseLeave={() => setShowDetails(false)}
+        onMouseEnter={() => !isMinimized && setShowDetails(true)}
+        onMouseLeave={() => !isMinimized && setShowDetails(false)}
       >
         {/* Time Section */}
         <div className="mb-4">
-          <div className="flex items-center space-x-2 mb-2">
-            <Clock size={20} className="opacity-70" />
-            <div className="text-2xl font-bold font-mono">
-              {formatTime(time)}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <Clock size={20} className="opacity-70" />
+              <div className="text-2xl font-bold font-mono">
+                {formatTime(time)}
+              </div>
             </div>
+            <button
+              onClick={() => setIsMinimized(!isMinimized)}
+              className="p-1 rounded-full hover:bg-white/20 transition-colors touch-manipulation"
+              title={isMinimized ? "Expand weather" : "Minimize weather"}
+            >
+              {isMinimized ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+            </button>
           </div>
           <div className="text-sm opacity-70">
             {formatDate(time)}
@@ -189,7 +207,7 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
         </div>
 
         {/* Weather Section */}
-        {weather && (
+        {weather && !isMinimized && (
           <div className="border-t border-white/20 pt-4">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center space-x-2">
@@ -233,6 +251,21 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
                 </div>
               </div>
             )}
+          </div>
+        )}
+
+        {/* Minimized Weather Preview */}
+        {weather && isMinimized && (
+          <div className="border-t border-white/20 pt-2">
+            <div className="flex items-center justify-between text-sm">
+              <div className="flex items-center space-x-1">
+                <span className="text-lg">{weather.icon}</span>
+                <span className="font-medium">{weather.temperature}°</span>
+              </div>
+              <div className="text-xs opacity-70">
+                {weather.location.split(',')[0]}
+              </div>
+            </div>
           </div>
         )}
 

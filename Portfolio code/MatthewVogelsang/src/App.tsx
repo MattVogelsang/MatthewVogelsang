@@ -369,6 +369,15 @@ function App() {
         {/* Floating UI Elements */}
         <BackgroundMusic darkMode={darkMode} />
         <WeatherTime darkMode={darkMode} />
+        
+        {/* Music Credit */}
+        <div className="fixed bottom-2 left-2 z-40">
+          <div className={`text-xs opacity-60 hover:opacity-100 transition-opacity duration-300 ${
+            darkMode ? 'text-gray-400' : 'text-gray-600'
+          }`}>
+            🎵 Music: Jeremy Black
+          </div>
+        </div>
       </div>
     </div>
   );

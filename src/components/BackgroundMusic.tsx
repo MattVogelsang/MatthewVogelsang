@@ -11,6 +11,7 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
   const [volume, setVolume] = useState(0.3);
   const [isMuted, setIsMuted] = useState(false);
   const [showControls, setShowControls] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   // House Music Playlist for Portfolio
@@ -58,6 +59,18 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
       audioRef.current.volume = isMuted ? 0 : volume;
     }
   }, [volume, isMuted]);
+
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   // Auto-play when component mounts
   useEffect(() => {
@@ -160,25 +173,26 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
   return (
     <div className="fixed bottom-4 right-4 z-50 music-player">
       <div 
-        className={`glass rounded-2xl shadow-2xl p-4 transition-all duration-500 hover:scale-105 ${
-          showControls ? 'w-80' : 'w-16'
+        className={`glass rounded-2xl shadow-2xl p-3 md:p-4 transition-all duration-500 hover:scale-105 ${
+          showControls || isMobile ? 'w-72 md:w-80' : 'w-16 md:w-16'
         } ${darkMode ? 'text-white' : 'text-gray-800'}`}
-        onMouseEnter={() => setShowControls(true)}
-        onMouseLeave={() => setShowControls(false)}
+        onMouseEnter={() => !isMobile && setShowControls(true)}
+        onMouseLeave={() => !isMobile && setShowControls(false)}
+        onTouchStart={() => isMobile && setShowControls(true)}
       >
         <div className="flex items-center space-x-3">
           <button
             onClick={togglePlay}
-            className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${
+            className={`w-16 h-16 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-all duration-300 touch-manipulation ${
               isPlaying 
-                ? 'bg-red-500 hover:bg-red-600 text-white' 
-                : 'bg-blue-500 hover:bg-blue-600 text-white'
+                ? 'bg-red-500 hover:bg-red-600 active:bg-red-700 text-white' 
+                : 'bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white'
             }`}
           >
-            {isPlaying ? <Pause size={20} /> : <Play size={20} />}
+            {isPlaying ? <Pause size={24} className="md:w-5 md:h-5" /> : <Play size={24} className="md:w-5 md:h-5" />}
           </button>
           
-          {showControls && (
+          {(showControls || isMobile) && (
             <>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium truncate">{playlist[currentTrack].title}</p>
@@ -188,29 +202,29 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
               <div className="flex items-center space-x-2">
                 <button
                   onClick={prevTrack}
-                  className="p-2 rounded-full hover:bg-white/20 transition-colors"
+                  className="p-3 md:p-2 rounded-full hover:bg-white/20 active:bg-white/30 transition-colors touch-manipulation"
                 >
-                  <SkipBack size={16} />
+                  <SkipBack size={20} className="md:w-4 md:h-4" />
                 </button>
                 
                 <button
                   onClick={nextTrack}
-                  className="p-2 rounded-full hover:bg-white/20 transition-colors"
+                  className="p-3 md:p-2 rounded-full hover:bg-white/20 active:bg-white/30 transition-colors touch-manipulation"
                 >
-                  <SkipForward size={16} />
+                  <SkipForward size={20} className="md:w-4 md:h-4" />
                 </button>
               </div>
             </>
           )}
         </div>
 
-        {showControls && (
+        {(showControls || isMobile) && (
           <div className="flex items-center space-x-2 mt-3">
             <button
               onClick={toggleMute}
-              className="p-1 rounded hover:bg-white/20 transition-colors"
+              className="p-2 md:p-1 rounded hover:bg-white/20 active:bg-white/30 transition-colors touch-manipulation"
             >
-              {isMuted ? <VolumeX size={16} /> : <Volume2 size={16} />}
+              {isMuted ? <VolumeX size={20} className="md:w-4 md:h-4" /> : <Volume2 size={20} className="md:w-4 md:h-4" />}
             </button>
             <input
               type="range"
@@ -222,7 +236,13 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
                 setVolume(parseFloat(e.target.value));
                 setIsMuted(false);
               }}
-              className="flex-1 h-2 bg-white/20 rounded-lg appearance-none cursor-pointer"
+              className="flex-1 h-3 md:h-2 bg-white/20 rounded-lg appearance-none cursor-pointer touch-manipulation"
+              style={{
+                WebkitAppearance: 'none',
+                appearance: 'none',
+                background: 'transparent',
+                cursor: 'pointer',
+              }}
             />
           </div>
         )}

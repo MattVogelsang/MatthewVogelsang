@@ -275,7 +275,7 @@ function App() {
             </section>
 
             {/* Contact Section */}
-            <section id="contact" className="py-20">
+            <section id="contact" className="py-20 pb-32 md:pb-20">
               <div className="container mx-auto px-4 max-w-4xl">
                 <h2 className="text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
                   Get In Touch
@@ -371,7 +371,7 @@ function App() {
         <WeatherTime darkMode={darkMode} />
         
         {/* Music Credit */}
-        <div className="fixed bottom-2 left-2 z-40">
+        <div className="fixed bottom-2 left-2 z-30">
           <div className={`text-xs opacity-60 hover:opacity-100 transition-opacity duration-300 ${
             darkMode ? 'text-gray-400' : 'text-gray-600'
           }`}>

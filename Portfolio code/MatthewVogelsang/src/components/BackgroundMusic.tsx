@@ -74,8 +74,16 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
 
   // Enhanced auto-play with user interaction
   useEffect(() => {
-    const handleUserInteraction = () => {
-      if (audioRef.current && !isPlaying) {
+    let hasStarted = false;
+    
+    const handleUserInteraction = (event: Event) => {
+      // Don't auto-play if user is clicking on music controls
+      if (event.target && (event.target as Element).closest('.music-player')) {
+        return;
+      }
+      
+      if (audioRef.current && !isPlaying && !hasStarted) {
+        hasStarted = true;
         audioRef.current.play().then(() => {
           setIsPlaying(true);
         }).catch((error) => {
@@ -99,16 +107,23 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
       document.removeEventListener('keydown', handleUserInteraction);
       document.removeEventListener('touchstart', handleUserInteraction);
     };
-  }, [isPlaying]);
+  }, []); // Remove isPlaying dependency to prevent re-adding listeners
 
   const togglePlay = () => {
+    console.log('Toggle play clicked, current state:', isPlaying);
     if (audioRef.current) {
       if (isPlaying) {
+        console.log('Pausing audio...');
         audioRef.current.pause();
+        setIsPlaying(false);
       } else {
-        audioRef.current.play();
+        console.log('Playing audio...');
+        audioRef.current.play().then(() => {
+          setIsPlaying(true);
+        }).catch((error) => {
+          console.log('Play failed:', error);
+        });
       }
-      setIsPlaying(!isPlaying);
     }
   };
 
@@ -143,7 +158,7 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50">
+    <div className="fixed bottom-4 right-4 z-50 music-player">
       <div 
         className={`glass rounded-2xl shadow-2xl p-4 transition-all duration-500 hover:scale-105 ${
           showControls ? 'w-80' : 'w-16'

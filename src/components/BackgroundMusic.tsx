@@ -171,7 +171,7 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
   };
 
   return (
-    <div className="fixed bottom-4 right-4 z-50 music-player">
+    <div className="fixed bottom-4 right-2 md:right-4 z-50 music-player" style={{ zIndex: 9999 }}>
       <div 
         className={`glass rounded-2xl shadow-2xl p-3 md:p-4 transition-all duration-500 hover:scale-105 ${
           showControls || isMobile ? 'w-72 md:w-80' : 'w-16 md:w-16'

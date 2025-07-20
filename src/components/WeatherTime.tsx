@@ -155,7 +155,7 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
 
   if (loading) {
     return (
-      <div className="fixed bottom-4 left-4 z-50">
+      <div className="fixed bottom-4 left-2 md:left-4 z-40">
         <div className={`glass rounded-2xl shadow-2xl p-4 transition-all duration-300 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
           <div className="animate-pulse">
             <div className="h-4 bg-white/20 rounded w-24 mb-2"></div>
@@ -167,10 +167,10 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
   }
 
   return (
-    <div className="fixed bottom-4 left-4 z-50">
+    <div className="fixed bottom-4 left-2 md:left-4 z-40">
       <div 
         className={`glass rounded-2xl shadow-2xl p-4 transition-all duration-500 hover:scale-105 ${
-          showDetails ? 'w-80' : 'w-auto'
+          showDetails ? 'w-72 md:w-80' : 'w-auto'
         } ${darkMode ? 'text-white' : 'text-gray-800'}`}
         onMouseEnter={() => setShowDetails(true)}
         onMouseLeave={() => setShowDetails(false)}

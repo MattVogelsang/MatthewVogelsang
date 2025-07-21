@@ -48,34 +48,7 @@ const ScrollAnimations = ({ children }: ScrollAnimationsProps) => {
       element.classList.add('animate-float');
     });
 
-    // Add typing effect to text elements
-    const typingElements = document.querySelectorAll('.typing-effect');
-    typingElements.forEach((element) => {
-      const text = element.textContent || '';
-      element.textContent = '';
-      element.classList.add('typing-animation');
-      
-      let i = 0;
-      const typeWriter = () => {
-        if (i < text.length) {
-          (element as HTMLElement).textContent += text.charAt(i);
-          i++;
-          setTimeout(typeWriter, 100);
-        }
-      };
-      
-      // Start typing when element comes into view
-      const typingObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            typeWriter();
-            typingObserver.unobserve(entry.target);
-          }
-        });
-      });
-      
-      typingObserver.observe(element);
-    });
+
 
     // Add glow effect on hover
     const glowElements = document.querySelectorAll('.glow');

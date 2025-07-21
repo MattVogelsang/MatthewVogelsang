@@ -2,6 +2,7 @@ import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
 import mattProfile from '../images/matt-profile.jpg';
 
 const HeroSection = () => {
+
   return (
     <section className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
       {/* Enhanced Parallax Background Elements */}
@@ -37,7 +38,7 @@ const HeroSection = () => {
                 Hello, I'm
               </p>
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-bold gradient-text leading-tight">
-                <span className="typing-effect">Matt Vogelsang</span>
+                <span className="typewriter">Matt Vogelsang</span>
               </h1>
               <h2 className="text-2xl lg:text-3xl text-gray-700 dark:text-gray-300 animate-on-scroll">
                 Full-Stack Engineer
@@ -101,7 +102,7 @@ const HeroSection = () => {
               <div className="absolute inset-0 bg-purple-600 rounded-full transform -translate-x-2 -translate-y-2 opacity-20 floating" style={{ animationDelay: '0.5s' }}></div>
               
               {/* Profile image */}
-              <div className="relative z-10 w-80 h-80 rounded-full shadow-2xl border-4 border-white dark:border-gray-800 glow floating overflow-hidden">
+              <div className="relative z-10 w-80 h-80 rounded-full shadow-2xl border-4 border-white dark:border-gray-800 auto-glow overflow-hidden">
                 <img
                   src={mattProfile}
                   alt="Matt Vogelsang - Full-Stack Engineer"

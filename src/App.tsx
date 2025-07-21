@@ -4,18 +4,9 @@ import HeroSection from './components/HeroSection';
 import BackgroundMusic from './components/BackgroundMusic';
 import WeatherTime from './components/WeatherTime';
 import ScrollAnimations from './components/ScrollAnimations';
+import { projects } from './data/projects';
 
-// Import project images
-import trinityInsurance from './images/trinity-insurance.jpg';
-import swimWithSara from './images/swim-with-sara.jpg';
-import sneakersHero from './images/sneakers-hero.jpg';
-import spaceHero from './images/space-hero.jpg';
-import projectAtlas from './images/project-atlas.jpg';
-import classico from './images/classico.jpg';
-import workoutGenerator from './images/Workout-Generator.jpg';
-import shop23 from './images/Shop23.jpg';
-import launchingSoon from './images/launching-soon.jpg';
-import landscape from './images/Landscape.jpg';
+
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -169,84 +160,12 @@ function App() {
                   Featured Projects
                 </h2>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {[
-                    {
-                      title: "Trinity Insurance",
-                      description: "Modern insurance platform with user management and policy tracking.",
-                      tech: ["React", "Node.js", "MongoDB", "Express"],
-                      image: trinityInsurance,
-                      link: "#"
-                    },
-                    {
-                      title: "Project Atlas",
-                      description: "Project management tool with team collaboration and task tracking.",
-                      tech: ["React", "Socket.io", "Express", "MongoDB"],
-                      image: projectAtlas,
-                      link: "#"
-                    },
-                    {
-                      title: "Swim With Sara",
-                      description: "Swimming lesson booking platform with instructor profiles and scheduling.",
-                      tech: ["React", "TypeScript", "Tailwind CSS", "Vite"],
-                      image: swimWithSara,
-                      link: "#"
-                    },
-
-                    {
-                      title: "Classico",
-                      description: "Classic car marketplace with detailed listings and user reviews.",
-                      tech: ["React", "Node.js", "AWS", "PostgreSQL"],
-                      image: classico,
-                      link: "#"
-                    },
-                    {
-                      title: "Landscape Project",
-                      description: "Beautiful landscape design and visualization platform.",
-                      tech: ["React", "Three.js", "WebGL", "CSS3"],
-                      image: landscape,
-                      link: "#"
-                    },
-                    {
-                      title: "Space Hero",
-                      description: "Interactive space exploration app with real-time data visualization.",
-                      tech: ["React", "Three.js", "NASA API", "WebGL"],
-                      image: spaceHero,
-                      link: "#"
-                    },
-                    {
-                      title: "Workout Generator",
-                      description: "AI-powered workout planning app with personalized fitness routines.",
-                      tech: ["React", "Node.js", "AI/ML", "MongoDB"],
-                      image: workoutGenerator,
-                      link: "#"
-                    },
-                    {
-                      title: "Shop23",
-                      description: "Modern e-commerce platform with advanced shopping features.",
-                      tech: ["React", "TypeScript", "Stripe", "PostgreSQL"],
-                      image: shop23,
-                      link: "#"
-                    },
-                    {
-                      title: "Sneakers Hero",
-                      description: "E-commerce platform for premium sneakers with advanced filtering.",
-                      tech: ["React", "Node.js", "Stripe", "PostgreSQL"],
-                      image: sneakersHero,
-                      link: "#"
-                    },
-                    {
-                      title: "Launching Soon",
-                      description: "Exciting new project coming soon with innovative features.",
-                      tech: ["React", "Next.js", "TypeScript", "Tailwind"],
-                      image: launchingSoon,
-                      link: "#"
-                    }
-                  ].map((project, index) => (
-                    <div key={project.title} className="animate-on-scroll" style={{ animationDelay: `${index * 0.2}s` }}>
+                  {projects.filter(project => project.featured).map((project, index) => (
+                    <div key={project.id} className="animate-on-scroll" style={{ animationDelay: `${index * 0.2}s` }}>
                       <div className="glass p-6 rounded-2xl h-full hover:scale-105 transition-transform duration-300 group flex flex-col">
                         <div className="relative mb-4 overflow-hidden rounded-lg">
                           <img
-                            src={project.image}
+                            src={project.imageUrl}
                             alt={project.title}
                             className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
                           />
@@ -255,14 +174,16 @@ function App() {
                         <h3 className="text-xl font-bold mb-3">{project.title}</h3>
                         <p className="text-gray-600 dark:text-gray-300 mb-4 flex-grow">{project.description}</p>
                         <div className="flex flex-wrap gap-2 mb-4">
-                          {project.tech.map((tech) => (
+                          {project.technologies.map((tech) => (
                             <span key={tech} className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">
                               {tech}
                             </span>
                           ))}
                         </div>
                         <a
-                          href={project.link}
+                          href={project.demoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 text-sm font-medium mt-auto"
                         >
                           View Project

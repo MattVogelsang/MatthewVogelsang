@@ -1,0 +1,10 @@
+INSTRUCTIONS FOR ADDING YOUR RESUME:
+
+1. Create or export your resume as a PDF file
+2. Name it "resume.pdf" 
+3. Place it in this "public" folder (same location as this file)
+4. The download button in the Resume section will automatically work
+
+The resume.pdf file should be placed in the public folder so it can be accessed at the root URL of your website.
+
+Your resume PDF will be downloadable when users click the "Download Resume" button on your portfolio website. 

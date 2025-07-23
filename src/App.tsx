@@ -4,6 +4,7 @@ import HeroSection from './components/HeroSection';
 import BackgroundMusic from './components/BackgroundMusic';
 import WeatherTime from './components/WeatherTime';
 import ScrollAnimations from './components/ScrollAnimations';
+import Resume from './components/Resume';
 import { projects } from './data/projects';
 
 
@@ -284,6 +285,9 @@ function App() {
                 </div>
               </div>
             </section>
+
+            {/* Resume Section */}
+            <Resume />
           </main>
         </ScrollAnimations>
 

@@ -9,6 +9,7 @@ import workoutGeneratorImg from '@/images/Workout-Generator.jpg';
 import landscapeImg from '@/images/Landscape.jpg';
 import shop23Img from '@/images/Shop23.jpg';
 import swimWithSaraImg from '@/images/swim-with-sara.jpg';
+import vdImg from '@/images/VD.jpg';
 
 export const projects: Project[] = [
 	{
@@ -93,6 +94,46 @@ export const projects: Project[] = [
 	},
 	{
 		id: 3,
+		title: 'Web Design & Development Studio Site',
+		description:
+			'A modern web application showcasing innovative design and development solutions with a focus on user experience and performance.',
+		technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
+		imageUrl: vdImg,
+		demoUrl: '#',
+		featured: true,
+		category: 'web-app',
+		challenge:
+			'Create a modern web application that demonstrates cutting-edge design principles and development practices.',
+		solution:
+			'Developed a responsive React application with TypeScript, featuring modern UI components and optimized performance.',
+		outcome:
+			'Delivered a polished web application that showcases modern development practices and user experience design.',
+		goals: [
+			'Implement modern design principles',
+			'Ensure responsive layout across all devices',
+			'Optimize for fast loading and performance',
+			'Create an intuitive user experience'
+		],
+		process: [
+			{
+				title: 'Research & Planning',
+				description:
+					'Analyzed modern web application requirements and planned the user interface and functionality.'
+			},
+			{
+				title: 'Design & Development',
+				description:
+					'Built with React and TypeScript, using Tailwind CSS for responsive styling and modern UI components.'
+			},
+			{
+				title: 'Testing & Optimization',
+				description:
+					'Conducted thorough testing across devices and browsers, ensuring optimal performance and accessibility.'
+			}
+		]
+	},
+	{
+		id: 4,
 		title: 'Richy\'s Landscaping Website',
 		description:
 			'A modern, professional website for Richy\'s Landscaping, showcasing their landscaping services and portfolio in Hollywood, Florida.',
@@ -132,7 +173,7 @@ export const projects: Project[] = [
 		]
 	},
 	{
-		id: 4,
+		id: 5,
 		title: 'Workout Generator',
 		description:
 			'An interactive web application that generates personalized workout routines based on user preferences for workout type, difficulty level, and data source.',
@@ -172,7 +213,7 @@ export const projects: Project[] = [
 		]
 	},
 	{
-		id: 5,
+		id: 6,
 		title: 'Classico – Luxury Ride-Share Landing Experience',
 		description:
 			'A refined, conversion-focused landing page for a luxury ride-share brand, featuring curated car showcases and a waitlist signup flow.',
@@ -217,7 +258,7 @@ export const projects: Project[] = [
 		]
 	},
 	{
-		id: 6,
+		id: 7,
 		title: 'Space Tourism Website',
 		description:
 			'A modern, responsive website for a space tourism company, showcasing space travel experiences and destinations.',
@@ -257,7 +298,7 @@ export const projects: Project[] = [
 		]
 	},
 	{
-		id: 7,
+		id: 8,
 		title: 'Shopping App',
 		description:
 			'A modern e-commerce platform for sneakers, featuring a clean design and seamless shopping experience.',
@@ -297,7 +338,7 @@ export const projects: Project[] = [
 		]
 	},
 	{
-		id: 8,
+		id: 9,
 		title: 'Launching Soon',
 		description:
 			'A placeholder project for upcoming work.',
@@ -324,7 +365,7 @@ export const projects: Project[] = [
 		]
 	},
 	{
-		id: 9,
+		id: 10,
 		title: 'Shop23 - E-commerce Platform',
 		description:
 			'A modern e-commerce platform built with React and Node.js, featuring product browsing, shopping cart functionality, and secure checkout process.',
@@ -364,7 +405,7 @@ export const projects: Project[] = [
 		]
 	},
 	{
-		id: 10,
+		id: 11,
 		title: 'Swim with Sara',
 		description:
 			'A modern, responsive website for Swim with Sara, showcasing swimming lessons and aquatic services with an engaging user experience.',

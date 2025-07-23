@@ -95,11 +95,11 @@ function App() {
                       <ul className="space-y-3">
                         <li className="flex items-center space-x-3">
                           <div className="w-2 h-2 bg-white rounded-full"></div>
-                          <span>Frontend Development with React & TypeScript</span>
+                          <span>Frontend Development Specializing in React, TypeScript & Modern Web Technologies</span>
                         </li>
                         <li className="flex items-center space-x-3">
                           <div className="w-2 h-2 bg-white rounded-full"></div>
-                          <span>Backend Development with Node.js</span>
+                          <span>Backend Development with Node.js & Python</span>
                         </li>
                         <li className="flex items-center space-x-3">
                           <div className="w-2 h-2 bg-white rounded-full"></div>

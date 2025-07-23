@@ -205,11 +205,11 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
         onTouchStart={() => isMobile && !isMinimized && setShowDetails(true)}
       >
         {/* Time Section */}
-        <div className="mb-4">
+        <div className={`${isMinimized ? 'mb-2' : 'mb-4'}`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
-              <Clock size={20} className="opacity-70" />
-              <div className="text-2xl font-bold font-mono">
+              <Clock size={isMinimized ? 16 : 20} className="opacity-70" />
+              <div className={`font-bold font-mono ${isMinimized ? 'text-lg' : 'text-2xl'}`}>
                 {formatTime(time)}
               </div>
             </div>
@@ -225,9 +225,11 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
               )}
             </button>
           </div>
-          <div className="text-sm opacity-70">
-            {formatDate(time)}
-          </div>
+          {!isMinimized && (
+            <div className="text-sm opacity-70">
+              {formatDate(time)}
+            </div>
+          )}
         </div>
 
         {/* Weather Section */}
@@ -281,12 +283,12 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
         {/* Minimized Weather Preview */}
         {weather && isMinimized && (
           <div className="border-t border-white/20 pt-2">
-            <div className="flex items-center justify-between text-sm">
+            <div className="flex items-center justify-between text-xs">
               <div className="flex items-center space-x-1">
-                <span className="text-lg">{weather.icon}</span>
+                <span className="text-base">{weather.icon}</span>
                 <span className="font-medium">{weather.temperature}°</span>
               </div>
-              <div className="text-xs opacity-70">
+              <div className="text-xs opacity-70 hidden sm:block">
                 {weather.location.split(',')[0]}
               </div>
             </div>

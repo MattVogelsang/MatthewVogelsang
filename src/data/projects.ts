@@ -99,7 +99,7 @@ export const projects: Project[] = [
 			'A modern web application showcasing innovative design and development solutions with a focus on user experience and performance.',
 		technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS'],
 		imageUrl: vdImg,
-		demoUrl: '#',
+		demoUrl: 'https://vogelsang-designs.vercel.app',
 		featured: true,
 		category: 'web-app',
 		challenge:

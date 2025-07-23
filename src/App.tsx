@@ -164,14 +164,19 @@ function App() {
                   {projects.filter(project => project.featured).map((project, index) => (
                     <div key={project.id} className="animate-on-scroll" style={{ animationDelay: `${index * 0.2}s` }}>
                       <div className="glass p-6 rounded-2xl h-full hover:scale-105 transition-transform duration-300 group flex flex-col">
-                        <div className="relative mb-4 overflow-hidden rounded-lg">
+                        <a
+                          href={project.demoUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block relative mb-4 overflow-hidden rounded-lg cursor-pointer"
+                        >
                           <img
                             src={project.imageUrl}
                             alt={project.title}
                             className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
                           />
                           <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        </div>
+                        </a>
                         <h3 className="text-xl font-bold mb-3">{project.title}</h3>
                         <p className="text-gray-600 dark:text-gray-300 mb-4 flex-grow">{project.description}</p>
                         <div className="flex flex-wrap gap-2 mb-4">

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX } from 'lucide-react';
+import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX, Minimize2, Maximize2 } from 'lucide-react';
 
 interface BackgroundMusicProps {
   darkMode: boolean;
@@ -12,6 +12,7 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
   const [isMuted, setIsMuted] = useState(false);
   const [showControls, setShowControls] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [isMinimized, setIsMinimized] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   // House Music Playlist for Portfolio
@@ -170,15 +171,22 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
     nextTrack();
   };
 
+  const toggleMinimize = () => {
+    setIsMinimized(!isMinimized);
+    if (!isMinimized) {
+      setShowControls(false);
+    }
+  };
+
   return (
     <div className="fixed bottom-20 md:bottom-4 right-2 md:right-4 z-50 music-player" style={{ zIndex: 9999 }}>
       <div 
         className={`glass rounded-2xl shadow-2xl p-3 md:p-4 transition-all duration-500 hover:scale-105 ${
-          showControls || isMobile ? 'w-72 md:w-80' : 'w-16 md:w-16'
+          isMinimized ? 'w-16 md:w-16' : (showControls || isMobile ? 'w-72 md:w-80' : 'w-16 md:w-16')
         } ${darkMode ? 'text-white' : 'text-gray-800'}`}
-        onMouseEnter={() => !isMobile && setShowControls(true)}
-        onMouseLeave={() => !isMobile && setShowControls(false)}
-        onTouchStart={() => isMobile && setShowControls(true)}
+        onMouseEnter={() => !isMobile && !isMinimized && setShowControls(true)}
+        onMouseLeave={() => !isMobile && !isMinimized && setShowControls(false)}
+        onTouchStart={() => isMobile && !isMinimized && setShowControls(true)}
       >
         <div className="flex items-center space-x-3">
           <button
@@ -192,7 +200,17 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
             {isPlaying ? <Pause size={24} className="md:w-5 md:h-5" /> : <Play size={24} className="md:w-5 md:h-5" />}
           </button>
           
-          {(showControls || isMobile) && (
+          {/* Minimize/Maximize button for mobile */}
+          {isMobile && (
+            <button
+              onClick={toggleMinimize}
+              className="p-2 rounded-full hover:bg-white/20 active:bg-white/30 transition-colors touch-manipulation"
+            >
+              {isMinimized ? <Maximize2 size={20} /> : <Minimize2 size={20} />}
+            </button>
+          )}
+          
+          {(showControls || isMobile) && !isMinimized && (
             <>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium truncate">{playlist[currentTrack].title}</p>
@@ -218,7 +236,7 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
           )}
         </div>
 
-        {(showControls || isMobile) && (
+        {(showControls || isMobile) && !isMinimized && (
           <div className="flex items-center space-x-2 mt-3">
             <button
               onClick={toggleMute}

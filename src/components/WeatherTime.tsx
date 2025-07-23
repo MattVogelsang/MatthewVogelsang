@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Clock, MapPin, Thermometer, Droplets, Wind, ChevronDown, ChevronUp } from 'lucide-react';
+import { Clock, MapPin, Thermometer, Droplets, Wind, ChevronDown, ChevronUp, Minimize2, Maximize2 } from 'lucide-react';
 
 interface WeatherData {
   location: string;
@@ -25,6 +25,7 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
     const saved = localStorage.getItem('weatherMinimized');
     return saved ? JSON.parse(saved) : false;
   });
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     // Update time every second
@@ -136,13 +137,31 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
 
     getWeather();
 
-    return () => clearInterval(timeInterval);
+    // Check if device is mobile
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      clearInterval(timeInterval);
+      window.removeEventListener('resize', checkMobile);
+    };
   }, []);
 
   // Save minimized state to localStorage
   useEffect(() => {
     localStorage.setItem('weatherMinimized', JSON.stringify(isMinimized));
   }, [isMinimized]);
+
+  const toggleMinimize = () => {
+    setIsMinimized(!isMinimized);
+    if (!isMinimized) {
+      setShowDetails(false);
+    }
+  };
 
   const formatTime = (date: Date) => {
     return date.toLocaleTimeString('en-US', {
@@ -181,8 +200,9 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
         className={`glass rounded-2xl shadow-2xl p-4 transition-all duration-500 hover:scale-105 ${
           isMinimized ? 'w-auto' : showDetails ? 'w-72 md:w-80' : 'w-auto'
         } ${darkMode ? 'text-white' : 'text-gray-800'}`}
-        onMouseEnter={() => !isMinimized && setShowDetails(true)}
-        onMouseLeave={() => !isMinimized && setShowDetails(false)}
+        onMouseEnter={() => !isMobile && !isMinimized && setShowDetails(true)}
+        onMouseLeave={() => !isMobile && !isMinimized && setShowDetails(false)}
+        onTouchStart={() => isMobile && !isMinimized && setShowDetails(true)}
       >
         {/* Time Section */}
         <div className="mb-4">
@@ -194,11 +214,15 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
               </div>
             </div>
             <button
-              onClick={() => setIsMinimized(!isMinimized)}
+              onClick={toggleMinimize}
               className="p-1 rounded-full hover:bg-white/20 transition-colors touch-manipulation"
               title={isMinimized ? "Expand weather" : "Minimize weather"}
             >
-              {isMinimized ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+              {isMobile ? (
+                isMinimized ? <Maximize2 size={16} /> : <Minimize2 size={16} />
+              ) : (
+                isMinimized ? <ChevronUp size={16} /> : <ChevronDown size={16} />
+              )}
             </button>
           </div>
           <div className="text-sm opacity-70">

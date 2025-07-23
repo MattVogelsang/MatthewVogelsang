@@ -378,4 +378,35 @@ input[type="range"]::-moz-range-thumb:active {
   input[type="range"]::-moz-range-track {
     height: 10px;
   }
+
+  /* Mobile-specific improvements */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Reduce text sizes on mobile */
+  h1 {
+    font-size: 2rem !important;
+  }
+
+  h2 {
+    font-size: 1.75rem !important;
+  }
+
+  /* Improve touch targets */
+  button, a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Better spacing for mobile */
+  .space-y-8 > * + * {
+    margin-top: 1.5rem;
+  }
+
+  /* Improve form inputs on mobile */
+  input, textarea {
+    font-size: 16px !important; /* Prevents zoom on iOS */
+  }
 } 

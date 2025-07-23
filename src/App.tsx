@@ -74,7 +74,7 @@ function App() {
                       technologies, I bring ideas to life with clean code and 
                       exceptional user experiences.
                     </p>
-                    <div className="flex gap-4">
+                    <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
                       <div className="text-center">
                         <div className="text-3xl font-bold text-blue-600">3+</div>
                         <div className="text-sm text-gray-600 dark:text-gray-400">Years Experience</div>
@@ -122,7 +122,7 @@ function App() {
                 <h2 className="text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
                   Skills & Technologies
                 </h2>
-                <div className="grid md:grid-cols-3 gap-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
                   {[
                     {
                       category: "Frontend",
@@ -160,7 +160,7 @@ function App() {
                 <h2 className="text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
                   Featured Projects
                 </h2>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
                   {projects.filter(project => project.featured).map((project, index) => (
                     <div key={project.id} className="animate-on-scroll" style={{ animationDelay: `${index * 0.2}s` }}>
                       <div className="glass p-6 rounded-2xl h-full hover:scale-105 transition-transform duration-300 group flex flex-col">
@@ -202,7 +202,7 @@ function App() {
                 <h2 className="text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
                   Get In Touch
                 </h2>
-                <div className="grid md:grid-cols-2 gap-12">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
                   <div className="animate-on-scroll">
                     <h3 className="text-2xl font-bold mb-6">Let's Work Together</h3>
                     <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">

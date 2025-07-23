@@ -31,7 +31,7 @@ const HeroSection = () => {
       </div>
 
       <div className="container mx-auto px-4 max-w-6xl relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="space-y-8">
             <div className="space-y-4">
               <p className="text-blue-600 dark:text-blue-400 font-semibold animate-on-scroll">
@@ -51,7 +51,7 @@ const HeroSection = () => {
               web applications with stunning user experiences.
             </p>
 
-            <div className="flex flex-wrap gap-4 animate-on-scroll">
+            <div className="flex flex-col sm:flex-row gap-4 animate-on-scroll">
               <a
                 href="#projects"
                 className="px-8 py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 glow"
@@ -102,7 +102,7 @@ const HeroSection = () => {
               <div className="absolute inset-0 bg-purple-600 rounded-full transform -translate-x-2 -translate-y-2 opacity-20 floating" style={{ animationDelay: '0.5s' }}></div>
               
               {/* Profile image */}
-              <div className="relative z-10 w-80 h-80 rounded-full shadow-2xl border-4 border-white dark:border-gray-800 auto-glow overflow-hidden">
+              <div className="relative z-10 w-64 h-64 sm:w-80 sm:h-80 rounded-full shadow-2xl border-4 border-white dark:border-gray-800 auto-glow overflow-hidden">
                 <img
                   src={mattProfile}
                   alt="Matt Vogelsang - Full-Stack Engineer"

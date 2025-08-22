@@ -1,10 +1,12 @@
 import React from 'react';
+import umFullStackImg from '../images/UMFULLSTACK.jpg';
+import ibmDataAnalystImg from '../images/IMBDATAANALYST.jpg';
 
 const Resume: React.FC = () => {
   const handleDownload = () => {
     // You can replace this with the actual path to your PDF resume
     const link = document.createElement('a');
-    link.href = '/resume.pdf'; // Add your resume PDF to the public folder
+    link.href = '/Matthew-Vogelsang-Full Stack Developer-3 2.pdf'; // Updated resume PDF
     link.download = 'Matthew-Vogelsang-Full-Stack-Developer-Resume.pdf';
     document.body.appendChild(link);
     link.click();
@@ -36,14 +38,42 @@ const Resume: React.FC = () => {
           {/* Certifications Section */}
           <div>
             <h3 className="text-2xl font-bold mb-6 text-blue-600">Certifications</h3>
-            <div className="space-y-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                <span className="text-gray-600 dark:text-gray-300">Full Stack Developer - University of Miami</span>
+            <div className="space-y-6">
+              <div className="flex items-center space-x-4">
+                <a 
+                  href={umFullStackImg} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300"
+                >
+                  <img 
+                    src={umFullStackImg} 
+                    alt="University of Miami Full Stack Developer Certification" 
+                    className="w-full h-full object-cover"
+                  />
+                </a>
+                <div>
+                  <div className="font-semibold text-gray-800 dark:text-gray-200">Full Stack Developer</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">University of Miami</div>
+                </div>
               </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                <span className="text-gray-600 dark:text-gray-300">Data Analyst - IBM</span>
+              <div className="flex items-center space-x-4">
+                <a 
+                  href={ibmDataAnalystImg} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 cursor-pointer hover:scale-105 transition-transform duration-300"
+                >
+                  <img 
+                    src={ibmDataAnalystImg} 
+                    alt="IBM Data Analyst Certification" 
+                    className="w-full h-full object-cover"
+                  />
+                </a>
+                <div>
+                  <div className="font-semibold text-gray-800 dark:text-gray-200">Data Analyst</div>
+                  <div className="text-sm text-gray-600 dark:text-gray-400">IBM</div>
+                </div>
               </div>
             </div>
           </div>

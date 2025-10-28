@@ -6,7 +6,7 @@ const Resume: React.FC = () => {
   const handleDownload = () => {
     // You can replace this with the actual path to your PDF resume
     const link = document.createElement('a');
-    link.href = '/Matthew-Vogelsang-Full Stack Developer 2.pdf'; // Updated resume PDF
+    link.href = '/Matthew-Vogelsang-Full Stack Developer..pdf'; // Updated resume PDF
     link.download = 'Matthew-Vogelsang-Full-Stack-Developer-Resume.pdf';
     document.body.appendChild(link);
     link.click();

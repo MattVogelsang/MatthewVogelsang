@@ -11,6 +11,7 @@ import shop23Img from '@/images/Shop23.jpg';
 import swimWithSaraImg from '@/images/swim-with-sara.jpg';
 import vdImg from '@/images/VD.jpg';
 import empowhertoImg from '@/images/Empowherto.jpeg';
+import paperboatImg from '@/images/Paperboat.jpg';
 
 export const projects: Project[] = [
 	{
@@ -55,6 +56,46 @@ export const projects: Project[] = [
 	},
 	{
 		id: 2,
+		title: 'Paperboat CRM - Customer Relationship Management Platform',
+		description:
+			'A comprehensive CRM platform designed to streamline customer relationships, manage sales pipelines, and enhance business productivity with modern web technologies.',
+		technologies: ['React', 'TypeScript', 'Node.js', 'MongoDB', 'Tailwind CSS'],
+		imageUrl: paperboatImg,
+		demoUrl: 'https://www.paperboatcrm.com/',
+		featured: true,
+		category: 'business',
+		challenge:
+			'Create a modern CRM platform that helps businesses manage customer relationships, track sales opportunities, and improve team collaboration.',
+		solution:
+			'Developed a comprehensive web application with intuitive dashboard, contact management, sales pipeline tracking, and team collaboration features.',
+		outcome:
+			'Delivered a powerful CRM solution that streamlines business operations and enhances customer relationship management for modern businesses.',
+		goals: [
+			'Create an intuitive and user-friendly CRM interface',
+			'Implement comprehensive contact and lead management',
+			'Build sales pipeline tracking and reporting features',
+			'Ensure responsive design across all devices'
+		],
+		process: [
+			{
+				title: 'Research & Planning',
+				description:
+					'Analyzed CRM requirements and planned user-friendly features for contact management and sales tracking.'
+			},
+			{
+				title: 'Design & Development',
+				description:
+					'Built with React and TypeScript, implementing modern UI components and comprehensive business management features.'
+			},
+			{
+				title: 'Testing & Optimization',
+				description:
+					'Conducted thorough testing across devices and browsers, ensuring optimal performance and user experience.'
+			}
+		]
+	},
+	{
+		id: 3,
 		title: 'Project Atlas – Visual SEO Planning Tool',
 		description:
 			'An interactive SEO content strategy tool that lets users visually map topic clusters and internal linking using a drag-and-drop interface.',
@@ -94,7 +135,7 @@ export const projects: Project[] = [
 		]
 	},
 	{
-		id: 3,
+		id: 4,
 		title: 'Trinity Insurance Website',
 		description:
 			'A modern, responsive website for Trinity Insurance, featuring a clean design and comprehensive insurance information.',
@@ -134,7 +175,7 @@ export const projects: Project[] = [
 		]
 	},
 	{
-		id: 4,
+		id: 5,
 		title: 'Web Design & Development Studio Site',
 		description:
 			'A modern web application showcasing innovative design and development solutions with a focus on user experience and performance.',
@@ -174,7 +215,7 @@ export const projects: Project[] = [
 		]
 	},
 	{
-		id: 5,
+		id: 6,
 		title: 'Richy\'s Landscaping Website',
 		description:
 			'A modern, professional website for Richy\'s Landscaping, showcasing their landscaping services and portfolio in Hollywood, Florida.',
@@ -214,7 +255,7 @@ export const projects: Project[] = [
 		]
 	},
 	{
-		id: 6,
+		id: 7,
 		title: 'Workout Generator',
 		description:
 			'An interactive web application that generates personalized workout routines based on user preferences for workout type, difficulty level, and data source.',
@@ -254,7 +295,7 @@ export const projects: Project[] = [
 		]
 	},
 	{
-		id: 7,
+		id: 8,
 		title: 'Classico – Luxury Ride-Share Landing Experience',
 		description:
 			'A refined, conversion-focused landing page for a luxury ride-share brand, featuring curated car showcases and a waitlist signup flow.',
@@ -299,7 +340,7 @@ export const projects: Project[] = [
 		]
 	},
 	{
-		id: 8,
+		id: 9,
 		title: 'Space Tourism Website',
 		description:
 			'A modern, responsive website for a space tourism company, showcasing space travel experiences and destinations.',
@@ -339,7 +380,7 @@ export const projects: Project[] = [
 		]
 	},
 	{
-		id: 9,
+		id: 10,
 		title: 'Shopping App',
 		description:
 			'A modern e-commerce platform for sneakers, featuring a clean design and seamless shopping experience.',
@@ -379,7 +420,7 @@ export const projects: Project[] = [
 		]
 	},
 	{
-		id: 10,
+		id: 11,
 		title: 'Launching Soon',
 		description:
 			'A placeholder project for upcoming work.',
@@ -406,7 +447,7 @@ export const projects: Project[] = [
 		]
 	},
 	{
-		id: 11,
+		id: 12,
 		title: 'Shop23 - E-commerce Platform',
 		description:
 			'A modern e-commerce platform built with React and Node.js, featuring product browsing, shopping cart functionality, and secure checkout process.',
@@ -446,7 +487,7 @@ export const projects: Project[] = [
 		]
 	},
 	{
-		id: 12,
+		id: 13,
 		title: 'Swim with Sara',
 		description:
 			'A modern, responsive website for Swim with Sara, showcasing swimming lessons and aquatic services with an engaging user experience.',

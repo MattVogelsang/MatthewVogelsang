@@ -4,9 +4,8 @@ import ibmDataAnalystImg from '../images/IMBDATAANALYST.jpg';
 
 const Resume: React.FC = () => {
   const handleDownload = () => {
-    // You can replace this with the actual path to your PDF resume
     const link = document.createElement('a');
-    link.href = '/Matthew-Vogelsang-Full Stack Developer...pdf'; // Updated resume PDF
+    link.href = '/Matthew-Vogelsang-Full Stack Developer...pdf';
     link.download = 'Matthew-Vogelsang-Full-Stack-Developer-Resume.pdf';
     document.body.appendChild(link);
     link.click();
@@ -35,7 +34,6 @@ const Resume: React.FC = () => {
         </div>
 
         <div className="glass p-6 sm:p-8 rounded-2xl animate-on-scroll">
-          {/* Certifications Section */}
           <div>
             <h3 className="text-2xl font-bold mb-6 text-blue-600">Certifications</h3>
             <div className="space-y-6">

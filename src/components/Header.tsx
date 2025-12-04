@@ -34,12 +34,10 @@ const Header = ({ darkMode, toggleDarkMode }: HeaderProps) => {
     }`}>
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
           <a href="#home" className="text-2xl font-bold gradient-text">
             MV
           </a>
 
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <a
@@ -52,7 +50,6 @@ const Header = ({ darkMode, toggleDarkMode }: HeaderProps) => {
             ))}
           </nav>
 
-          {/* Dark Mode Toggle & Mobile Menu Button */}
           <div className="flex items-center space-x-4">
             <button
               onClick={toggleDarkMode}
@@ -62,7 +59,6 @@ const Header = ({ darkMode, toggleDarkMode }: HeaderProps) => {
               {darkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
 
-            {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="md:hidden p-2 rounded-full hover:bg-white/20 transition-colors duration-300"
@@ -73,7 +69,6 @@ const Header = ({ darkMode, toggleDarkMode }: HeaderProps) => {
           </div>
         </div>
 
-        {/* Mobile Navigation */}
         {isMenuOpen && (
           <div className="md:hidden glass rounded-lg mt-2 p-4">
             <nav className="flex flex-col space-y-4">

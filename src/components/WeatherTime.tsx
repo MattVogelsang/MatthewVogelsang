@@ -28,17 +28,14 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    // Update time every second
     const timeInterval = setInterval(() => {
       setTime(new Date());
     }, 1000);
 
-    // Get weather data
     const getWeather = async () => {
       try {
         setLoading(true);
         
-        // Get user's location
         const position = await new Promise<GeolocationPosition>((resolve, reject) => {
           navigator.geolocation.getCurrentPosition(resolve, reject, {
             timeout: 10000,
@@ -48,19 +45,16 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
 
         const { latitude, longitude } = position.coords;
         
-        // Get real weather data using OpenWeatherMap API
-        // You'll need to sign up at https://openweathermap.org/api and get a free API key
         const API_KEY = process.env.VITE_OPENWEATHERMAP_API_KEY || 'demo_key';
         
-        // If no API key is provided, use mock data
         if (API_KEY === 'demo_key') {
           const mockWeather: WeatherData = {
             location: "Miami, FL",
-            temperature: Math.floor(Math.random() * 20) + 15, // Random temp between 15-35°C
+            temperature: Math.floor(Math.random() * 20) + 15,
             condition: "Partly Cloudy",
             icon: "☁️",
-            humidity: Math.floor(Math.random() * 40) + 40, // Random humidity 40-80%
-            windSpeed: Math.floor(Math.random() * 20) + 5, // Random wind 5-25 km/h
+            humidity: Math.floor(Math.random() * 40) + 40,
+            windSpeed: Math.floor(Math.random() * 20) + 5,
             feelsLike: Math.floor(Math.random() * 20) + 13
           };
           setWeather(mockWeather);
@@ -77,7 +71,6 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
         
         const weatherData = await weatherResponse.json();
         
-        // Get location name using reverse geocoding
         const geoResponse = await fetch(
           `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${API_KEY}`
         );
@@ -91,7 +84,6 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
           }
         }
         
-        // Map weather conditions to emojis
         const weatherIcons: { [key: string]: string } = {
           'Clear': '☀️',
           'Clouds': '☁️',
@@ -110,7 +102,7 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
           condition: weatherData.weather[0].main,
           icon: weatherIcons[weatherData.weather[0].main] || '🌤️',
           humidity: weatherData.main.humidity,
-          windSpeed: Math.round(weatherData.wind.speed * 3.6), // Convert m/s to km/h
+          windSpeed: Math.round(weatherData.wind.speed * 3.6),
           feelsLike: Math.round(weatherData.main.feels_like)
         };
 
@@ -120,7 +112,6 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
         console.error('Error getting weather:', err);
         setError('Unable to get weather data');
         
-        // Fallback weather data
         setWeather({
           location: "Location unavailable",
           temperature: 22,
@@ -137,7 +128,6 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
 
     getWeather();
 
-    // Check if device is mobile
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
     };
@@ -151,7 +141,6 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
     };
   }, []);
 
-  // Save minimized state to localStorage
   useEffect(() => {
     localStorage.setItem('weatherMinimized', JSON.stringify(isMinimized));
   }, [isMinimized]);
@@ -204,7 +193,6 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
         onMouseLeave={() => !isMobile && !isMinimized && setShowDetails(false)}
         onTouchStart={() => isMobile && !isMinimized && setShowDetails(true)}
       >
-        {/* Time Section */}
         <div className={`${isMinimized ? 'mb-2' : 'mb-4'}`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
@@ -232,7 +220,6 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
           )}
         </div>
 
-        {/* Weather Section */}
         {weather && !isMinimized && (
           <div className="border-t border-white/20 pt-4">
             <div className="flex items-center justify-between mb-3">
@@ -280,7 +267,6 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
           </div>
         )}
 
-        {/* Minimized Weather Preview */}
         {weather && isMinimized && (
           <div className="border-t border-white/20 pt-2">
             <div className="flex items-center justify-between text-xs">

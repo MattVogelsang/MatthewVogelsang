@@ -21,14 +21,12 @@ const ScrollAnimations = ({ children }: ScrollAnimationsProps) => {
       });
     }, observerOptions);
 
-    // Add scroll-triggered animations to all sections
     const sections = document.querySelectorAll('section, .animate-on-scroll');
     sections.forEach((section) => {
       section.classList.add('opacity-0', 'translate-y-8', 'transition-all', 'duration-700', 'ease-out');
       observer.observe(section);
     });
 
-    // Parallax effect for background elements
     const parallaxElements = document.querySelectorAll('.parallax');
     const handleScroll = () => {
       const scrolled = window.pageYOffset;
@@ -41,16 +39,12 @@ const ScrollAnimations = ({ children }: ScrollAnimationsProps) => {
 
     window.addEventListener('scroll', handleScroll);
 
-    // Add floating animation to certain elements
     const floatingElements = document.querySelectorAll('.floating');
     floatingElements.forEach((element, index) => {
       (element as HTMLElement).style.animationDelay = `${index * 0.2}s`;
       element.classList.add('animate-float');
     });
 
-
-
-    // Add glow effect on hover
     const glowElements = document.querySelectorAll('.glow');
     glowElements.forEach((element) => {
       element.addEventListener('mouseenter', () => {

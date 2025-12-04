@@ -5,7 +5,6 @@ const HeroSection = () => {
 
   return (
     <section className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 overflow-hidden">
-      {/* Enhanced Parallax Background Elements */}
       <div className="parallax-bg">
         <div className="parallax-element" data-speed="0.3" style={{ top: '10%', left: '5%' }}>
           <div className="w-20 h-20 bg-blue-500/10 rounded-full blur-xl floating"></div>
@@ -97,11 +96,9 @@ const HeroSection = () => {
 
           <div className="flex justify-center lg:justify-end">
             <div className="relative animate-on-scroll">
-              {/* Floating background elements */}
               <div className="absolute inset-0 bg-blue-600 rounded-full transform translate-x-4 translate-y-4 opacity-20 floating"></div>
               <div className="absolute inset-0 bg-purple-600 rounded-full transform -translate-x-2 -translate-y-2 opacity-20 floating" style={{ animationDelay: '0.5s' }}></div>
               
-              {/* Profile image */}
               <div className="relative z-10 w-64 h-64 sm:w-80 sm:h-80 rounded-full shadow-2xl border-4 border-white dark:border-gray-800 auto-glow overflow-hidden">
                 <img
                   src={mattProfile}
@@ -114,7 +111,6 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
         <a
           href="#about"

@@ -15,7 +15,6 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
   const [isMinimized, setIsMinimized] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  // House Music Playlist for Portfolio
   const playlist = [
     {
       title: "You Know Me",
@@ -25,31 +24,31 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
     },
     {
       title: "Deep House Vibes",
-      url: "/music/deep-house-vibes.mp3", // Add your house music file here
+      url: "/music/deep-house-vibes.mp3",
       duration: "4:32",
       artist: "House Flow"
     },
     {
       title: "Tech House Groove",
-      url: "/music/tech-house-groove.mp3", // Add your house music file here
+      url: "/music/tech-house-groove.mp3",
       duration: "5:18",
       artist: "Digital Beats"
     },
     {
       title: "Chill House Flow",
-      url: "/music/chill-house-flow.mp3", // Add your house music file here
+      url: "/music/chill-house-flow.mp3",
       duration: "3:55",
       artist: "Relax House"
     },
     {
       title: "Progressive House",
-      url: "/music/progressive-house.mp3", // Add your house music file here
+      url: "/music/progressive-house.mp3",
       duration: "6:12",
       artist: "Future Sound"
     },
     {
       title: "Minimal House",
-      url: "/music/minimal-house.mp3", // Add your house music file here
+      url: "/music/minimal-house.mp3",
       duration: "4:08",
       artist: "Minimal Flow"
     }
@@ -61,7 +60,6 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
     }
   }, [volume, isMuted]);
 
-  // Check if device is mobile
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -73,14 +71,12 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
-  // Auto-play when component mounts
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.play().then(() => {
         setIsPlaying(true);
       }).catch((error) => {
         console.log('Auto-play prevented by browser:', error);
-        // Most browsers block auto-play, so we'll start paused
         setIsPlaying(false);
       });
     }
@@ -91,7 +87,6 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
     let hasStarted = false;
     
     const handleUserInteraction = (event: Event) => {
-      // Don't auto-play if user is clicking on music controls
       if (event.target && (event.target as Element).closest('.music-player')) {
         return;
       }
@@ -103,14 +98,12 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
         }).catch((error) => {
           console.log('Auto-play still blocked:', error);
         });
-        // Remove event listeners after first interaction
         document.removeEventListener('click', handleUserInteraction);
         document.removeEventListener('keydown', handleUserInteraction);
         document.removeEventListener('touchstart', handleUserInteraction);
       }
     };
 
-    // Add event listeners for user interaction
     document.addEventListener('click', handleUserInteraction);
     document.addEventListener('keydown', handleUserInteraction);
     document.addEventListener('touchstart', handleUserInteraction);
@@ -121,7 +114,7 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
       document.removeEventListener('keydown', handleUserInteraction);
       document.removeEventListener('touchstart', handleUserInteraction);
     };
-  }, []); // Remove isPlaying dependency to prevent re-adding listeners
+  }, []);
 
   const togglePlay = () => {
     console.log('Toggle play clicked, current state:', isPlaying);
@@ -198,9 +191,8 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
             }`}
           >
             {isPlaying ? <Pause size={24} className="md:w-5 md:h-5" /> : <Play size={24} className="md:w-5 md:h-5" />}
-          </button>
+            </button>
           
-          {/* Minimize/Maximize button for mobile */}
           {isMobile && (
             <button
               onClick={toggleMinimize}

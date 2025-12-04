@@ -33,13 +33,11 @@ body {
   line-height: 1.5;
 }
 
-/* Enhanced scroll animations */
 .animate-in {
   opacity: 1 !important;
   transform: translateY(0) !important;
 }
 
-/* Simple typing animation */
 @keyframes typewriter {
   0% {
     width: 0;
@@ -70,7 +68,6 @@ body {
   font-family: monospace;
 }
 
-/* Enhanced Parallax background */
 .parallax-bg {
   position: absolute;
   top: 0;
@@ -87,7 +84,6 @@ body {
   animation: float 6s ease-in-out infinite;
 }
 
-/* Additional floating animations */
 @keyframes float {
   0%, 100% {
     transform: translateY(0px) rotate(0deg);
@@ -148,7 +144,6 @@ body {
   }
 }
 
-/* Enhanced floating class */
 .floating {
   animation: float 6s ease-in-out infinite;
 }
@@ -183,7 +178,6 @@ body {
   animation: wave 3s ease-in-out infinite;
 }
 
-/* Gradient text effect */
 .gradient-text {
   background: linear-gradient(135deg, #3B82F6, #10B981);
   -webkit-background-clip: text;
@@ -191,7 +185,6 @@ body {
   background-clip: text;
 }
 
-/* Glow effect */
 .glow {
   box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
   transition: box-shadow 0.3s ease;
@@ -201,7 +194,6 @@ body {
   box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
 }
 
-/* Auto-pulsing glow animation with movement */
 @keyframes auto-glow {
   0%, 100% {
     box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
@@ -225,7 +217,6 @@ body {
   animation: auto-glow 4s ease-in-out infinite;
 }
 
-/* Glass morphism */
 .glass {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
@@ -237,7 +228,6 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -289,7 +279,6 @@ body {
   }
 }
 
-/* Mobile-friendly range slider for music player */
 input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
@@ -328,7 +317,6 @@ input[type="range"]::-webkit-slider-thumb:active {
   transform: scale(1.2);
 }
 
-/* Firefox */
 input[type="range"]::-moz-range-track {
   width: 100%;
   height: 8px;
@@ -359,7 +347,6 @@ input[type="range"]::-moz-range-thumb:active {
   transform: scale(1.2);
 }
 
-/* Mobile-specific styles */
 @media (max-width: 768px) {
   input[type="range"]::-webkit-slider-thumb {
     height: 24px;
@@ -379,13 +366,11 @@ input[type="range"]::-moz-range-thumb:active {
     height: 10px;
   }
 
-  /* Mobile-specific improvements */
   .container {
     padding-left: 1rem;
     padding-right: 1rem;
   }
 
-  /* Reduce text sizes on mobile */
   h1 {
     font-size: 2rem !important;
   }
@@ -394,19 +379,16 @@ input[type="range"]::-moz-range-thumb:active {
     font-size: 1.75rem !important;
   }
 
-  /* Improve touch targets */
   button, a {
     min-height: 44px;
     min-width: 44px;
   }
 
-  /* Better spacing for mobile */
   .space-y-8 > * + * {
     margin-top: 1.5rem;
   }
 
-  /* Improve form inputs on mobile */
   input, textarea {
-    font-size: 16px !important; /* Prevents zoom on iOS */
+    font-size: 16px !important;
   }
 } 

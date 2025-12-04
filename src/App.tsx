@@ -13,13 +13,11 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    // Check user preference
     const isDarkMode =
       window.matchMedia &&
       window.matchMedia('(prefers-color-scheme: dark)').matches;
     setDarkMode(isDarkMode);
 
-    // Listen for changes in color scheme
     const darkModeListener = window.matchMedia('(prefers-color-scheme: dark)');
     const handleChange = (e: MediaQueryListEvent) => setDarkMode(e.matches);
 
@@ -34,10 +32,8 @@ function App() {
   };
 
   useEffect(() => {
-    // Update document title
     document.title = 'Matt Vogelsang | Full-Stack Engineer';
 
-    // Update body dark mode class
     if (darkMode) {
       document.documentElement.classList.add('dark');
     } else {
@@ -56,7 +52,6 @@ function App() {
           <main>
             <HeroSection />
             
-            {/* About Section */}
             <section id="about" className="py-20 bg-gray-50 dark:bg-gray-800">
               <div className="container mx-auto px-4 max-w-4xl">
                 <h2 className="text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
@@ -116,7 +111,6 @@ function App() {
               </div>
             </section>
 
-            {/* Skills Section */}
             <section id="skills" className="py-20">
               <div className="container mx-auto px-4 max-w-6xl">
                 <h2 className="text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
@@ -154,7 +148,6 @@ function App() {
               </div>
             </section>
 
-            {/* Projects Section */}
             <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-800">
               <div className="container mx-auto px-4 max-w-6xl">
                 <h2 className="text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
@@ -201,7 +194,6 @@ function App() {
               </div>
             </section>
 
-            {/* Contact Section */}
             <section id="contact" className="py-20 pb-32 md:pb-20">
               <div className="container mx-auto px-4 max-w-4xl">
                 <h2 className="text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
@@ -291,16 +283,13 @@ function App() {
               </div>
             </section>
 
-            {/* Resume Section */}
             <Resume />
           </main>
         </ScrollAnimations>
 
-        {/* Floating UI Elements */}
         <BackgroundMusic darkMode={darkMode} />
         <WeatherTime darkMode={darkMode} />
         
-        {/* Music Credit */}
         <div className="fixed bottom-2 left-2 z-30">
           <div className={`text-xs opacity-60 hover:opacity-100 transition-opacity duration-300 ${
             darkMode ? 'text-gray-400' : 'text-gray-600'

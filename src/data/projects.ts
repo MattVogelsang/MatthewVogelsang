@@ -12,6 +12,7 @@ import swimWithSaraImg from '@/images/swim-with-sara.jpg';
 import vdImg from '@/images/VD.jpg';
 import empowhertoImg from '@/images/Empowherto.jpeg';
 import paperboatImg from '@/images/Paperboat.jpg';
+import apiTestImg from '@/images/API-test.png';
 
 export const projects: Project[] = [
 	{
@@ -523,6 +524,46 @@ export const projects: Project[] = [
 				title: 'Testing & Optimization',
 				description:
 					'Conducted thorough testing across devices and browsers, ensuring optimal performance and accessibility.'
+			}
+		]
+	},
+	{
+		id: 14,
+		title: 'Tech.Care - Medical Dashboard Platform',
+		description:
+			'A comprehensive medical dashboard platform for healthcare providers to manage patient information, track diagnosis history, and monitor vital signs with intuitive data visualization.',
+		technologies: ['React', 'TypeScript', 'Node.js', 'MongoDB', 'Tailwind CSS', 'Chart.js'],
+		imageUrl: apiTestImg,
+		demoUrl: 'https://api-skills-test-seven.vercel.app',
+		featured: true,
+		category: 'healthcare',
+		challenge:
+			'Create a modern medical dashboard that allows healthcare providers to efficiently manage patient data, track diagnosis history, and visualize vital signs in an intuitive interface.',
+		solution:
+			'Developed a comprehensive healthcare dashboard with patient management, diagnosis history tracking, vital signs monitoring, and interactive data visualization charts for blood pressure and other metrics.',
+		outcome:
+			'Delivered a powerful medical dashboard platform that streamlines patient management and provides healthcare providers with clear insights into patient health metrics and diagnosis history.',
+		goals: [
+			'Create an intuitive patient management interface',
+			'Implement comprehensive diagnosis history tracking',
+			'Build interactive vital signs visualization',
+			'Ensure secure and HIPAA-compliant data handling'
+		],
+		process: [
+			{
+				title: 'Research & Planning',
+				description:
+					'Analyzed healthcare dashboard requirements and planned user-friendly features for patient management and data visualization.'
+			},
+			{
+				title: 'Design & Development',
+				description:
+					'Built with React and TypeScript, implementing modern UI components, chart visualizations, and comprehensive patient data management features.'
+			},
+			{
+				title: 'Testing & Optimization',
+				description:
+					'Conducted thorough testing across devices and browsers, ensuring optimal performance, data accuracy, and user experience for healthcare providers.'
 			}
 		]
 	}

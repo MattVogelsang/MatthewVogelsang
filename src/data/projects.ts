@@ -489,6 +489,46 @@ export const projects: Project[] = [
 	},
 	{
 		id: 13,
+		title: 'API Testing & Integration Tool',
+		description:
+			'A comprehensive API testing and integration tool that allows developers to test, debug, and integrate REST APIs with an intuitive interface and real-time response visualization.',
+		technologies: ['React', 'TypeScript', 'Node.js', 'REST API', 'JSON'],
+		imageUrl: apiTestImg,
+		demoUrl: '#',
+		featured: true,
+		category: 'tooling',
+		challenge:
+			'Create a user-friendly tool that simplifies API testing and integration for developers, providing clear visual feedback and efficient request/response handling.',
+		solution:
+			'Developed a modern web application with React and TypeScript that provides an intuitive interface for testing REST APIs, with real-time response visualization and request history.',
+		outcome:
+			'Delivered a powerful API testing tool that streamlines the development workflow and helps developers quickly test and integrate APIs with confidence.',
+		goals: [
+			'Provide an intuitive interface for API testing',
+			'Enable real-time request and response visualization',
+			'Support multiple HTTP methods and authentication',
+			'Create a seamless developer experience'
+		],
+		process: [
+			{
+				title: 'Research & Planning',
+				description:
+					'Analyzed developer needs for API testing tools and planned features for request building and response visualization.'
+			},
+			{
+				title: 'Design & Development',
+				description:
+					'Built with React and TypeScript, implementing modern UI components for API request building and response display.'
+			},
+			{
+				title: 'Testing & Optimization',
+				description:
+					'Conducted thorough testing across different API endpoints and optimized for performance and user experience.'
+			}
+		]
+	},
+	{
+		id: 14,
 		title: 'Swim with Sara',
 		description:
 			'A modern, responsive website for Swim with Sara, showcasing swimming lessons and aquatic services with an engaging user experience.',
@@ -524,46 +564,6 @@ export const projects: Project[] = [
 				title: 'Testing & Optimization',
 				description:
 					'Conducted thorough testing across devices and browsers, ensuring optimal performance and accessibility.'
-			}
-		]
-	},
-	{
-		id: 14,
-		title: 'Tech.Care - Medical Dashboard Platform',
-		description:
-			'A comprehensive medical dashboard platform for healthcare providers to manage patient information, track diagnosis history, and monitor vital signs with intuitive data visualization.',
-		technologies: ['React', 'TypeScript', 'Node.js', 'MongoDB', 'Tailwind CSS', 'Chart.js'],
-		imageUrl: apiTestImg,
-		demoUrl: 'https://api-skills-test-seven.vercel.app',
-		featured: true,
-		category: 'healthcare',
-		challenge:
-			'Create a modern medical dashboard that allows healthcare providers to efficiently manage patient data, track diagnosis history, and visualize vital signs in an intuitive interface.',
-		solution:
-			'Developed a comprehensive healthcare dashboard with patient management, diagnosis history tracking, vital signs monitoring, and interactive data visualization charts for blood pressure and other metrics.',
-		outcome:
-			'Delivered a powerful medical dashboard platform that streamlines patient management and provides healthcare providers with clear insights into patient health metrics and diagnosis history.',
-		goals: [
-			'Create an intuitive patient management interface',
-			'Implement comprehensive diagnosis history tracking',
-			'Build interactive vital signs visualization',
-			'Ensure secure and HIPAA-compliant data handling'
-		],
-		process: [
-			{
-				title: 'Research & Planning',
-				description:
-					'Analyzed healthcare dashboard requirements and planned user-friendly features for patient management and data visualization.'
-			},
-			{
-				title: 'Design & Development',
-				description:
-					'Built with React and TypeScript, implementing modern UI components, chart visualizations, and comprehensive patient data management features.'
-			},
-			{
-				title: 'Testing & Optimization',
-				description:
-					'Conducted thorough testing across devices and browsers, ensuring optimal performance, data accuracy, and user experience for healthcare providers.'
 			}
 		]
 	}

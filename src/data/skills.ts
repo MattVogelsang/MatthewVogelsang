@@ -6,8 +6,8 @@ export const skillCategories: SkillCategory[] = [
 		name: 'Languages',
 		skills: [
 			{ name: 'JavaScript', proficiency: 80 },
-			{ name: 'HTML5', proficiency: 89 },
-			{ name: 'CSS3', proficiency: 92 },
+			{ name: 'TypeScript', proficiency: 92 },
+			{ name: 'SQL', proficiency: 89 },
 			{ name: 'Python', proficiency: 85 }
 		]
 	},
@@ -16,7 +16,6 @@ export const skillCategories: SkillCategory[] = [
 		name: 'Frameworks & Libraries',
 		skills: [
 			{ name: 'React', proficiency: 75 },
-			{ name: 'Redux', proficiency: 68 },
 			{ name: 'Express.js', proficiency: 85 },
 			{ name: 'Tailwind CSS', proficiency: 90 },
 			{ name: 'PostgreSQL', proficiency: 70 }
@@ -39,7 +38,7 @@ export const skillCategories: SkillCategory[] = [
 		skills: [
 			{ name: 'Responsive Design', proficiency: 94 },
 			{ name: 'Performance Optimization', proficiency: 88 },
-			{ name: 'Accessibility', proficiency: 85 },
+			{ name: 'RESTful API', proficiency: 85 },
 			{ name: 'UI/UX Principles', proficiency: 82 }
 		]
 	}

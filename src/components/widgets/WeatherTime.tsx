@@ -173,7 +173,7 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
   if (loading) {
     return (
       <div className="fixed bottom-20 md:bottom-4 left-2 md:left-4 z-40">
-        <div className={`glass rounded-2xl shadow-2xl p-4 transition-all duration-300 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+        <div className={`glass-effect rounded-3xl shadow-2xl p-4 border border-cyan-500/20 transition-all duration-300 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
           <div className="animate-pulse">
             <div className="h-4 bg-white/20 rounded w-24 mb-2"></div>
             <div className="h-6 bg-white/20 rounded w-16"></div>
@@ -186,7 +186,7 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
   return (
     <div className="fixed bottom-20 md:bottom-4 left-2 md:left-4 z-40">
       <div 
-        className={`glass rounded-2xl shadow-2xl p-4 transition-all duration-500 hover:scale-105 ${
+        className={`glass-effect rounded-3xl shadow-2xl p-4 border border-cyan-500/20 hover:border-cyan-500/50 transition-all duration-500 hover:scale-105 ${
           isMinimized ? 'w-auto' : showDetails ? 'w-72 md:w-80' : 'w-auto'
         } ${darkMode ? 'text-white' : 'text-gray-800'}`}
         onMouseEnter={() => !isMobile && !isMinimized && setShowDetails(true)}
@@ -203,7 +203,7 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
             </div>
             <button
               onClick={toggleMinimize}
-              className="p-1 rounded-full hover:bg-white/20 transition-colors touch-manipulation"
+              className="p-1.5 rounded-full glass-effect hover:bg-cyan-500/20 hover:border-cyan-500/50 transition-all duration-300 touch-manipulation"
               title={isMinimized ? "Expand weather" : "Minimize weather"}
             >
               {isMobile ? (

@@ -174,7 +174,7 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
   return (
     <div className="fixed bottom-20 md:bottom-4 right-2 md:right-4 z-50 music-player" style={{ zIndex: 9999 }}>
       <div 
-        className={`glass rounded-2xl shadow-2xl p-3 md:p-4 transition-all duration-500 hover:scale-105 ${
+        className={`glass-effect rounded-3xl shadow-2xl p-3 md:p-4 border border-purple-500/20 hover:border-purple-500/50 transition-all duration-500 hover:scale-105 ${
           isMinimized ? 'w-16 md:w-16' : (showControls || isMobile ? 'w-72 md:w-80' : 'w-16 md:w-16')
         } ${darkMode ? 'text-white' : 'text-gray-800'}`}
         onMouseEnter={() => !isMobile && !isMinimized && setShowControls(true)}
@@ -184,19 +184,22 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
         <div className="flex items-center space-x-3">
           <button
             onClick={togglePlay}
-            className={`w-16 h-16 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-all duration-300 touch-manipulation ${
+            className={`relative w-16 h-16 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-all duration-300 touch-manipulation overflow-hidden group ${
               isPlaying 
-                ? 'bg-red-500 hover:bg-red-600 active:bg-red-700 text-white' 
-                : 'bg-blue-500 hover:bg-blue-600 active:bg-blue-700 text-white'
+                ? 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white shadow-lg shadow-red-500/50' 
+                : 'bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 text-white shadow-lg shadow-cyan-500/50'
             }`}
           >
-            {isPlaying ? <Pause size={24} className="md:w-5 md:h-5" /> : <Play size={24} className="md:w-5 md:h-5" />}
-            </button>
+            <span className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-md"></span>
+            <span className="relative z-10">
+              {isPlaying ? <Pause size={24} className="md:w-5 md:h-5" /> : <Play size={24} className="md:w-5 md:h-5" />}
+            </span>
+          </button>
           
           {isMobile && (
             <button
               onClick={toggleMinimize}
-              className="p-2 rounded-full hover:bg-white/20 active:bg-white/30 transition-colors touch-manipulation"
+              className="p-2 rounded-full glass-effect hover:bg-purple-500/20 hover:border-purple-500/50 active:bg-purple-500/30 transition-all duration-300 touch-manipulation"
             >
               {isMinimized ? <Maximize2 size={20} /> : <Minimize2 size={20} />}
             </button>
@@ -212,14 +215,14 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
               <div className="flex items-center space-x-2">
                 <button
                   onClick={prevTrack}
-                  className="p-3 md:p-2 rounded-full hover:bg-white/20 active:bg-white/30 transition-colors touch-manipulation"
+                  className="p-3 md:p-2 rounded-full glass-effect hover:bg-purple-500/20 hover:border-purple-500/50 active:bg-purple-500/30 transition-all duration-300 touch-manipulation"
                 >
                   <SkipBack size={20} className="md:w-4 md:h-4" />
                 </button>
                 
                 <button
                   onClick={nextTrack}
-                  className="p-3 md:p-2 rounded-full hover:bg-white/20 active:bg-white/30 transition-colors touch-manipulation"
+                  className="p-3 md:p-2 rounded-full glass-effect hover:bg-purple-500/20 hover:border-purple-500/50 active:bg-purple-500/30 transition-all duration-300 touch-manipulation"
                 >
                   <SkipForward size={20} className="md:w-4 md:h-4" />
                 </button>
@@ -232,7 +235,7 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
           <div className="flex items-center space-x-2 mt-3">
             <button
               onClick={toggleMute}
-              className="p-2 md:p-1 rounded hover:bg-white/20 active:bg-white/30 transition-colors touch-manipulation"
+              className="p-2 md:p-1 rounded-lg glass-effect hover:bg-purple-500/20 hover:border-purple-500/50 active:bg-purple-500/30 transition-all duration-300 touch-manipulation"
             >
               {isMuted ? <VolumeX size={20} className="md:w-4 md:h-4" /> : <Volume2 size={20} className="md:w-4 md:h-4" />}
             </button>

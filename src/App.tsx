@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react';
-import Header from './components/Header';
-import HeroSection from './components/HeroSection';
-import BackgroundMusic from './components/BackgroundMusic';
-import WeatherTime from './components/WeatherTime';
-import ScrollAnimations from './components/ScrollAnimations';
-import Resume from './components/Resume';
+import Header from './components/layout/Header';
+import HeroSection from './components/sections/HeroSection';
+import BackgroundMusic from './components/widgets/BackgroundMusic';
+import WeatherTime from './components/widgets/WeatherTime';
+import ScrollAnimations from './components/layout/ScrollAnimations';
+import Resume from './components/sections/Resume';
 import { projects } from './data/projects';
+import { skillCategories } from './data/skills';
 
 
 
@@ -32,7 +33,7 @@ function App() {
   };
 
   useEffect(() => {
-    document.title = 'Matt Vogelsang | Full-Stack Engineer';
+    document.title = 'Matt Vogelsang | Full Stack Developer';
 
     if (darkMode) {
       document.documentElement.classList.add('dark');
@@ -43,7 +44,7 @@ function App() {
 
   return (
     <div className={darkMode ? 'dark' : ''}>
-      <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 text-gray-900 dark:text-white relative overflow-x-hidden">
         <ScrollAnimations>
           <Header
             darkMode={darkMode}
@@ -52,92 +53,116 @@ function App() {
           <main>
             <HeroSection />
             
-            <section id="about" className="py-20 bg-gray-50 dark:bg-gray-800">
-              <div className="container mx-auto px-4 max-w-4xl">
-                <h2 className="text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
+            <section id="about" className="py-20 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-b from-gray-50/50 dark:from-gray-900/50 via-transparent to-transparent"></div>
+              <div className="section-divider"></div>
+              <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
+                <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text animate-on-scroll">
                   About Me
                 </h2>
                 <div className="grid md:grid-cols-2 gap-12 items-center">
-                  <div className="space-y-6 animate-on-scroll">
-                    <p className="text-lg text-gray-600 dark:text-gray-300">
-                      I'm a passionate Full-Stack Engineer based in South Florida, 
-                      specializing in creating beautiful, functional, and user-friendly 
-                      web applications.
-                    </p>
-                    <p className="text-lg text-gray-600 dark:text-gray-300">
-                      With expertise in React, TypeScript, Node.js, and modern web 
-                      technologies, I bring ideas to life with clean code and 
-                      exceptional user experiences.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 sm:gap-8">
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-blue-600">3+</div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">Years Experience</div>
+                  <div className="space-y-8 animate-on-scroll">
+                    <div className="space-y-6">
+                      <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
+                        I'm a passionate Full Stack Developer based in South Florida, 
+                        specializing in creating beautiful, functional, and user-friendly 
+                        web applications.
+                      </p>
+                      <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 leading-relaxed">
+                        With expertise in React, TypeScript, Node.js, and modern web 
+                        technologies, I bring ideas to life with clean code and 
+                        exceptional user experiences.
+                      </p>
+                    </div>
+                    <div className="grid grid-cols-3 gap-4">
+                      <div className="glass-effect p-6 rounded-2xl text-center group hover:scale-105 transition-all duration-300">
+                        <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent mb-2">3+</div>
+                        <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">Years Experience</div>
+                        <div className="mt-3 h-1 bg-gradient-to-r from-cyan-500 to-cyan-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                       </div>
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-blue-600">50+</div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">Projects Completed</div>
+                      <div className="glass-effect p-6 rounded-2xl text-center group hover:scale-105 transition-all duration-300">
+                        <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent mb-2">50+</div>
+                        <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">Projects Completed</div>
+                        <div className="mt-3 h-1 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                       </div>
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-blue-600">100%</div>
-                        <div className="text-sm text-gray-600 dark:text-gray-400">Client Satisfaction</div>
+                      <div className="glass-effect p-6 rounded-2xl text-center group hover:scale-105 transition-all duration-300">
+                        <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent mb-2">100%</div>
+                        <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">Client Satisfaction</div>
+                        <div className="mt-3 h-1 bg-gradient-to-r from-green-500 to-green-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                       </div>
                     </div>
                   </div>
                   <div className="animate-on-scroll">
-                    <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-8 rounded-2xl text-white">
-                      <h3 className="text-2xl font-bold mb-4">What I Do</h3>
-                      <ul className="space-y-3">
-                        <li className="flex items-center space-x-3">
-                          <div className="w-2 h-2 bg-white rounded-full"></div>
-                          <span>Frontend Development Specializing in React, TypeScript & Modern Web Technologies</span>
-                        </li>
-                        <li className="flex items-center space-x-3">
-                          <div className="w-2 h-2 bg-white rounded-full"></div>
-                          <span>Backend Development with Node.js & Python</span>
-                        </li>
-                        <li className="flex items-center space-x-3">
-                          <div className="w-2 h-2 bg-white rounded-full"></div>
-                          <span>UI/UX Design & Implementation</span>
-                        </li>
-                        <li className="flex items-center space-x-3">
-                          <div className="w-2 h-2 bg-white rounded-full"></div>
-                          <span>Database Design & Management</span>
-                        </li>
-                      </ul>
+                    <div className="glass-effect p-8 md:p-10 rounded-3xl relative overflow-hidden group">
+                      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 via-purple-500/20 to-magenta-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      <div className="relative z-10">
+                        <h3 className="text-2xl md:text-3xl font-bold mb-6 gradient-text">What I Do</h3>
+                        <ul className="space-y-4">
+                          <li className="flex items-start space-x-4 group/item">
+                            <div className="w-3 h-3 bg-gradient-to-r from-cyan-400 to-cyan-600 rounded-full mt-2 flex-shrink-0 shadow-lg shadow-cyan-500/50"></div>
+                            <span className="text-gray-700 dark:text-gray-300 group-hover/item:text-cyan-400 transition-colors duration-300">Frontend Development Specializing in React, TypeScript & Modern Web Technologies</span>
+                          </li>
+                          <li className="flex items-start space-x-4 group/item">
+                            <div className="w-3 h-3 bg-gradient-to-r from-purple-400 to-purple-600 rounded-full mt-2 flex-shrink-0 shadow-lg shadow-purple-500/50"></div>
+                            <span className="text-gray-700 dark:text-gray-300 group-hover/item:text-purple-400 transition-colors duration-300">Backend Development with Node.js & Python</span>
+                          </li>
+                          <li className="flex items-start space-x-4 group/item">
+                            <div className="w-3 h-3 bg-gradient-to-r from-cyan-400 to-magenta-600 rounded-full mt-2 flex-shrink-0 shadow-lg shadow-cyan-500/50"></div>
+                            <span className="text-gray-700 dark:text-gray-300 group-hover/item:text-cyan-400 transition-colors duration-300">UI/UX Design & Implementation</span>
+                          </li>
+                          <li className="flex items-start space-x-4 group/item">
+                            <div className="w-3 h-3 bg-gradient-to-r from-magenta-400 to-purple-600 rounded-full mt-2 flex-shrink-0 shadow-lg shadow-magenta-500/50"></div>
+                            <span className="text-gray-700 dark:text-gray-300 group-hover/item:text-magenta-400 transition-colors duration-300">Database Design & Management</span>
+                          </li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+              <div className="section-divider"></div>
             </section>
 
-            <section id="skills" className="py-20">
+            <section id="skills" className="py-20 bg-gray-50/50 dark:bg-gray-900/50 relative overflow-hidden">
+              <div className="section-divider"></div>
               <div className="container mx-auto px-4 max-w-6xl">
-                <h2 className="text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
+                <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text animate-on-scroll">
                   Skills & Technologies
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-                  {[
-                    {
-                      category: "Frontend",
-                      skills: ["React", "TypeScript", "JavaScript", "HTML/CSS", "Tailwind CSS", "Next.js"]
-                    },
-                    {
-                      category: "Backend",
-                      skills: ["Node.js", "Express", "Python", "PostgreSQL", "MongoDB", "REST APIs"]
-                    },
-                    {
-                      category: "Tools & Others",
-                      skills: ["Git", "Docker", "AWS", "Figma", "Jest", "Webpack"]
-                    }
-                  ].map((category, index) => (
-                    <div key={category.category} className="animate-on-scroll" style={{ animationDelay: `${index * 0.2}s` }}>
-                      <div className="glass p-6 rounded-2xl h-full">
-                        <h3 className="text-2xl font-bold mb-6 text-center">{category.category}</h3>
-                        <div className="grid grid-cols-2 gap-3">
-                          {category.skills.map((skill) => (
-                            <div key={skill} className="bg-white/20 dark:bg-gray-700/20 px-3 py-2 rounded-lg text-center text-sm font-medium">
-                              {skill}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+                  {skillCategories.map((category, categoryIndex) => (
+                    <div 
+                      key={category.id} 
+                      className="animate-on-scroll tilt-card" 
+                      style={{ animationDelay: `${categoryIndex * 0.15}s` }}
+                    >
+                      <div className="glass-effect p-8 rounded-3xl h-full group hover:border-cyan-500/50 transition-all duration-300">
+                        <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center gradient-text">
+                          {category.name}
+                        </h3>
+                        <div className="space-y-6">
+                          {category.skills.map((skill, skillIndex) => (
+                            <div key={skill.name} className="group/item">
+                              <div className="flex items-center justify-between mb-2">
+                                <span className="text-gray-700 dark:text-gray-300 font-medium group-hover/item:text-cyan-400 transition-colors duration-300">
+                                  {skill.name}
+                                </span>
+                                <span className="text-sm text-gray-500 dark:text-gray-400 font-semibold">
+                                  {skill.proficiency}%
+                                </span>
+                              </div>
+                              <div className="relative h-3 bg-gray-200/20 dark:bg-gray-700/30 rounded-full overflow-hidden">
+                                <div 
+                                  className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-magenta-500 rounded-full transition-all duration-1000 ease-out shadow-lg"
+                                  style={{ 
+                                    width: `${skill.proficiency}%`,
+                                    transitionDelay: `${skillIndex * 0.1}s`,
+                                    boxShadow: '0 0 20px rgba(6, 182, 212, 0.5)'
+                                  }}
+                                >
+                                  <div className="absolute inset-0 bg-white/30 animate-shimmer"></div>
+                                </div>
+                              </div>
                             </div>
                           ))}
                         </div>
@@ -146,35 +171,50 @@ function App() {
                   ))}
                 </div>
               </div>
+              <div className="section-divider"></div>
             </section>
 
-            <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-800">
-              <div className="container mx-auto px-4 max-w-6xl">
-                <h2 className="text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
+            <section id="projects" className="py-20 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-50/50 dark:via-gray-900/50 to-transparent"></div>
+              <div className="section-divider"></div>
+              <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
+                <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text animate-on-scroll">
                   Featured Projects
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
                   {projects.filter(project => project.featured).map((project, index) => (
-                    <div key={project.id} className="animate-on-scroll" style={{ animationDelay: `${index * 0.2}s` }}>
-                      <div className="glass p-6 rounded-2xl h-full hover:scale-105 transition-transform duration-300 group flex flex-col">
+                    <div 
+                      key={project.id} 
+                      className="animate-on-scroll group" 
+                      style={{ animationDelay: `${index * 0.05}s` }}
+                    >
+                      <div className="glass-effect p-6 rounded-3xl h-full flex flex-col hover:border-cyan-500/50 transition-all duration-200">
                         <a
                           href={project.demoUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="block relative mb-4 overflow-hidden rounded-lg cursor-pointer"
+                          className="block relative mb-6 overflow-hidden rounded-2xl cursor-pointer"
                         >
                           <img
                             src={project.imageUrl}
                             alt={project.title}
-                            className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
+                            loading="lazy"
+                            decoding="async"
+                            className="w-full h-48 object-cover transition-transform duration-200 group-hover:scale-105"
                           />
-                          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         </a>
-                        <h3 className="text-xl font-bold mb-3">{project.title}</h3>
-                        <p className="text-gray-600 dark:text-gray-300 mb-4 flex-grow">{project.description}</p>
-                        <div className="flex flex-wrap gap-2 mb-4">
+                        <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-800 dark:text-gray-200 group-hover:text-cyan-400 transition-colors duration-300">
+                          {project.title}
+                        </h3>
+                        <p className="text-gray-600 dark:text-gray-300 mb-6 flex-grow text-sm leading-relaxed">
+                          {project.description}
+                        </p>
+                        <div className="flex flex-wrap gap-2 mb-6">
                           {project.technologies.map((tech) => (
-                            <span key={tech} className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 rounded text-xs">
+                            <span 
+                              key={tech} 
+                              className="glass-effect px-3 py-1.5 rounded-lg text-xs font-medium text-gray-700 dark:text-gray-300 border border-cyan-500/20 group-hover:border-cyan-500/50 group-hover:text-cyan-400 transition-all duration-300"
+                            >
                               {tech}
                             </span>
                           ))}
@@ -183,101 +223,119 @@ function App() {
                           href={project.demoUrl}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-block px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-300 text-sm font-medium mt-auto"
+                          className="group/btn relative inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-xl hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 text-sm font-semibold mt-auto overflow-hidden"
                         >
-                          View Project
+                          <span className="relative z-10 flex items-center gap-2">
+                            View Project
+                            <svg className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                          </span>
+                          <span className="absolute inset-0 bg-white/20 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 blur-xl"></span>
                         </a>
                       </div>
                     </div>
                   ))}
                 </div>
               </div>
+              <div className="section-divider"></div>
             </section>
 
-            <section id="contact" className="py-20 pb-32 md:pb-20">
-              <div className="container mx-auto px-4 max-w-4xl">
-                <h2 className="text-4xl font-bold text-center mb-12 gradient-text animate-on-scroll">
+            <section id="contact" className="py-20 pb-32 md:pb-20 bg-gray-50/50 dark:bg-gray-900/50 relative overflow-hidden">
+              <div className="section-divider"></div>
+              <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
+                <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text animate-on-scroll">
                   Get In Touch
                 </h2>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
                   <div className="animate-on-scroll">
-                    <h3 className="text-2xl font-bold mb-6">Let's Work Together</h3>
-                    <p className="text-lg text-gray-600 dark:text-gray-300 mb-8">
-                      I'm always interested in new opportunities and exciting projects. 
-                      Whether you have a question or just want to say hi, feel free to reach out!
-                    </p>
-                    <div className="space-y-4">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
-                          📧
+                    <div className="glass-effect p-8 rounded-3xl h-full">
+                      <h3 className="text-3xl font-bold mb-6 gradient-text">Let's Work Together</h3>
+                      <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-10 leading-relaxed">
+                        I'm always interested in new opportunities and exciting projects. 
+                        Whether you have a question or just want to say hi, feel free to reach out!
+                      </p>
+                      <div className="space-y-6">
+                        <div className="group flex items-center space-x-4 p-4 rounded-2xl hover:bg-cyan-500/10 transition-all duration-300">
+                          <div className="w-14 h-14 glass-effect rounded-full flex items-center justify-center text-2xl group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-cyan-500/50 transition-all duration-300">
+                            📧
+                          </div>
+                          <div>
+                            <div className="font-semibold text-gray-800 dark:text-gray-200 mb-1">Email</div>
+                            <a 
+                              href="mailto:vogelsangmatt@gmail.com"
+                              className="text-gray-600 dark:text-gray-400 hover:text-cyan-400 dark:hover:text-cyan-400 transition-colors duration-300 text-sm md:text-base"
+                            >
+                              vogelsangmatt@gmail.com
+                            </a>
+                          </div>
                         </div>
-                        <div>
-                          <div className="font-medium">Email</div>
-                          <a 
-                            href="mailto:vogelsangmatt@gmail.com"
-                            className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300"
-                          >
-                            vogelsangmatt@gmail.com
-                          </a>
-                        </div>
-                      </div>
-                      <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
-                          📍
-                        </div>
-                        <div>
-                          <div className="font-medium">Location</div>
-                          <div className="text-gray-600 dark:text-gray-300">South Florida, USA</div>
+                        <div className="group flex items-center space-x-4 p-4 rounded-2xl hover:bg-purple-500/10 transition-all duration-300">
+                          <div className="w-14 h-14 glass-effect rounded-full flex items-center justify-center text-2xl group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-purple-500/50 transition-all duration-300">
+                            📍
+                          </div>
+                          <div>
+                            <div className="font-semibold text-gray-800 dark:text-gray-200 mb-1">Location</div>
+                            <div className="text-gray-600 dark:text-gray-400 text-sm md:text-base">South Florida, USA</div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div className="animate-on-scroll">
-                    <form 
-                      action="https://formspree.io/f/mvgqglbw" 
-                      method="POST"
-                      className="space-y-6"
-                    >
-                      <div>
-                        <label htmlFor="name" className="block text-sm font-medium mb-2">Name</label>
-                        <input
-                          id="name"
-                          name="name"
-                          type="text"
-                          required
-                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-300"
-                          placeholder="Your name"
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="email" className="block text-sm font-medium mb-2">Email</label>
-                        <input
-                          id="email"
-                          name="email"
-                          type="email"
-                          required
-                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-300"
-                          placeholder="your@email.com"
-                        />
-                      </div>
-                      <div>
-                        <label htmlFor="message" className="block text-sm font-medium mb-2">Message</label>
-                        <textarea
-                          id="message"
-                          name="message"
-                          rows={4}
-                          required
-                          className="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-300"
-                          placeholder="Your message..."
-                        ></textarea>
-                      </div>
-                      <button
-                        type="submit"
-                        className="w-full px-8 py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors duration-300 transform hover:scale-105"
+                    <div className="glass-effect p-8 rounded-3xl">
+                      <form 
+                        action="https://formspree.io/f/mvgqglbw" 
+                        method="POST"
+                        className="space-y-6"
                       >
-                        Send Message
-                      </button>
-                    </form>
+                        <div>
+                          <label htmlFor="name" className="block text-sm font-semibold mb-3 text-gray-700 dark:text-gray-300">Name</label>
+                          <input
+                            id="name"
+                            name="name"
+                            type="text"
+                            required
+                            className="w-full px-5 py-4 glass-effect border border-cyan-500/30 rounded-xl bg-white/5 dark:bg-black/20 text-gray-800 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 focus:outline-none transition-all duration-300 focus:shadow-lg focus:shadow-cyan-500/20"
+                            placeholder="Your name"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="email" className="block text-sm font-semibold mb-3 text-gray-700 dark:text-gray-300">Email</label>
+                          <input
+                            id="email"
+                            name="email"
+                            type="email"
+                            required
+                            className="w-full px-5 py-4 glass-effect border border-cyan-500/30 rounded-xl bg-white/5 dark:bg-black/20 text-gray-800 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 focus:outline-none transition-all duration-300 focus:shadow-lg focus:shadow-cyan-500/20"
+                            placeholder="your@email.com"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="message" className="block text-sm font-semibold mb-3 text-gray-700 dark:text-gray-300">Message</label>
+                          <textarea
+                            id="message"
+                            name="message"
+                            rows={4}
+                            required
+                            className="w-full px-5 py-4 glass-effect border border-cyan-500/30 rounded-xl bg-white/5 dark:bg-black/20 text-gray-800 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 focus:outline-none transition-all duration-300 focus:shadow-lg focus:shadow-cyan-500/20 resize-none"
+                            placeholder="Your message..."
+                          ></textarea>
+                        </div>
+                        <button
+                          type="submit"
+                          className="group relative w-full px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-xl font-semibold hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/50 overflow-hidden"
+                        >
+                          <span className="relative z-10 flex items-center justify-center gap-2">
+                            Send Message
+                            <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                            </svg>
+                          </span>
+                          <span className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
+                        </button>
+                      </form>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -290,9 +348,9 @@ function App() {
         <BackgroundMusic darkMode={darkMode} />
         <WeatherTime darkMode={darkMode} />
         
-        <div className="fixed bottom-2 left-2 z-30">
-          <div className={`text-xs opacity-60 hover:opacity-100 transition-opacity duration-300 ${
-            darkMode ? 'text-gray-400' : 'text-gray-600'
+        <div className="fixed bottom-2 left-2 z-30 md:left-20">
+          <div className={`glass-effect px-3 py-2 rounded-lg text-xs opacity-70 hover:opacity-100 transition-all duration-300 border border-cyan-500/20 hover:border-cyan-500/50 ${
+            darkMode ? 'text-cyan-300' : 'text-gray-700 dark:text-gray-300'
           }`}>
             🎵 Music: Jeremy Black
           </div>

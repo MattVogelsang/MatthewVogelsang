@@ -2,53 +2,59 @@ import { useState, useEffect } from 'react';
 import Header from './components/layout/Header';
 import HeroSection from './components/sections/HeroSection';
 import BackgroundMusic from './components/widgets/BackgroundMusic';
-import WeatherTime from './components/widgets/WeatherTime';
 import ScrollAnimations from './components/layout/ScrollAnimations';
 import Resume from './components/sections/Resume';
 import { projects } from './data/projects';
 import { skillCategories } from './data/skills';
+import { 
+  SiJavascript, 
+  SiTypescript, 
+  SiPython, 
+  SiPostgresql,
+  SiExpress,
+  SiTailwindcss,
+  SiWebpack,
+  SiVite,
+  SiJest,
+  SiFigma,
+} from 'react-icons/si';
+import { FaReact, FaNode, FaGitAlt } from 'react-icons/fa';
+import { Layout, Zap, Globe, Palette } from 'lucide-react';
 
 
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
+  const [theme, setTheme] = useState<'theme1' | 'theme2'>('theme1');
 
   useEffect(() => {
-    const isDarkMode =
-      window.matchMedia &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches;
-    setDarkMode(isDarkMode);
-
-    const darkModeListener = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleChange = (e: MediaQueryListEvent) => setDarkMode(e.matches);
-
-    if (darkModeListener.addEventListener) {
-      darkModeListener.addEventListener('change', handleChange);
-      return () => darkModeListener.removeEventListener('change', handleChange);
+    const savedTheme = localStorage.getItem('portfolio-theme') as 'theme1' | 'theme2' | null;
+    if (savedTheme) {
+      setTheme(savedTheme);
     }
   }, []);
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
+  const toggleTheme = () => {
+    const newTheme = theme === 'theme1' ? 'theme2' : 'theme1';
+    setTheme(newTheme);
+    localStorage.setItem('portfolio-theme', newTheme);
   };
 
   useEffect(() => {
     document.title = 'Matt Vogelsang | Full Stack Developer';
-
-    if (darkMode) {
+    document.documentElement.classList.remove('theme1', 'theme2', 'dark');
+    document.documentElement.classList.add(theme);
+    if (theme === 'theme1') {
       document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
     }
-  }, [darkMode]);
+  }, [theme]);
 
   return (
-    <div className={darkMode ? 'dark' : ''}>
+    <div className={theme}>
       <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 text-gray-900 dark:text-white relative overflow-x-hidden">
         <ScrollAnimations>
           <Header
-            darkMode={darkMode}
-            toggleDarkMode={toggleDarkMode}
+            theme={theme}
+            toggleTheme={toggleTheme}
           />
           <main>
             <HeroSection />
@@ -76,17 +82,17 @@ function App() {
                     </div>
                     <div className="grid grid-cols-3 gap-4">
                       <div className="glass-effect p-6 rounded-2xl text-center group hover:scale-105 transition-all duration-300">
-                        <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent mb-2">3+</div>
+                        <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-cyan-400 to-cyan-600 bg-clip-text text-transparent mb-2 whitespace-nowrap">3+</div>
                         <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">Years Experience</div>
                         <div className="mt-3 h-1 bg-gradient-to-r from-cyan-500 to-cyan-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                       </div>
                       <div className="glass-effect p-6 rounded-2xl text-center group hover:scale-105 transition-all duration-300">
-                        <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent mb-2">50+</div>
+                        <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-400 to-purple-600 bg-clip-text text-transparent mb-2 whitespace-nowrap">50+</div>
                         <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">Projects Completed</div>
                         <div className="mt-3 h-1 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                       </div>
-                      <div className="glass-effect p-6 rounded-2xl text-center group hover:scale-105 transition-all duration-300">
-                        <div className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent mb-2">100%</div>
+                      <div className="glass-effect p-4 md:p-6 rounded-2xl text-center group hover:scale-105 transition-all duration-300">
+                        <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-green-400 to-green-600 bg-clip-text text-transparent mb-2 whitespace-nowrap">100%</div>
                         <div className="text-sm text-gray-600 dark:text-gray-400 font-medium">Client Satisfaction</div>
                         <div className="mt-3 h-1 bg-gradient-to-r from-green-500 to-green-600 rounded-full transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                       </div>
@@ -125,50 +131,70 @@ function App() {
 
             <section id="skills" className="py-20 bg-gray-50/50 dark:bg-gray-900/50 relative overflow-hidden">
               <div className="section-divider"></div>
-              <div className="container mx-auto px-4 max-w-6xl">
+              <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
                 <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text animate-on-scroll">
                   Skills & Technologies
                 </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-                  {skillCategories.map((category, categoryIndex) => (
-                    <div 
-                      key={category.id} 
-                      className="animate-on-scroll tilt-card" 
-                      style={{ animationDelay: `${categoryIndex * 0.15}s` }}
-                    >
-                      <div className="glass-effect p-8 rounded-3xl h-full group hover:border-cyan-500/50 transition-all duration-300">
-                        <h3 className="text-2xl md:text-3xl font-bold mb-8 text-center gradient-text">
-                          {category.name}
-                        </h3>
-                        <div className="space-y-6">
-                          {category.skills.map((skill, skillIndex) => (
-                            <div key={skill.name} className="group/item">
-                              <div className="flex items-center justify-between mb-2">
-                                <span className="text-gray-700 dark:text-gray-300 font-medium group-hover/item:text-cyan-400 transition-colors duration-300">
-                                  {skill.name}
-                                </span>
-                                <span className="text-sm text-gray-500 dark:text-gray-400 font-semibold">
-                                  {skill.proficiency}%
-                                </span>
-                              </div>
-                              <div className="relative h-3 bg-gray-200/20 dark:bg-gray-700/30 rounded-full overflow-hidden">
-                                <div 
-                                  className="absolute inset-y-0 left-0 bg-gradient-to-r from-cyan-500 via-purple-500 to-magenta-500 rounded-full transition-all duration-1000 ease-out shadow-lg"
-                                  style={{ 
-                                    width: `${skill.proficiency}%`,
-                                    transitionDelay: `${skillIndex * 0.1}s`,
-                                    boxShadow: '0 0 20px rgba(6, 182, 212, 0.5)'
-                                  }}
-                                >
-                                  <div className="absolute inset-0 bg-white/30 animate-shimmer"></div>
-                                </div>
-                              </div>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6">
+                  {skillCategories.flatMap((category) => {
+                    const iconMap: { [key: string]: React.ComponentType<{ className?: string }> } = {
+                      'JavaScript': SiJavascript,
+                      'TypeScript': SiTypescript,
+                      'SQL': SiPostgresql,
+                      'Python': SiPython,
+                      'React': FaReact,
+                      'Express.js': SiExpress,
+                      'Tailwind CSS': SiTailwindcss,
+                      'PostgreSQL': SiPostgresql,
+                      'Git': FaGitAlt,
+                      'Webpack': SiWebpack,
+                      'Vite': SiVite,
+                      'Jest/Testing Library': SiJest,
+                      'Figma': SiFigma,
+                      'Responsive Design': Layout,
+                      'Performance Optimization': Zap,
+                      'RESTful API': Globe,
+                      'UI/UX Principles': Palette
+                    };
+                    
+                    const categoryColors: { [key: string]: string } = {
+                      languages: 'from-cyan-400 to-cyan-600',
+                      frameworks: 'from-purple-400 to-purple-600',
+                      tools: 'from-blue-400 to-blue-600',
+                      other: 'from-green-400 to-green-600'
+                    };
+                    const gradientClass = categoryColors[category.id] || 'from-cyan-400 to-cyan-600';
+                    
+                    return category.skills.map((skill, index) => {
+                      const IconComponent = iconMap[skill.name] || Globe;
+                      
+                      return (
+                        <div
+                          key={`${category.id}-${skill.name}`}
+                          className="animate-on-scroll group"
+                          style={{ animationDelay: `${index * 0.03}s` }}
+                        >
+                          <div className="glass-effect p-4 sm:p-5 rounded-2xl h-full flex flex-col items-center justify-center text-center hover:scale-105 hover:border-cyan-500/50 transition-all duration-300 relative overflow-hidden">
+                            <div className={`absolute top-2 right-2 w-2 h-2 rounded-full bg-gradient-to-r ${gradientClass} opacity-60 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                            
+                            <div className="mb-3 flex items-center justify-center">
+                              <IconComponent 
+                                className="w-12 h-12 sm:w-16 sm:h-16 text-gray-700 dark:text-gray-300 group-hover:text-cyan-400 dark:group-hover:text-cyan-400 transition-colors duration-300" 
+                              />
                             </div>
-                          ))}
+                            
+                            <div className="font-semibold text-sm sm:text-base text-gray-800 dark:text-gray-200 group-hover:text-cyan-400 dark:group-hover:text-cyan-400 transition-colors duration-300">
+                              {skill.name}
+                            </div>
+                            
+                            <div className="text-xs text-gray-500 dark:text-gray-400 opacity-70 group-hover:opacity-100 transition-opacity duration-300 mt-2">
+                              {category.name}
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  ))}
+                      );
+                    });
+                  })}
                 </div>
               </div>
               <div className="section-divider"></div>
@@ -345,12 +371,11 @@ function App() {
           </main>
         </ScrollAnimations>
 
-        <BackgroundMusic darkMode={darkMode} />
-        <WeatherTime darkMode={darkMode} />
+        <BackgroundMusic theme={theme} />
         
         <div className="fixed bottom-2 left-2 z-30 md:left-20">
           <div className={`glass-effect px-3 py-2 rounded-lg text-xs opacity-70 hover:opacity-100 transition-all duration-300 border border-cyan-500/20 hover:border-cyan-500/50 ${
-            darkMode ? 'text-cyan-300' : 'text-gray-700 dark:text-gray-300'
+            theme === 'theme1' ? 'text-cyan-300' : 'text-gray-700'
           }`}>
             🎵 Music: Jeremy Black
           </div>

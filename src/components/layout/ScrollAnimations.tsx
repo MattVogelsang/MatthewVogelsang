@@ -22,7 +22,6 @@ const ScrollAnimations = ({ children }: ScrollAnimationsProps) => {
       });
     }, observerOptions);
 
-    // Use requestIdleCallback for non-critical animations
     const setupAnimations = () => {
       const sections = document.querySelectorAll('section, .animate-on-scroll');
       sections.forEach((section, index) => {
@@ -38,9 +37,6 @@ const ScrollAnimations = ({ children }: ScrollAnimationsProps) => {
       setTimeout(setupAnimations, 50);
     }
 
-    // Simplified parallax - disabled for better performance (CSS animations handle it)
-    // Scroll-based parallax removed to improve initial load performance
-
     const floatingElements = document.querySelectorAll('.floating, .floating-tech');
     floatingElements.forEach((element, index) => {
       (element as HTMLElement).style.animationDelay = `${index * 0.2}s`;
@@ -49,7 +45,6 @@ const ScrollAnimations = ({ children }: ScrollAnimationsProps) => {
       }
     });
 
-    // Enhanced glow effects on hover
     const glowElements = document.querySelectorAll('.glow, .neon-glow');
     glowElements.forEach((element) => {
       element.addEventListener('mouseenter', () => {

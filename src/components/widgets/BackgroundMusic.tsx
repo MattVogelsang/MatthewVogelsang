@@ -2,10 +2,10 @@ import { useState, useRef, useEffect } from 'react';
 import { Play, Pause, SkipBack, SkipForward, Volume2, VolumeX, Minimize2, Maximize2 } from 'lucide-react';
 
 interface BackgroundMusicProps {
-  darkMode: boolean;
+  theme: 'theme1' | 'theme2';
 }
 
-const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
+const BackgroundMusic = ({ theme }: BackgroundMusicProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTrack, setCurrentTrack] = useState(0);
   const [volume, setVolume] = useState(0.3);
@@ -82,7 +82,6 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
     }
   }, [currentTrack]);
 
-  // Enhanced auto-play with user interaction
   useEffect(() => {
     let hasStarted = false;
     
@@ -108,7 +107,6 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
     document.addEventListener('keydown', handleUserInteraction);
     document.addEventListener('touchstart', handleUserInteraction);
 
-    // Cleanup
     return () => {
       document.removeEventListener('click', handleUserInteraction);
       document.removeEventListener('keydown', handleUserInteraction);
@@ -176,7 +174,7 @@ const BackgroundMusic = ({ darkMode }: BackgroundMusicProps) => {
       <div 
         className={`glass-effect rounded-3xl shadow-2xl p-3 md:p-4 border border-purple-500/20 hover:border-purple-500/50 transition-all duration-500 hover:scale-105 ${
           isMinimized ? 'w-16 md:w-16' : (showControls || isMobile ? 'w-72 md:w-80' : 'w-16 md:w-16')
-        } ${darkMode ? 'text-white' : 'text-gray-800'}`}
+        } ${theme === 'theme1' ? 'text-white' : 'text-gray-800'}`}
         onMouseEnter={() => !isMobile && !isMinimized && setShowControls(true)}
         onMouseLeave={() => !isMobile && !isMinimized && setShowControls(false)}
         onTouchStart={() => isMobile && !isMinimized && setShowControls(true)}

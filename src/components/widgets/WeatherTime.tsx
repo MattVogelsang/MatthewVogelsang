@@ -12,10 +12,10 @@ interface WeatherData {
 }
 
 interface WeatherTimeProps {
-  darkMode: boolean;
+  theme: 'theme1' | 'theme2';
 }
 
-const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
+const WeatherTime = ({ theme }: WeatherTimeProps) => {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [time, setTime] = useState(new Date());
   const [loading, setLoading] = useState(true);
@@ -173,7 +173,7 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
   if (loading) {
     return (
       <div className="fixed bottom-20 md:bottom-4 left-2 md:left-4 z-40">
-        <div className={`glass-effect rounded-3xl shadow-2xl p-4 border border-cyan-500/20 transition-all duration-300 ${darkMode ? 'text-white' : 'text-gray-800'}`}>
+        <div className={`glass-effect rounded-3xl shadow-2xl p-4 border border-cyan-500/20 transition-all duration-300 ${theme === 'theme1' ? 'text-white' : 'text-gray-800'}`}>
           <div className="animate-pulse">
             <div className="h-4 bg-white/20 rounded w-24 mb-2"></div>
             <div className="h-6 bg-white/20 rounded w-16"></div>
@@ -188,7 +188,7 @@ const WeatherTime = ({ darkMode }: WeatherTimeProps) => {
       <div 
         className={`glass-effect rounded-3xl shadow-2xl p-4 border border-cyan-500/20 hover:border-cyan-500/50 transition-all duration-500 hover:scale-105 ${
           isMinimized ? 'w-auto' : showDetails ? 'w-72 md:w-80' : 'w-auto'
-        } ${darkMode ? 'text-white' : 'text-gray-800'}`}
+        } ${theme === 'theme1' ? 'text-white' : 'text-gray-800'}`}
         onMouseEnter={() => !isMobile && !isMinimized && setShowDetails(true)}
         onMouseLeave={() => !isMobile && !isMinimized && setShowDetails(false)}
         onTouchStart={() => isMobile && !isMinimized && setShowDetails(true)}

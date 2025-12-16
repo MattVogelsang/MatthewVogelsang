@@ -17,9 +17,16 @@ import {
   SiVite,
   SiJest,
   SiFigma,
+  SiVuedotjs,
+  SiWordpress,
+  SiBootstrap,
+  SiVercel,
+  SiNetlify,
+  SiRender,
+  SiSequelize,
 } from 'react-icons/si';
 import { FaReact, FaNode, FaGitAlt } from 'react-icons/fa';
-import { Layout, Zap, Globe, Palette } from 'lucide-react';
+import { Layout, Zap, Globe, Palette, Settings } from 'lucide-react';
 
 
 
@@ -143,17 +150,26 @@ function App() {
                       'SQL': SiPostgresql,
                       'Python': SiPython,
                       'React': FaReact,
+                      'Vue.js': SiVuedotjs,
+                      'Node.js': FaNode,
                       'Express.js': SiExpress,
                       'Tailwind CSS': SiTailwindcss,
+                      'Bootstrap': SiBootstrap,
+                      'WordPress': SiWordpress,
+                      'Sequelize': SiSequelize,
                       'PostgreSQL': SiPostgresql,
                       'Git': FaGitAlt,
                       'Webpack': SiWebpack,
                       'Vite': SiVite,
+                      'Vercel': SiVercel,
+                      'Netlify': SiNetlify,
+                      'Render': SiRender,
                       'Jest/Testing Library': SiJest,
                       'Figma': SiFigma,
                       'Responsive Design': Layout,
                       'Performance Optimization': Zap,
                       'RESTful API': Globe,
+                      'CI/CD Pipelines': Settings,
                       'UI/UX Principles': Palette
                     };
                     

@@ -70,6 +70,18 @@ body {
 
 @keyframes typewriter {
   0% {
+    width: 0ch;
+  }
+  100% {
+    width: 14ch;
+  }
+}
+
+@keyframes typewriter-repeat {
+  0% {
+    width: 16ch;
+  }
+  0.5% {
     width: 0;
   }
   100% {
@@ -92,12 +104,20 @@ body {
   overflow: hidden;
   white-space: nowrap;
   border-right: 3px solid #06B6D4;
-  animation: typewriter 3s steps(16, end) infinite 8s, blink 1.2s step-end infinite;
+  animation: typewriter 2.5s steps(14, end) forwards,
+              blink 1s step-end infinite;
   display: inline-block;
   width: 0;
   line-height: 1.6;
   padding-bottom: 0.5em;
-  font-family: monospace;
+  font-family: 'Inter', sans-serif;
+  will-change: width;
+  transform: translateZ(0);
+  color: #06B6D4;
+}
+
+.theme2 .typewriter {
+  color: #2563EB;
 }
 
 .parallax-bg {

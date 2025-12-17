@@ -27,7 +27,7 @@ const HeroSection = () => {
               <p className="text-cyan-400 dark:text-blue-500 font-semibold text-lg md:text-xl animate-on-scroll tracking-wider uppercase">
                 Hello, I'm
               </p>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold gradient-text leading-tight animate-on-scroll">
+              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight animate-on-scroll">
                 <span className="typewriter block">Matt Vogelsang</span>
               </h1>
               <h2 className="text-2xl md:text-3xl lg:text-4xl text-gray-800 dark:text-white animate-on-scroll font-light">

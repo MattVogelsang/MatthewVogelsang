@@ -13,6 +13,7 @@ import vdImg from '@/images/VD.jpg';
 import empowhertoImg from '@/images/Empowherto.jpeg';
 import paperboatImg from '@/images/Paperboat.jpg';
 import apiTestImg from '@/images/API-test.png';
+import cliftImg from '@/images/clift.png';
 
 export const projects: Project[] = [
 	{
@@ -92,6 +93,46 @@ export const projects: Project[] = [
 				title: 'Testing & Optimization',
 				description:
 					'Conducted thorough testing across devices and browsers, ensuring optimal performance and user experience.'
+			}
+		]
+	},
+	{
+		id: 15,
+		title: 'CareerLift - AI-Powered Job Search Automation',
+		description:
+			'An AI-powered job search automation platform that continuously finds and applies to relevant job openings 24/7, helping job seekers get hired faster while they focus on their career goals.',
+		technologies: ['React', 'TypeScript', 'Node.js', 'AI Integration', 'Tailwind CSS'],
+		imageUrl: cliftImg,
+		demoUrl: 'https://www.thecareerlift.com/',
+		featured: true,
+		category: 'business',
+		challenge:
+			'Create an automated job search platform that helps job seekers find and apply to relevant positions efficiently, saving hours of manual application work.',
+		solution:
+			'Developed an AI-powered platform that automatically scans job boards, matches positions to user profiles, generates customized cover letters, and submits applications 24/7.',
+		outcome:
+			'Delivered a powerful automation tool that helps users apply to hundreds of jobs automatically, significantly reducing time-to-hire and increasing application success rates.',
+		goals: [
+			'Automate the job search and application process',
+			'Provide intelligent job matching based on user profile',
+			'Generate personalized cover letters for each application',
+			'Enable 24/7 automated application submission'
+		],
+		process: [
+			{
+				title: 'Research & Planning',
+				description:
+					'Analyzed job search pain points and planned AI automation features for job matching and application submission.'
+			},
+			{
+				title: 'Design & Development',
+				description:
+					'Built with React and TypeScript, implementing AI algorithms for job matching, cover letter generation, and automated application submission.'
+			},
+			{
+				title: 'Testing & Optimization',
+				description:
+					'Conducted thorough testing of automation features and optimized matching algorithms for better job relevance and application success rates.'
 			}
 		]
 	},

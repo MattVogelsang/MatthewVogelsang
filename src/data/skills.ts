@@ -36,6 +36,7 @@ export const skillCategories: SkillCategory[] = [
 			{ name: 'Vercel', proficiency: 88 },
 			{ name: 'Netlify', proficiency: 90 },
 			{ name: 'Render', proficiency: 85 },
+			{ name: 'Stripe', proficiency: 83 },
 			{ name: 'Jest/Testing Library', proficiency: 82 },
 			{ name: 'Figma', proficiency: 78 }
 		]

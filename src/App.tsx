@@ -24,6 +24,7 @@ import {
   SiNetlify,
   SiRender,
   SiSequelize,
+  SiStripe,
 } from 'react-icons/si';
 import { FaReact, FaNode, FaGitAlt } from 'react-icons/fa';
 import { Layout, Zap, Globe, Palette, Settings } from 'lucide-react';
@@ -164,6 +165,7 @@ function App() {
                       'Vercel': SiVercel,
                       'Netlify': SiNetlify,
                       'Render': SiRender,
+                      'Stripe': SiStripe,
                       'Jest/Testing Library': SiJest,
                       'Figma': SiFigma,
                       'Responsive Design': Layout,

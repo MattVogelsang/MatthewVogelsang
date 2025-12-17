@@ -494,7 +494,7 @@ export const projects: Project[] = [
 			'A comprehensive API testing and integration tool that allows developers to test, debug, and integrate REST APIs with an intuitive interface and real-time response visualization.',
 		technologies: ['React', 'TypeScript', 'Node.js', 'REST API', 'JSON'],
 		imageUrl: apiTestImg,
-		demoUrl: '#',
+		demoUrl: 'https://api-skills-test-seven.vercel.app/',
 		featured: true,
 		category: 'tooling',
 		challenge:

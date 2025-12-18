@@ -14,6 +14,7 @@ import empowhertoImg from '@/images/Empowherto.jpeg';
 import paperboatImg from '@/images/Paperboat.jpg';
 import apiTestImg from '@/images/API-test.png';
 import cliftImg from '@/images/clift.png';
+import calculatorImg from '@/images/Calculator.png';
 
 export const projects: Project[] = [
 	{
@@ -605,6 +606,46 @@ export const projects: Project[] = [
 				title: 'Testing & Optimization',
 				description:
 					'Conducted thorough testing across devices and browsers, ensuring optimal performance and accessibility.'
+			}
+		]
+	},
+	{
+		id: 16,
+		title: 'Calculator',
+		description:
+			'A modern, feature-rich calculator application with theme switching, supporting basic arithmetic operations and a clean, intuitive user interface.',
+		technologies: ['React', 'TypeScript', 'HTML', 'CSS', 'JavaScript'],
+		imageUrl: calculatorImg,
+		demoUrl: 'https://mattvogelsang.github.io/Calculator/',
+		featured: true,
+		category: 'tooling',
+		challenge:
+			'Create a functional calculator application with modern UI design, theme switching capabilities, and smooth user interactions for mathematical operations.',
+		solution:
+			'Developed a responsive calculator application with React and TypeScript, featuring theme toggle, clear visual feedback, and intuitive button layout for all basic arithmetic operations.',
+		outcome:
+			'Delivered a polished calculator tool that provides a smooth user experience with modern design and functional theme switching capabilities.',
+		goals: [
+			'Create an intuitive and responsive calculator interface',
+			'Implement theme switching functionality',
+			'Support all basic arithmetic operations',
+			'Ensure smooth user interactions and visual feedback'
+		],
+		process: [
+			{
+				title: 'Research & Planning',
+				description:
+					'Analyzed calculator application requirements and planned the user interface with focus on usability and modern design.'
+			},
+			{
+				title: 'Design & Development',
+				description:
+					'Built with React and TypeScript, implementing calculator logic, theme switching, and responsive design.'
+			},
+			{
+				title: 'Testing & Optimization',
+				description:
+					'Conducted thorough testing of all calculator operations and optimized for performance and user experience.'
 			}
 		]
 	}

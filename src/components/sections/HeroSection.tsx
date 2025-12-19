@@ -1,24 +1,20 @@
-import { Github, Linkedin, Mail, Code, Zap, Globe } from 'lucide-react';
-import mattProfile from '../../images/matt-profile.jpg';
+import { Github, Linkedin, Mail, Code, Zap, Globe, ArrowDown } from 'lucide-react';
+import subjectImage from '../../images/Subject1.png';
 
 const HeroSection = () => {
   return (
     <section 
       id="home" 
-      className="relative min-h-screen w-full overflow-hidden"
-      style={{
-        backgroundImage: `url(${mattProfile})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
+      className="relative min-h-screen w-full overflow-hidden bg-slate-950"
     >
-      {/* Dark Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/95 via-gray-900/90 to-gray-900/95"></div>
-      <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-transparent to-gray-900/60"></div>
+      {/* Animated Gradient Orbs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      </div>
 
-      {/* Top Navbar - Already handled by Header component, but ensuring it's visible */}
-      <div className="relative z-50"></div>
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5 pointer-events-none z-0"></div>
 
       {/* Left Vertical Icon Sidebar */}
       <div className="hidden md:flex fixed left-4 top-1/2 -translate-y-1/2 z-40 flex-col items-center space-y-6">
@@ -26,7 +22,7 @@ const HeroSection = () => {
           href="https://github.com/MattVogelsang"
           target="_blank"
           rel="noopener noreferrer"
-          className="group p-3 rounded-full glass-effect hover:bg-cyan-500/20 transition-all duration-300 hover:scale-110"
+          className="group p-3 rounded-full bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 hover:bg-cyan-500/20 transition-all duration-300 hover:scale-110"
           aria-label="GitHub"
         >
           <Github size={20} className="text-white group-hover:text-cyan-400 transition-colors" />
@@ -35,19 +31,19 @@ const HeroSection = () => {
           href="https://www.linkedin.com/in/matthew-vogelsang-096514229/"
           target="_blank"
           rel="noopener noreferrer"
-          className="group p-3 rounded-full glass-effect hover:bg-cyan-500/20 transition-all duration-300 hover:scale-110"
+          className="group p-3 rounded-full bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 hover:bg-cyan-500/20 transition-all duration-300 hover:scale-110"
           aria-label="LinkedIn"
         >
           <Linkedin size={20} className="text-white group-hover:text-cyan-400 transition-colors" />
         </a>
         <a
           href="mailto:vogelsangmatt@gmail.com"
-          className="group p-3 rounded-full glass-effect hover:bg-cyan-500/20 transition-all duration-300 hover:scale-110"
+          className="group p-3 rounded-full bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 hover:bg-cyan-500/20 transition-all duration-300 hover:scale-110"
           aria-label="Email"
         >
           <Mail size={20} className="text-white group-hover:text-cyan-400 transition-colors" />
         </a>
-        <div className="w-px h-16 bg-white/20"></div>
+        <div className="w-px h-16 bg-slate-700/50"></div>
       </div>
 
       {/* Mobile Sidebar - Collapsed to top */}
@@ -56,7 +52,7 @@ const HeroSection = () => {
           href="https://github.com/MattVogelsang"
           target="_blank"
           rel="noopener noreferrer"
-          className="p-2 rounded-full glass-effect hover:bg-cyan-500/20 transition-all duration-300"
+          className="p-2 rounded-full bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 hover:bg-cyan-500/20 transition-all duration-300"
           aria-label="GitHub"
         >
           <Github size={18} className="text-white" />
@@ -65,14 +61,14 @@ const HeroSection = () => {
           href="https://www.linkedin.com/in/matthew-vogelsang-096514229/"
           target="_blank"
           rel="noopener noreferrer"
-          className="p-2 rounded-full glass-effect hover:bg-cyan-500/20 transition-all duration-300"
+          className="p-2 rounded-full bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 hover:bg-cyan-500/20 transition-all duration-300"
           aria-label="LinkedIn"
         >
           <Linkedin size={18} className="text-white" />
         </a>
         <a
           href="mailto:vogelsangmatt@gmail.com"
-          className="p-2 rounded-full glass-effect hover:bg-cyan-500/20 transition-all duration-300"
+          className="p-2 rounded-full bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 hover:bg-cyan-500/20 transition-all duration-300"
           aria-label="Email"
         >
           <Mail size={18} className="text-white" />
@@ -80,87 +76,135 @@ const HeroSection = () => {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 min-h-screen flex flex-col">
-        {/* Hero Text Section - Right Aligned */}
-        <div className="flex-1 flex items-center justify-end pr-8 md:pr-16 lg:pr-24 pt-32 pb-40">
-          <div className="max-w-2xl text-right space-y-6">
-            <div className="space-y-4">
-              <p className="text-cyan-400 text-sm md:text-base font-semibold tracking-wider uppercase">
-                Full Stack Developer
+      <div className="relative z-10 min-h-screen flex items-center">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Side - Hero Text */}
+            <div className="space-y-8">
+              <div className="space-y-6">
+                <p className="text-cyan-400 font-semibold text-lg md:text-xl tracking-wider uppercase">
+                  Hello, I'm
+                </p>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                  <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent animate-gradient">
+                    Matt Vogelsang
+                  </span>
+                </h1>
+                <h2 className="text-2xl md:text-3xl lg:text-4xl">
+                  <span className="text-slate-300">Full Stack</span>{' '}
+                  <span className="text-purple-400">Developer</span>
+                </h2>
+              </div>
+              
+              {/* Decorative Line */}
+              <div className="h-1 w-24 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full"></div>
+              
+              <p className="text-slate-400 text-lg md:text-xl leading-relaxed max-w-2xl">
+                I'm a South-Floridian Full Stack Developer that specializes in
+                React, JavaScript, and Node.js to build clean, high-performance
+                web applications with stunning user experiences.
               </p>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-tight">
-                Build
-                <br />
-                <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                  Anywhere
-                </span>
-              </h1>
+
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <a
+                  href="#projects"
+                  className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transform hover:-translate-y-1 transition-all duration-300 text-center"
+                >
+                  View My Work
+                </a>
+                <a
+                  href="#contact"
+                  className="px-8 py-3 bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 text-white rounded-full font-semibold hover:bg-slate-800/60 hover:border-cyan-500/30 transition-all duration-300 text-center"
+                >
+                  Contact Me
+                </a>
+              </div>
             </div>
-            <p className="text-gray-300 text-lg md:text-xl leading-relaxed max-w-xl ml-auto">
-              I create beautiful, functional web applications with React, TypeScript, and Node.js. 
-              Specializing in modern full-stack development that brings ideas to life with clean code 
-              and exceptional user experiences.
+
+            {/* Right Side - Image with Glass Card */}
+            <div className="flex justify-center lg:justify-end relative">
+              <div className="relative">
+                {/* Outer Glow Effect */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/30 to-purple-500/30 rounded-full blur-2xl"></div>
+                
+                {/* Glass Card Container */}
+                <div className="relative z-10 bg-slate-800/20 backdrop-blur-xl rounded-2xl p-4">
+                  <div className="relative w-48 sm:w-56 md:w-64 rounded-xl overflow-hidden flex items-center justify-center">
+                    <img
+                      src={subjectImage}
+                      alt="Matt Vogelsang - Full Stack Developer"
+                      loading="eager"
+                      decoding="async"
+                      className="w-full h-auto max-h-[400px] object-contain rounded-xl"
+                    />
+                  </div>
+                  
+                  {/* Available for work badge */}
+                  <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20">
+                    <div className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-full text-sm font-semibold shadow-lg">
+                      Available for work
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Glassmorphism Cards */}
+      <div className="relative z-10 pb-8 md:pb-12 px-4 md:px-8 lg:px-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-7xl mx-auto">
+          {/* Card 1 */}
+          <div className="bg-slate-800/30 backdrop-blur-xl border border-slate-700/50 p-6 md:p-8 rounded-2xl hover:border-cyan-500/30 transition-all duration-300 hover:scale-105 group">
+            <div className="flex items-center space-x-4 mb-4">
+              <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20">
+                <Code size={24} className="text-cyan-400" />
+              </div>
+              <h3 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">Full Stack</h3>
+            </div>
+            <p className="text-slate-400 text-sm md:text-base leading-relaxed">
+              React, TypeScript, Node.js, and modern web technologies for building scalable applications.
             </p>
-            <div className="flex justify-end gap-4 pt-4">
-              <a
-                href="#projects"
-                className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transform hover:-translate-y-1 transition-all duration-300"
-              >
-                View My Work
-              </a>
-              <a
-                href="#contact"
-                className="px-8 py-3 glass-effect border border-white/20 text-white rounded-full font-semibold hover:bg-white/10 hover:border-white/40 transition-all duration-300"
-              >
-                Contact Me
-              </a>
+          </div>
+
+          {/* Card 2 */}
+          <div className="bg-slate-800/30 backdrop-blur-xl border border-slate-700/50 p-6 md:p-8 rounded-2xl hover:border-purple-500/30 transition-all duration-300 hover:scale-105 group">
+            <div className="flex items-center space-x-4 mb-4">
+              <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-500/10">
+                <Zap size={24} className="text-purple-400" />
+              </div>
+              <h3 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">Fast & Modern</h3>
             </div>
+            <p className="text-slate-400 text-sm md:text-base leading-relaxed">
+              Optimized performance with cutting-edge tools and best practices for lightning-fast experiences.
+            </p>
+          </div>
+
+          {/* Card 3 */}
+          <div className="bg-slate-800/30 backdrop-blur-xl border border-slate-700/50 p-6 md:p-8 rounded-2xl hover:border-cyan-500/30 transition-all duration-300 hover:scale-105 group">
+            <div className="flex items-center space-x-4 mb-4">
+              <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20">
+                <Globe size={24} className="text-cyan-400" />
+              </div>
+              <h3 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">Global Reach</h3>
+            </div>
+            <p className="text-slate-400 text-sm md:text-base leading-relaxed">
+              Responsive designs that work seamlessly across all devices and platforms worldwide.
+            </p>
           </div>
         </div>
+      </div>
 
-        {/* Bottom Glassmorphism Cards */}
-        <div className="relative z-10 pb-8 md:pb-12 px-4 md:px-8 lg:px-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-7xl mx-auto">
-            {/* Card 1 */}
-            <div className="glass-effect p-6 md:p-8 rounded-2xl border border-white/10 hover:border-cyan-500/30 transition-all duration-300 hover:scale-105 group">
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-cyan-500/10">
-                  <Code size={24} className="text-cyan-400" />
-                </div>
-                <h3 className="text-xl font-bold text-white">Full Stack</h3>
-              </div>
-              <p className="text-gray-300 text-sm md:text-base leading-relaxed">
-                React, TypeScript, Node.js, and modern web technologies for building scalable applications.
-              </p>
-            </div>
-
-            {/* Card 2 */}
-            <div className="glass-effect p-6 md:p-8 rounded-2xl border border-white/10 hover:border-purple-500/30 transition-all duration-300 hover:scale-105 group">
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-500/10">
-                  <Zap size={24} className="text-purple-400" />
-                </div>
-                <h3 className="text-xl font-bold text-white">Fast & Modern</h3>
-              </div>
-              <p className="text-gray-300 text-sm md:text-base leading-relaxed">
-                Optimized performance with cutting-edge tools and best practices for lightning-fast experiences.
-              </p>
-            </div>
-
-            {/* Card 3 */}
-            <div className="glass-effect p-6 md:p-8 rounded-2xl border border-white/10 hover:border-cyan-500/30 transition-all duration-300 hover:scale-105 group">
-              <div className="flex items-center space-x-4 mb-4">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20">
-                  <Globe size={24} className="text-cyan-400" />
-                </div>
-                <h3 className="text-xl font-bold text-white">Global Reach</h3>
-              </div>
-              <p className="text-gray-300 text-sm md:text-base leading-relaxed">
-                Responsive designs that work seamlessly across all devices and platforms worldwide.
-              </p>
-            </div>
-          </div>
-        </div>
+      {/* Scroll Down Indicator */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-40">
+        <a
+          href="#about"
+          className="group relative p-3 rounded-full text-cyan-400 hover:text-cyan-300 transition-all duration-300 hover:scale-110"
+          aria-label="Scroll down"
+        >
+          <ArrowDown size={32} className="animate-bounce" />
+        </a>
       </div>
     </section>
   );

@@ -788,6 +788,21 @@ input[type="range"]::-moz-range-thumb:active {
   }
 }
 
+/* Animated Gradient for Hero Name */
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -796,5 +811,9 @@ input[type="range"]::-moz-range-thumb:active {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  
+  .animate-gradient {
+    animation: none !important;
   }
 } 

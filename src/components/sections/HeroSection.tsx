@@ -1,126 +1,169 @@
-import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail, Code, Zap, Globe } from 'lucide-react';
 import mattProfile from '../../images/matt-profile.jpg';
 
 const HeroSection = () => {
-
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative mesh-gradient grid-pattern overflow-hidden">
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="floating-tech" style={{ top: '10%', left: '5%', width: '60px', height: '60px' }}>
-          <div className="w-full h-full bg-cyan-500/15 rounded-full blur-xl"></div>
-        </div>
-        <div className="floating-tech" style={{ top: '30%', right: '10%', width: '80px', height: '80px', animationDelay: '1s' }}>
-          <div className="w-full h-full bg-purple-500/15 rounded-full blur-xl"></div>
-        </div>
-        <div className="floating-tech" style={{ bottom: '20%', left: '15%', width: '50px', height: '50px', animationDelay: '2s' }}>
-          <div className="w-full h-full bg-magenta-500/15 rounded-full blur-xl"></div>
-        </div>
-        
-        <div className="absolute top-20 right-20 w-32 h-32 border border-cyan-500/20 rounded-lg rotate-45 floating" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-32 left-32 w-24 h-24 border border-purple-500/20 rounded-lg rotate-12 floating" style={{ animationDelay: '2s' }}></div>
+    <section 
+      id="home" 
+      className="relative min-h-screen w-full overflow-hidden"
+      style={{
+        backgroundImage: `url(${mattProfile})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      {/* Dark Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-gray-900/95 via-gray-900/90 to-gray-900/95"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-transparent to-gray-900/60"></div>
+
+      {/* Top Navbar - Already handled by Header component, but ensuring it's visible */}
+      <div className="relative z-50"></div>
+
+      {/* Left Vertical Icon Sidebar */}
+      <div className="hidden md:flex fixed left-4 top-1/2 -translate-y-1/2 z-40 flex-col items-center space-y-6">
+        <a
+          href="https://github.com/MattVogelsang"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group p-3 rounded-full glass-effect hover:bg-cyan-500/20 transition-all duration-300 hover:scale-110"
+          aria-label="GitHub"
+        >
+          <Github size={20} className="text-white group-hover:text-cyan-400 transition-colors" />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/matthew-vogelsang-096514229/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group p-3 rounded-full glass-effect hover:bg-cyan-500/20 transition-all duration-300 hover:scale-110"
+          aria-label="LinkedIn"
+        >
+          <Linkedin size={20} className="text-white group-hover:text-cyan-400 transition-colors" />
+        </a>
+        <a
+          href="mailto:vogelsangmatt@gmail.com"
+          className="group p-3 rounded-full glass-effect hover:bg-cyan-500/20 transition-all duration-300 hover:scale-110"
+          aria-label="Email"
+        >
+          <Mail size={20} className="text-white group-hover:text-cyan-400 transition-colors" />
+        </a>
+        <div className="w-px h-16 bg-white/20"></div>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
-          <div className="space-y-8 relative">
-            <div className="space-y-6">
-              <p className="text-cyan-400 dark:text-blue-500 font-semibold text-lg md:text-xl animate-on-scroll tracking-wider uppercase">
-                Hello, I'm
-              </p>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight animate-on-scroll">
-                <span className="typewriter block">Matt Vogelsang</span>
-              </h1>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl text-gray-800 dark:text-white animate-on-scroll font-light">
-                Full Stack <span className="neon-text">Developer</span>
-              </h2>
-            </div>
-            
-            <p className="text-lg md:text-xl text-gray-800 dark:text-white max-w-2xl animate-on-scroll leading-relaxed">
-              I'm a South-Floridian Full Stack Developer that specializes in
-              React, JavaScript, and Node.js to build clean, high-performance
-              web applications with stunning user experiences.
-            </p>
+      {/* Mobile Sidebar - Collapsed to top */}
+      <div className="md:hidden fixed top-20 left-4 z-40 flex flex-row items-center space-x-4">
+        <a
+          href="https://github.com/MattVogelsang"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-2 rounded-full glass-effect hover:bg-cyan-500/20 transition-all duration-300"
+          aria-label="GitHub"
+        >
+          <Github size={18} className="text-white" />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/matthew-vogelsang-096514229/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-2 rounded-full glass-effect hover:bg-cyan-500/20 transition-all duration-300"
+          aria-label="LinkedIn"
+        >
+          <Linkedin size={18} className="text-white" />
+        </a>
+        <a
+          href="mailto:vogelsangmatt@gmail.com"
+          className="p-2 rounded-full glass-effect hover:bg-cyan-500/20 transition-all duration-300"
+          aria-label="Email"
+        >
+          <Mail size={18} className="text-white" />
+        </a>
+      </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 animate-on-scroll">
+      {/* Main Content */}
+      <div className="relative z-10 min-h-screen flex flex-col">
+        {/* Hero Text Section - Right Aligned */}
+        <div className="flex-1 flex items-center justify-end pr-8 md:pr-16 lg:pr-24 pt-32 pb-40">
+          <div className="max-w-2xl text-right space-y-6">
+            <div className="space-y-4">
+              <p className="text-cyan-400 text-sm md:text-base font-semibold tracking-wider uppercase">
+                Full Stack Developer
+              </p>
+              <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-white leading-tight">
+                Build
+                <br />
+                <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                  Anywhere
+                </span>
+              </h1>
+            </div>
+            <p className="text-gray-300 text-lg md:text-xl leading-relaxed max-w-xl ml-auto">
+              I create beautiful, functional web applications with React, TypeScript, and Node.js. 
+              Specializing in modern full-stack development that brings ideas to life with clean code 
+              and exceptional user experiences.
+            </p>
+            <div className="flex justify-end gap-4 pt-4">
               <a
                 href="#projects"
-                className="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-full font-semibold shadow-2xl hover:shadow-cyan-500/50 transform hover:-translate-y-1 transition-all duration-300 overflow-hidden"
+                className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transform hover:-translate-y-1 transition-all duration-300"
               >
-                <span className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  View My Work
-                  <ArrowDown className="w-5 h-5 group-hover:translate-y-1 transition-transform duration-300" />
-                </span>
-                <span className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
+                View My Work
               </a>
               <a
                 href="#contact"
-                className="group relative px-8 py-4 glass-effect border-2 border-cyan-500/50 text-cyan-400 dark:text-blue-500 rounded-full font-semibold hover:bg-cyan-500/10 hover:border-cyan-400 dark:hover:bg-blue-500/10 dark:hover:border-blue-400 transition-all duration-300 overflow-hidden neon-glow"
+                className="px-8 py-3 glass-effect border border-white/20 text-white rounded-full font-semibold hover:bg-white/10 hover:border-white/40 transition-all duration-300"
               >
-                <span className="relative z-10">Contact Me</span>
+                Contact Me
               </a>
-            </div>
-
-            <div className="flex gap-6 animate-on-scroll pt-4">
-              <a
-                href="https://github.com/MattVogelsang"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative p-3 glass-effect rounded-full text-gray-300 dark:text-gray-600 hover:text-cyan-400 dark:hover:text-blue-500 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-cyan-500/50 dark:hover:shadow-blue-500/50"
-                aria-label="GitHub"
-              >
-                <Github size={28} className="relative z-10" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/matthew-vogelsang-096514229/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative p-3 glass-effect rounded-full text-gray-300 dark:text-gray-600 hover:text-cyan-400 dark:hover:text-blue-500 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-cyan-500/50 dark:hover:shadow-blue-500/50"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={28} className="relative z-10" />
-              </a>
-              <a
-                href="mailto:vogelsangmatt@gmail.com"
-                className="group relative p-3 glass-effect rounded-full text-gray-300 dark:text-gray-600 hover:text-cyan-400 dark:hover:text-blue-500 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-cyan-500/50 dark:hover:shadow-blue-500/50"
-                aria-label="Email"
-              >
-                <Mail size={28} className="relative z-10" />
-              </a>
-            </div>
-          </div>
-
-          <div className="flex justify-center lg:justify-end relative">
-            <div className="relative animate-on-scroll">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 via-purple-500 to-magenta-500 opacity-20 blur-2xl"></div>
-              
-              <div className="relative z-10 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full shadow-2xl border-4 border-cyan-500/30 overflow-hidden animate-bounce-slow">
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/15 via-transparent to-purple-500/15 pointer-events-none"></div>
-                <img
-                  src={mattProfile}
-                  alt="Matt Vogelsang - Full Stack Developer"
-                  loading="eager"
-                  decoding="async"
-                  className="w-full h-full object-cover relative z-10"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent pointer-events-none"></div>
-              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <a
-          href="#about"
-          className="group relative p-3 rounded-full text-cyan-400 dark:text-blue-500 hover:text-cyan-300 dark:hover:text-blue-400 transition-all duration-300 hover:scale-110"
-          aria-label="Scroll down"
-        >
-          <ArrowDown size={32} />
-        </a>
+        {/* Bottom Glassmorphism Cards */}
+        <div className="relative z-10 pb-8 md:pb-12 px-4 md:px-8 lg:px-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-7xl mx-auto">
+            {/* Card 1 */}
+            <div className="glass-effect p-6 md:p-8 rounded-2xl border border-white/10 hover:border-cyan-500/30 transition-all duration-300 hover:scale-105 group">
+              <div className="flex items-center space-x-4 mb-4">
+                <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-cyan-500/10">
+                  <Code size={24} className="text-cyan-400" />
+                </div>
+                <h3 className="text-xl font-bold text-white">Full Stack</h3>
+              </div>
+              <p className="text-gray-300 text-sm md:text-base leading-relaxed">
+                React, TypeScript, Node.js, and modern web technologies for building scalable applications.
+              </p>
+            </div>
+
+            {/* Card 2 */}
+            <div className="glass-effect p-6 md:p-8 rounded-2xl border border-white/10 hover:border-purple-500/30 transition-all duration-300 hover:scale-105 group">
+              <div className="flex items-center space-x-4 mb-4">
+                <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-500/10">
+                  <Zap size={24} className="text-purple-400" />
+                </div>
+                <h3 className="text-xl font-bold text-white">Fast & Modern</h3>
+              </div>
+              <p className="text-gray-300 text-sm md:text-base leading-relaxed">
+                Optimized performance with cutting-edge tools and best practices for lightning-fast experiences.
+              </p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="glass-effect p-6 md:p-8 rounded-2xl border border-white/10 hover:border-cyan-500/30 transition-all duration-300 hover:scale-105 group">
+              <div className="flex items-center space-x-4 mb-4">
+                <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20">
+                  <Globe size={24} className="text-cyan-400" />
+                </div>
+                <h3 className="text-xl font-bold text-white">Global Reach</h3>
+              </div>
+              <p className="text-gray-300 text-sm md:text-base leading-relaxed">
+                Responsive designs that work seamlessly across all devices and platforms worldwide.
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
 };
 
-export default HeroSection; 
+export default HeroSection;

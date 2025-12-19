@@ -1,32 +1,8 @@
 import { Github, Linkedin, Mail, Code, Zap, Globe, ArrowDown } from 'lucide-react';
-import { useEffect, useState } from 'react';
 import subjectImage from '../../images/Subject1.png';
+import ParticleBackground from '../widgets/ParticleBackground';
 
 const HeroSection = () => {
-  const [particles, setParticles] = useState<Array<{
-    id: number;
-    left: number;
-    top: number;
-    size: number;
-    color: string;
-    delay: number;
-    duration: number;
-  }>>([]);
-
-  useEffect(() => {
-    // Generate random particles - LOTS of them!
-    const particleCount = 1000;
-    const newParticles = Array.from({ length: particleCount }, (_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      top: 80 + Math.random() * 20, // Start closer to viewport
-      size: 1.5 + Math.random() * 4,
-      color: Math.random() > 0.5 ? 'rgba(6, 182, 212, 0.5)' : 'rgba(167, 139, 250, 0.5)', // cyan or purple
-      delay: Math.random() * 2, // Much shorter delay - particles appear almost immediately
-      duration: 4 + Math.random() * 6, // Faster movement - 4-10 seconds instead of 8-23
-    }));
-    setParticles(newParticles);
-  }, []);
   return (
     <section 
       id="home" 
@@ -50,26 +26,11 @@ const HeroSection = () => {
           animation: 'gradient-shift 15s ease infinite'
         }}></div>
 
-        {/* Floating Particles */}
-        {particles.map((particle) => (
-          <div
-            key={particle.id}
-            className="absolute rounded-full pointer-events-none"
-            style={{
-              left: `${particle.left}%`,
-              top: `${particle.top}%`,
-              width: `${particle.size}px`,
-              height: `${particle.size}px`,
-              background: `radial-gradient(circle, ${particle.color} 0%, transparent 70%)`,
-              filter: 'blur(1px)',
-              animation: `float-particle ${particle.duration}s linear infinite`,
-              animationDelay: `${particle.delay}s`,
-            }}
-          />
-        ))}
+        {/* Three.js Particle Background */}
+        <ParticleBackground />
 
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-purple-500/10 pointer-events-none"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-purple-500/10 pointer-events-none z-10"></div>
       </div>
 
       {/* Left Vertical Icon Sidebar */}

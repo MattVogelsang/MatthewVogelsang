@@ -13,7 +13,7 @@ import vdImg from '@/images/VD.jpg';
 import empowhertoImg from '@/images/Empowherto.jpeg';
 import paperboatImg from '@/images/Paperboat.jpg';
 import apiTestImg from '@/images/API-test.png';
-import cliftImg from '@/images/clift.png';
+import cliftImg from '@/images/clift1.png';
 import calculatorImg from '@/images/Calculator.png';
 
 export const projects: Project[] = [

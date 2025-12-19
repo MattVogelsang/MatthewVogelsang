@@ -1,126 +1,230 @@
-import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
-import mattProfile from '../../images/matt-profile.jpg';
+import { Github, Linkedin, Mail, Code, Zap, Globe, ArrowDown } from 'lucide-react';
+import subjectImage from '../../images/Subject1.png';
+import ParticleBackground from '../widgets/ParticleBackground';
 
 const HeroSection = () => {
-
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative mesh-gradient grid-pattern overflow-hidden">
+    <section 
+      id="home" 
+      className="relative min-h-screen w-full overflow-hidden bg-slate-950"
+    >
+      {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="floating-tech" style={{ top: '10%', left: '5%', width: '60px', height: '60px' }}>
-          <div className="w-full h-full bg-cyan-500/15 rounded-full blur-xl"></div>
-        </div>
-        <div className="floating-tech" style={{ top: '30%', right: '10%', width: '80px', height: '80px', animationDelay: '1s' }}>
-          <div className="w-full h-full bg-purple-500/15 rounded-full blur-xl"></div>
-        </div>
-        <div className="floating-tech" style={{ bottom: '20%', left: '15%', width: '50px', height: '50px', animationDelay: '2s' }}>
-          <div className="w-full h-full bg-magenta-500/15 rounded-full blur-xl"></div>
-        </div>
+        {/* Animated Gradient Orbs */}
+        <div className="absolute top-0 left-0 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
         
-        <div className="absolute top-20 right-20 w-32 h-32 border border-cyan-500/20 rounded-lg rotate-45 floating" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-32 left-32 w-24 h-24 border border-purple-500/20 rounded-lg rotate-12 floating" style={{ animationDelay: '2s' }}></div>
+        {/* Moving Gradient Blobs */}
+        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl floating"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl floating" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-cyan-500/5 to-purple-500/5 rounded-full blur-3xl floating-slow"></div>
+        
+        {/* Animated Mesh Gradient */}
+        <div className="absolute inset-0 pointer-events-none opacity-60" style={{
+          background: 'radial-gradient(circle at 20% 50%, rgba(6, 182, 212, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%), radial-gradient(circle at 40% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 50%)',
+          backgroundSize: '200% 200%',
+          animation: 'gradient-shift 15s ease infinite'
+        }}></div>
+
+        {/* Three.js Particle Background */}
+        <ParticleBackground />
+
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-purple-500/10 pointer-events-none z-10"></div>
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
-          <div className="space-y-8 relative">
-            <div className="space-y-6">
-              <p className="text-cyan-400 dark:text-blue-500 font-semibold text-lg md:text-xl animate-on-scroll tracking-wider uppercase">
-                Hello, I'm
-              </p>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight animate-on-scroll">
-                <span className="typewriter block">Matt Vogelsang</span>
-              </h1>
-              <h2 className="text-2xl md:text-3xl lg:text-4xl text-gray-800 dark:text-white animate-on-scroll font-light">
-                Full Stack <span className="neon-text">Developer</span>
-              </h2>
-            </div>
-            
-            <p className="text-lg md:text-xl text-gray-800 dark:text-white max-w-2xl animate-on-scroll leading-relaxed">
-              I'm a South-Floridian Full Stack Developer that specializes in
-              React, JavaScript, and Node.js to build clean, high-performance
-              web applications with stunning user experiences.
-            </p>
+      {/* Left Vertical Icon Sidebar */}
+      <div className="hidden md:flex fixed left-4 top-1/2 -translate-y-1/2 z-40 flex-col items-center space-y-6">
+        <a
+          href="https://github.com/MattVogelsang"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group p-3 rounded-full bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 hover:bg-cyan-500/20 transition-all duration-300 hover:scale-110"
+          aria-label="GitHub"
+        >
+          <Github size={20} className="text-white group-hover:text-cyan-400 transition-colors" />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/matthew-vogelsang-096514229/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group p-3 rounded-full bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 hover:bg-cyan-500/20 transition-all duration-300 hover:scale-110"
+          aria-label="LinkedIn"
+        >
+          <Linkedin size={20} className="text-white group-hover:text-cyan-400 transition-colors" />
+        </a>
+        <a
+          href="mailto:vogelsangmatt@gmail.com"
+          className="group p-3 rounded-full bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 hover:bg-cyan-500/20 transition-all duration-300 hover:scale-110"
+          aria-label="Email"
+        >
+          <Mail size={20} className="text-white group-hover:text-cyan-400 transition-colors" />
+        </a>
+        <div className="w-px h-16 bg-slate-700/50"></div>
+      </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 animate-on-scroll">
-              <a
-                href="#projects"
-                className="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-full font-semibold shadow-2xl hover:shadow-cyan-500/50 transform hover:-translate-y-1 transition-all duration-300 overflow-hidden"
-              >
-                <span className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  View My Work
-                  <ArrowDown className="w-5 h-5 group-hover:translate-y-1 transition-transform duration-300" />
-                </span>
-                <span className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
-              </a>
-              <a
-                href="#contact"
-                className="group relative px-8 py-4 glass-effect border-2 border-cyan-500/50 text-cyan-400 dark:text-blue-500 rounded-full font-semibold hover:bg-cyan-500/10 hover:border-cyan-400 dark:hover:bg-blue-500/10 dark:hover:border-blue-400 transition-all duration-300 overflow-hidden neon-glow"
-              >
-                <span className="relative z-10">Contact Me</span>
-              </a>
-            </div>
+      {/* Mobile Sidebar - Collapsed to top */}
+      <div className="md:hidden fixed top-20 left-4 z-40 flex flex-row items-center space-x-4">
+        <a
+          href="https://github.com/MattVogelsang"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-2 rounded-full bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 hover:bg-cyan-500/20 transition-all duration-300"
+          aria-label="GitHub"
+        >
+          <Github size={18} className="text-white" />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/matthew-vogelsang-096514229/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="p-2 rounded-full bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 hover:bg-cyan-500/20 transition-all duration-300"
+          aria-label="LinkedIn"
+        >
+          <Linkedin size={18} className="text-white" />
+        </a>
+        <a
+          href="mailto:vogelsangmatt@gmail.com"
+          className="p-2 rounded-full bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 hover:bg-cyan-500/20 transition-all duration-300"
+          aria-label="Email"
+        >
+          <Mail size={18} className="text-white" />
+        </a>
+      </div>
 
-            <div className="flex gap-6 animate-on-scroll pt-4">
-              <a
-                href="https://github.com/MattVogelsang"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative p-3 glass-effect rounded-full text-gray-300 dark:text-gray-600 hover:text-cyan-400 dark:hover:text-blue-500 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-cyan-500/50 dark:hover:shadow-blue-500/50"
-                aria-label="GitHub"
-              >
-                <Github size={28} className="relative z-10" />
-              </a>
-              <a
-                href="https://www.linkedin.com/in/matthew-vogelsang-096514229/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group relative p-3 glass-effect rounded-full text-gray-300 dark:text-gray-600 hover:text-cyan-400 dark:hover:text-blue-500 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-cyan-500/50 dark:hover:shadow-blue-500/50"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={28} className="relative z-10" />
-              </a>
-              <a
-                href="mailto:vogelsangmatt@gmail.com"
-                className="group relative p-3 glass-effect rounded-full text-gray-300 dark:text-gray-600 hover:text-cyan-400 dark:hover:text-blue-500 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-cyan-500/50 dark:hover:shadow-blue-500/50"
-                aria-label="Email"
-              >
-                <Mail size={28} className="relative z-10" />
-              </a>
-            </div>
-          </div>
-
-          <div className="flex justify-center lg:justify-end relative">
-            <div className="relative animate-on-scroll">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-cyan-500 via-purple-500 to-magenta-500 opacity-20 blur-2xl"></div>
+      {/* Main Content */}
+      <div className="relative z-10 min-h-screen flex items-center">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Side - Hero Text */}
+            <div className="space-y-8">
+              <div className="space-y-6">
+                <p className="text-cyan-400 font-semibold text-lg md:text-xl tracking-wider uppercase">
+                  Hello, I'm
+                </p>
+                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight">
+                  <span className="bg-gradient-to-r from-cyan-400 via-purple-400 to-cyan-400 bg-clip-text text-transparent animate-gradient">
+                    Matt Vogelsang
+                  </span>
+                </h1>
+                <h2 className="text-2xl md:text-3xl lg:text-4xl">
+                  <span className="text-slate-300">Full Stack</span>{' '}
+                  <span className="text-purple-400">Developer</span>
+                </h2>
+              </div>
               
-              <div className="relative z-10 w-64 h-64 sm:w-80 sm:h-80 md:w-96 md:h-96 rounded-full shadow-2xl border-4 border-cyan-500/30 overflow-hidden animate-bounce-slow">
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/15 via-transparent to-purple-500/15 pointer-events-none"></div>
-                <img
-                  src={mattProfile}
-                  alt="Matt Vogelsang - Full Stack Developer"
-                  loading="eager"
-                  decoding="async"
-                  className="w-full h-full object-cover relative z-10"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent pointer-events-none"></div>
+              {/* Decorative Line */}
+              <div className="h-1 w-24 bg-gradient-to-r from-cyan-400 to-purple-400 rounded-full"></div>
+              
+              <p className="text-slate-400 text-lg md:text-xl leading-relaxed max-w-2xl">
+                I'm a South-Floridian Full Stack Developer that specializes in
+                React, JavaScript, and Node.js to build clean, high-performance
+                web applications with stunning user experiences.
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <a
+                  href="#projects"
+                  className="px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-full font-semibold hover:shadow-lg hover:shadow-cyan-500/50 transform hover:-translate-y-1 transition-all duration-300 text-center"
+                >
+                  View My Work
+                </a>
+                <a
+                  href="#contact"
+                  className="px-8 py-3 bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 text-white rounded-full font-semibold hover:bg-slate-800/60 hover:border-cyan-500/30 transition-all duration-300 text-center"
+                >
+                  Contact Me
+                </a>
+              </div>
+            </div>
+
+            {/* Right Side - Image with Glass Card */}
+            <div className="flex justify-center lg:justify-end relative">
+              <div className="relative">
+                {/* Outer Glow Effect */}
+                <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500/30 to-purple-500/30 rounded-full blur-2xl"></div>
+                
+                {/* Glass Card Container */}
+                <div className="relative z-10 bg-slate-800/20 backdrop-blur-xl rounded-2xl p-4">
+                  <div className="relative w-48 sm:w-56 md:w-64 rounded-xl overflow-hidden flex items-center justify-center">
+                    <img
+                      src={subjectImage}
+                      alt="Matt Vogelsang - Full Stack Developer"
+                      loading="eager"
+                      decoding="async"
+                      className="w-full h-auto max-h-[400px] object-contain rounded-xl"
+                    />
+                  </div>
+                  
+                  {/* Available for work badge */}
+                  <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20">
+                    <div className="px-4 py-2 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-full text-sm font-semibold shadow-lg">
+                      Available for work
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+      {/* Bottom Glassmorphism Cards */}
+      <div className="relative z-10 pb-8 md:pb-12 px-4 md:px-8 lg:px-16">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 max-w-7xl mx-auto">
+          {/* Card 1 */}
+          <div className="bg-slate-800/30 backdrop-blur-xl border border-slate-700/50 p-6 md:p-8 rounded-2xl hover:border-cyan-500/30 transition-all duration-300 hover:scale-105 group">
+            <div className="flex items-center space-x-4 mb-4">
+              <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20">
+                <Code size={24} className="text-cyan-400" />
+              </div>
+              <h3 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">Full Stack</h3>
+            </div>
+            <p className="text-slate-400 text-sm md:text-base leading-relaxed">
+              React, TypeScript, Node.js, and modern web technologies for building scalable applications.
+            </p>
+          </div>
+
+          {/* Card 2 */}
+          <div className="bg-slate-800/30 backdrop-blur-xl border border-slate-700/50 p-6 md:p-8 rounded-2xl hover:border-purple-500/30 transition-all duration-300 hover:scale-105 group">
+            <div className="flex items-center space-x-4 mb-4">
+              <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500/20 to-purple-500/10">
+                <Zap size={24} className="text-purple-400" />
+              </div>
+              <h3 className="text-xl font-bold text-white group-hover:text-purple-400 transition-colors">Fast & Modern</h3>
+            </div>
+            <p className="text-slate-400 text-sm md:text-base leading-relaxed">
+              Optimized performance with cutting-edge tools and best practices for lightning-fast experiences.
+            </p>
+          </div>
+
+          {/* Card 3 */}
+          <div className="bg-slate-800/30 backdrop-blur-xl border border-slate-700/50 p-6 md:p-8 rounded-2xl hover:border-cyan-500/30 transition-all duration-300 hover:scale-105 group">
+            <div className="flex items-center space-x-4 mb-4">
+              <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20">
+                <Globe size={24} className="text-cyan-400" />
+              </div>
+              <h3 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">Global Reach</h3>
+            </div>
+            <p className="text-slate-400 text-sm md:text-base leading-relaxed">
+              Responsive designs that work seamlessly across all devices and platforms worldwide.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Scroll Down Indicator */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-40">
         <a
           href="#about"
-          className="group relative p-3 rounded-full text-cyan-400 dark:text-blue-500 hover:text-cyan-300 dark:hover:text-blue-400 transition-all duration-300 hover:scale-110"
+          className="group relative p-3 rounded-full text-cyan-400 hover:text-cyan-300 transition-all duration-300 hover:scale-110"
           aria-label="Scroll down"
         >
-          <ArrowDown size={32} />
+          <ArrowDown size={32} className="animate-bounce" />
         </a>
       </div>
     </section>
   );
 };
 
-export default HeroSection; 
+export default HeroSection;

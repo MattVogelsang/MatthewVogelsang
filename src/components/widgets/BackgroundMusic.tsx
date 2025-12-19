@@ -170,7 +170,7 @@ const BackgroundMusic = ({ theme }: BackgroundMusicProps) => {
   };
 
   return (
-    <div className="fixed bottom-20 md:bottom-4 right-2 md:right-4 z-50 music-player" style={{ zIndex: 9999 }}>
+    <div className="music-player fixed top-20 right-4 z-50" style={{ zIndex: 9999 }}>
       <div 
         className={`glass-effect rounded-3xl shadow-2xl p-3 md:p-4 border border-purple-500/20 hover:border-purple-500/50 transition-all duration-500 hover:scale-105 ${
           isMinimized ? 'w-16 md:w-16' : (showControls || isMobile ? 'w-72 md:w-80' : 'w-16 md:w-16')

@@ -33,6 +33,8 @@ import { Layout, Zap, Globe, Palette, Settings } from 'lucide-react';
 
 function App() {
   const [theme, setTheme] = useState<'theme1' | 'theme2'>('theme1');
+  const [showAllProjects, setShowAllProjects] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('portfolio-theme') as 'theme1' | 'theme2' | null;
@@ -56,9 +58,18 @@ function App() {
     }
   }, [theme]);
 
+  useEffect(() => {
+    // Page load animation
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className={theme}>
-      <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 text-gray-900 dark:text-white relative overflow-x-hidden">
+      <BackgroundMusic theme={theme} />
+      <div className={`min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 text-gray-900 dark:text-white relative overflow-x-hidden transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
         <ScrollAnimations>
           <Header
             theme={theme}
@@ -225,62 +236,133 @@ function App() {
                 <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text animate-on-scroll">
                   Featured Projects
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
-                  {projects.filter(project => project.featured).map((project, index) => (
-                    <div 
-                      key={project.id} 
-                      className="animate-on-scroll group" 
-                      style={{ animationDelay: `${index * 0.05}s` }}
-                    >
-                      <div className="glass-effect p-6 rounded-3xl h-full flex flex-col hover:border-cyan-500/50 transition-all duration-200">
-                        <a
-                          href={project.demoUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="block relative mb-6 overflow-hidden rounded-2xl cursor-pointer"
-                        >
-                          <img
-                            src={project.imageUrl}
-                            alt={project.title}
-                            loading="lazy"
-                            decoding="async"
-                            className="w-full h-48 object-cover transition-transform duration-200 group-hover:scale-105"
-                          />
-                        </a>
-                        <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-800 dark:text-gray-200 group-hover:text-cyan-400 transition-colors duration-300">
-                          {project.title}
-                        </h3>
-                        <p className="text-gray-600 dark:text-gray-300 mb-6 flex-grow text-sm leading-relaxed">
-                          {project.description}
-                        </p>
-                        <div className="flex flex-wrap gap-2 mb-6">
-                          {project.technologies.map((tech) => (
-                            <span 
-                              key={tech} 
-                              className="glass-effect px-3 py-1.5 rounded-lg text-xs font-medium text-gray-700 dark:text-gray-300 border border-cyan-500/20 group-hover:border-cyan-500/50 group-hover:text-cyan-400 transition-all duration-300"
+                
+                {(() => {
+                  const featuredProjects = projects.filter(project => project.featured);
+                  const topProjects = featuredProjects.slice(0, 5);
+                  const remainingProjects = featuredProjects.slice(5);
+                  const displayedProjects = showAllProjects ? featuredProjects : topProjects;
+
+                  return (
+                    <>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
+                        {displayedProjects.map((project, index) => (
+                          <div 
+                            key={project.id} 
+                            className="animate-on-scroll group transition-all duration-700 ease-out"
+                            style={{ animationDelay: `${index * 0.05}s` }}
+                          >
+                            <a
+                              href={project.demoUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="block h-full"
                             >
-                              {tech}
-                            </span>
-                          ))}
-                        </div>
-                        <a
-                          href={project.demoUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="group/btn relative inline-flex items-center justify-center px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-xl hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 text-sm font-semibold mt-auto overflow-hidden"
-                        >
-                          <span className="relative z-10 flex items-center gap-2">
-                            View Project
-                            <svg className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                            </svg>
-                          </span>
-                          <span className="absolute inset-0 bg-white/20 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300 blur-xl"></span>
-                        </a>
+                              <div className="glass-effect px-10 py-8 pb-8 rounded-3xl h-full flex flex-col relative overflow-visible cursor-pointer transition-[transform,box-shadow,border-color,background] duration-300 hover:scale-[1.01] hover:shadow-2xl hover:shadow-cyan-500/30 hover:border-cyan-500/60 border-2 border-transparent group-hover:bg-gradient-to-br group-hover:from-cyan-500/5 group-hover:to-purple-500/5">
+                                {/* Enhanced Glow Effect */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-purple-500/0 to-cyan-500/0 group-hover:from-cyan-500/20 group-hover:via-purple-500/20 group-hover:to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-2xl -z-10"></div>
+                                
+                                {/* Image Section - Always Visible */}
+                                <div className="relative mb-6 overflow-hidden rounded-2xl">
+                                  <img
+                                    src={project.imageUrl}
+                                    alt={project.title}
+                                    loading="lazy"
+                                    decoding="async"
+                                    className="w-full h-64 md:h-72 object-cover transition-[transform,filter] duration-300 group-hover:scale-110 group-hover:brightness-110"
+                                  />
+                                  {/* Gradient Overlay */}
+                                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
+                                  {/* Shine Effect - Removed for performance */}
+                                </div>
+
+                                {/* Title - Always Visible */}
+                                <h3 className="text-2xl md:text-3xl font-bold mb-4 text-gray-800 dark:text-gray-200 group-hover:text-cyan-400 dark:group-hover:text-cyan-400 transition-colors duration-300 relative">
+                                  {project.title}
+                                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-400 group-hover:w-full transition-all duration-500"></span>
+                                </h3>
+
+                                {/* Dropdown Content - Hidden until hover */}
+                                <div className="overflow-hidden max-h-0 group-hover:max-h-[600px] transition-[max-height] duration-300 ease-out">
+                                  <div className="pt-2">
+                                    {/* Description */}
+                                    <p className="text-gray-600 dark:text-gray-300 mb-6 text-base leading-relaxed group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors duration-200 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-[opacity,transform] duration-300 delay-50">
+                                      {project.description}
+                                    </p>
+
+                                    {/* Tech Stack - Enhanced */}
+                                    <div className="flex flex-wrap gap-2 mb-6 px-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100 transform translate-y-2 group-hover:translate-y-0 transition-[opacity,transform] min-w-0">
+                                      {project.technologies.slice(0, 4).map((tech, techIndex) => (
+                                        <span 
+                                          key={tech} 
+                                          className="glass-effect px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 border border-cyan-500/20 group-hover:border-cyan-500/60 group-hover:text-cyan-400 group-hover:bg-cyan-500/10 group-hover:shadow-lg group-hover:shadow-cyan-500/30 transition-[border-color,color,background-color,box-shadow] duration-200 transform group-hover:scale-[1.03] whitespace-nowrap"
+                                          style={{ transitionDelay: `${techIndex * 30 + 150}ms` }}
+                                        >
+                                          {tech}
+                                        </span>
+                                      ))}
+                                      {project.technologies.length > 4 && (
+                                        <span className="glass-effect px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 border border-cyan-500/20 group-hover:border-cyan-500/60 group-hover:text-cyan-400 group-hover:bg-cyan-500/10 transition-[border-color,color,background-color] duration-200 whitespace-nowrap">
+                                          +{project.technologies.length - 4}
+                                        </span>
+                                      )}
+                                    </div>
+
+                                    {/* CTA Button - Enhanced */}
+                                    <div className="group/btn relative mt-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150 transform translate-y-2 group-hover:translate-y-0 transition-[opacity,transform]">
+                                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-200"></div>
+                                      <div className="relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-xl font-semibold text-base overflow-hidden">
+                                        <span className="relative z-10 flex items-center justify-center gap-2">
+                                          View Project
+                                          <svg className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                          </svg>
+                                        </span>
+                                        <span className="absolute inset-0 bg-white/20 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-200 blur-xl"></span>
+                                        <span className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-purple-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-200"></span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+                                {/* Corner Accent */}
+                                <div className="absolute top-4 right-4 w-3 h-3 bg-gradient-to-br from-cyan-400 to-purple-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:scale-150 group-hover:blur-sm"></div>
+                              </div>
+                            </a>
+                          </div>
+                        ))}
                       </div>
-                    </div>
-                  ))}
-                </div>
+
+                      {remainingProjects.length > 0 && (
+                        <div className="flex justify-center mt-12">
+                          <button
+                            onClick={() => setShowAllProjects(!showAllProjects)}
+                            className="group relative px-8 py-4 bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 text-white rounded-full font-semibold hover:border-cyan-500/50 hover:bg-slate-800/60 transition-all duration-300 overflow-hidden"
+                          >
+                            <span className="relative z-10 flex items-center gap-3">
+                              {showAllProjects ? (
+                                <>
+                                  <span>Show Less</span>
+                                  <svg className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                                  </svg>
+                                </>
+                              ) : (
+                                <>
+                                  <span>View {remainingProjects.length} More Projects</span>
+                                  <svg className="w-5 h-5 group-hover:translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                  </svg>
+                                </>
+                              )}
+                            </span>
+                            <span className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                          </button>
+                        </div>
+                      )}
+                    </>
+                  );
+                })()}
               </div>
               <div className="section-divider"></div>
             </section>
@@ -388,8 +470,6 @@ function App() {
             <Resume />
           </main>
         </ScrollAnimations>
-
-        <BackgroundMusic theme={theme} />
         
         <div className="fixed bottom-2 left-2 z-30 md:left-20">
           <div className={`glass-effect px-3 py-2 rounded-lg text-xs opacity-70 hover:opacity-100 transition-all duration-300 border border-cyan-500/20 hover:border-cyan-500/50 ${

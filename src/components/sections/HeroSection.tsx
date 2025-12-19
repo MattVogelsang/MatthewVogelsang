@@ -1,20 +1,76 @@
 import { Github, Linkedin, Mail, Code, Zap, Globe, ArrowDown } from 'lucide-react';
+import { useEffect, useState } from 'react';
 import subjectImage from '../../images/Subject1.png';
 
 const HeroSection = () => {
+  const [particles, setParticles] = useState<Array<{
+    id: number;
+    left: number;
+    top: number;
+    size: number;
+    color: string;
+    delay: number;
+    duration: number;
+  }>>([]);
+
+  useEffect(() => {
+    // Generate random particles - LOTS of them!
+    const particleCount = 1000;
+    const newParticles = Array.from({ length: particleCount }, (_, i) => ({
+      id: i,
+      left: Math.random() * 100,
+      top: 80 + Math.random() * 20, // Start closer to viewport
+      size: 1.5 + Math.random() * 4,
+      color: Math.random() > 0.5 ? 'rgba(6, 182, 212, 0.5)' : 'rgba(167, 139, 250, 0.5)', // cyan or purple
+      delay: Math.random() * 2, // Much shorter delay - particles appear almost immediately
+      duration: 4 + Math.random() * 6, // Faster movement - 4-10 seconds instead of 8-23
+    }));
+    setParticles(newParticles);
+  }, []);
   return (
     <section 
       id="home" 
       className="relative min-h-screen w-full overflow-hidden bg-slate-950"
     >
-      {/* Animated Gradient Orbs */}
+      {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Animated Gradient Orbs */}
         <div className="absolute top-0 left-0 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-      </div>
+        
+        {/* Moving Gradient Blobs */}
+        <div className="absolute top-1/4 left-1/4 w-72 h-72 bg-cyan-500/10 rounded-full blur-3xl floating"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl floating" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-cyan-500/5 to-purple-500/5 rounded-full blur-3xl floating-slow"></div>
+        
+        {/* Animated Mesh Gradient */}
+        <div className="absolute inset-0 pointer-events-none opacity-60" style={{
+          background: 'radial-gradient(circle at 20% 50%, rgba(6, 182, 212, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.15) 0%, transparent 50%), radial-gradient(circle at 40% 20%, rgba(6, 182, 212, 0.1) 0%, transparent 50%)',
+          backgroundSize: '200% 200%',
+          animation: 'gradient-shift 15s ease infinite'
+        }}></div>
 
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 via-transparent to-purple-500/5 pointer-events-none z-0"></div>
+        {/* Floating Particles */}
+        {particles.map((particle) => (
+          <div
+            key={particle.id}
+            className="absolute rounded-full pointer-events-none"
+            style={{
+              left: `${particle.left}%`,
+              top: `${particle.top}%`,
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
+              background: `radial-gradient(circle, ${particle.color} 0%, transparent 70%)`,
+              filter: 'blur(1px)',
+              animation: `float-particle ${particle.duration}s linear infinite`,
+              animationDelay: `${particle.delay}s`,
+            }}
+          />
+        ))}
+
+        {/* Gradient Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-purple-500/10 pointer-events-none"></div>
+      </div>
 
       {/* Left Vertical Icon Sidebar */}
       <div className="hidden md:flex fixed left-4 top-1/2 -translate-y-1/2 z-40 flex-col items-center space-y-6">

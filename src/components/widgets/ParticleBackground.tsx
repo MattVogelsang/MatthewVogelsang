@@ -193,7 +193,7 @@ redesign-portfolio
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    animate();
+    animate(0);
 
     // Handle resize
     const handleResize = () => {

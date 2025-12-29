@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
+// Three.js particle background component for hero section
 export default function ParticleBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
 

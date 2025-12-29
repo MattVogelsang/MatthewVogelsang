@@ -7,9 +7,11 @@ export default function ParticleBackground() {
   useEffect(() => {
     if (!containerRef.current) return;
 
+redesign-portfolio
     // Detect mobile device
     const isMobile = window.innerWidth <= 768 || /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
+ main
     // Scene setup
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(
@@ -20,6 +22,7 @@ export default function ParticleBackground() {
     );
     camera.position.z = 5;
 
+ redesign-portfolio
     // Optimize renderer for mobile
     const renderer = new THREE.WebGLRenderer({ 
       alpha: true, 
@@ -33,6 +36,15 @@ export default function ParticleBackground() {
 
     // Create particles - reduce count on mobile
     const particlesCount = isMobile ? 200 : 800;
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    renderer.setSize(containerRef.current.clientWidth, containerRef.current.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    containerRef.current.appendChild(renderer.domElement);
+
+    // Create particles
+    const particlesCount = 800;
+ main
     const positions = new Float32Array(particlesCount * 3);
     const colors = new Float32Array(particlesCount * 3);
     const sizes = new Float32Array(particlesCount);
@@ -64,9 +76,11 @@ export default function ParticleBackground() {
     particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
     particlesGeometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
 
+ redesign-portfolio
     // Store initial positions for wave motion
     const initialPositions = new Float32Array(positions);
 
+ main
     const particlesMaterial = new THREE.ShaderMaterial({
       vertexColors: true,
       blending: THREE.AdditiveBlending,
@@ -112,6 +126,7 @@ export default function ParticleBackground() {
     // Animation
     const clock = new THREE.Clock();
     let animationFrameId: number;
+ redesign-portfolio
     let lastTime = 0;
     const targetFPS = isMobile ? 30 : 60; // Lower FPS on mobile
     const frameInterval = 1000 / targetFPS;
@@ -134,10 +149,23 @@ export default function ParticleBackground() {
         particles.rotation.x = target.y * 0.5;
       }
 
+
+    const animate = () => {
+      const elapsedTime = clock.getElapsedTime();
+
+      // Smooth mouse follow
+      target.x += (mouse.x * 0.2 - target.x) * 0.05;
+      target.y += (mouse.y * 0.2 - target.y) * 0.05;
+
+      particles.rotation.y = target.x * 0.5;
+      particles.rotation.x = target.y * 0.5;
+ main
+
       // Gentle rotation
       particles.rotation.y += 0.0005;
       particles.rotation.x += 0.0003;
 
+ redesign-portfolio
       // Wave motion - simplified on mobile
       const positionsArray = particles.geometry.attributes.position.array as Float32Array;
       const waveIntensity = isMobile ? 0.3 : 0.5; // Reduced wave motion on mobile
@@ -150,6 +178,14 @@ export default function ParticleBackground() {
         positionsArray[i3] = baseX + Math.sin(elapsedTime * 0.5 + i * 0.01) * waveIntensity;
         positionsArray[i3 + 1] = baseY + Math.cos(elapsedTime * 0.3 + i * 0.01) * waveIntensity;
         positionsArray[i3 + 2] = baseZ + Math.sin(elapsedTime * 0.4 + i * 0.01) * waveIntensity;
+
+      // Wave motion
+      const positionsArray = particles.geometry.attributes.position.array as Float32Array;
+      for (let i = 0; i < particlesCount; i++) {
+        const i3 = i * 3;
+        positionsArray[i3 + 1] += Math.sin(elapsedTime + positionsArray[i3]) * 0.001;
+        positionsArray[i3] += Math.cos(elapsedTime + positionsArray[i3 + 1]) * 0.001;
+ main
       }
       particles.geometry.attributes.position.needsUpdate = true;
 

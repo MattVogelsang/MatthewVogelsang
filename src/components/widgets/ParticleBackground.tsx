@@ -170,7 +170,7 @@ export default function ParticleBackground() {
 
     window.addEventListener('resize', handleResize);
 
-    // Cleanup
+    // Cleanup function
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);

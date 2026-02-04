@@ -769,13 +769,73 @@ input[type="range"]::-moz-range-thumb:active {
 
 @media (max-width: 768px) {
   .glass-effect {
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
   }
   
   .floating-tech,
   .floating {
     animation-duration: 10s !important;
+  }
+
+  /* Disable heavy animations on mobile */
+  .animate-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: opacity 0.3s ease !important;
+  }
+
+  /* Reduce transform animations */
+  * {
+    will-change: auto !important;
+  }
+
+  /* Optimize scrolling */
+  html {
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: auto;
+  }
+
+  /* Reduce blur effects */
+  .blur-3xl {
+    display: none;
+  }
+
+  /* Simplify gradients */
+  .mesh-gradient::before {
+    display: none;
+  }
+
+  /* Disable hover effects on touch devices */
+  @media (hover: none) {
+    .hover\:scale-105:hover,
+    .hover\:scale-110:hover,
+    .hover\:scale-\[1\.02\]:hover {
+      transform: none !important;
+    }
+    .group:hover .group-hover\:scale-110,
+    .group:hover .group-hover\:scale-105 {
+      transform: none !important;
+    }
+    .group:hover .group-hover\:brightness-110 {
+      filter: none !important;
+    }
+  }
+
+  /* Prevent scroll blocking */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Optimize rendering */
+  section {
+    contain: layout style paint;
+  }
+
+  /* Reduce repaints */
+  .glass-effect {
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
   }
 
   input[type="range"]::-webkit-slider-thumb {

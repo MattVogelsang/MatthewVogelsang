@@ -17,6 +17,16 @@
       <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     </noscript>
     <title>Matt Vogelsang | Full-Stack Engineer</title>
+    <script>
+      // Initialize theme synchronously before React renders to prevent flicker
+      (function() {
+        const savedTheme = localStorage.getItem('portfolio-theme') || 'theme1';
+        document.documentElement.classList.add(savedTheme);
+        if (savedTheme === 'theme1') {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

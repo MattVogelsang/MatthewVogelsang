@@ -3,7 +3,6 @@ import Header from './components/layout/Header';
 import HeroSection from './components/sections/HeroSection';
 import BackgroundMusic from './components/widgets/BackgroundMusic';
 import ScrollAnimations from './components/layout/ScrollAnimations';
-import Resume from './components/sections/Resume';
 import { projects } from './data/projects';
 import { skillCategories } from './data/skills';
 import { 
@@ -27,21 +26,26 @@ import {
   SiStripe,
 } from 'react-icons/si';
 import { FaReact, FaNode, FaGitAlt } from 'react-icons/fa';
-import { Layout, Zap, Globe, Palette, Settings } from 'lucide-react';
+import { Layout, Zap, Globe, Palette, Settings, Mail, MapPin, Send, Download, ExternalLink, ChevronDown, ChevronUp } from 'lucide-react';
+import umFullStackImg from './images/UMFULLSTACK.jpg';
+import ibmDataAnalystImg from './images/IMBDATAANALYST.jpg';
 
 
 
 function App() {
-  const [theme, setTheme] = useState<'theme1' | 'theme2'>('theme1');
-  const [showAllProjects, setShowAllProjects] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('portfolio-theme') as 'theme1' | 'theme2' | null;
-    if (savedTheme) {
-      setTheme(savedTheme);
+  // Initialize theme synchronously from localStorage to prevent flicker
+  const [theme, setTheme] = useState<'theme1' | 'theme2'>(() => {
+    if (typeof window !== 'undefined') {
+      return (localStorage.getItem('portfolio-theme') as 'theme1' | 'theme2') || 'theme1';
     }
-  }, []);
+    return 'theme1';
+  });
+  const [showAllProjects, setShowAllProjects] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
 
   const toggleTheme = () => {
     const newTheme = theme === 'theme1' ? 'theme2' : 'theme1';
@@ -49,27 +53,33 @@ function App() {
     localStorage.setItem('portfolio-theme', newTheme);
   };
 
-  useEffect(() => {
-    document.title = 'Matt Vogelsang | Full Stack Developer';
-    document.documentElement.classList.remove('theme1', 'theme2', 'dark');
-    document.documentElement.classList.add(theme);
-    if (theme === 'theme1') {
-      document.documentElement.classList.add('dark');
-    }
-  }, [theme]);
+  const handleResumeDownload = () => {
+    const link = document.createElement('a');
+    link.href = '/Matthew-Vogelsang-Full Stack Developer...pdf';
+    link.download = 'Matthew-Vogelsang-Full-Stack-Developer-Resume.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   useEffect(() => {
-    // Page load animation
-    const timer = setTimeout(() => {
-      setIsLoaded(true);
-    }, 100);
-    return () => clearTimeout(timer);
-  }, []);
+    document.title = 'Matt Vogelsang | Full Stack Developer';
+    // Only update if theme changed (already set in index.html)
+    const currentTheme = document.documentElement.classList.contains('theme1') ? 'theme1' : 
+                        document.documentElement.classList.contains('theme2') ? 'theme2' : null;
+    if (currentTheme !== theme) {
+      document.documentElement.classList.remove('theme1', 'theme2', 'dark');
+      document.documentElement.classList.add(theme);
+      if (theme === 'theme1') {
+        document.documentElement.classList.add('dark');
+      }
+    }
+  }, [theme]);
 
   return (
     <div className={theme}>
       <BackgroundMusic theme={theme} />
-      <div className={`min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 text-gray-900 dark:text-white relative overflow-x-hidden transition-all duration-1000 ease-out ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+      <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-blue-50 dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 text-gray-900 dark:text-white relative overflow-x-hidden">
         <ScrollAnimations>
           <Header
             theme={theme}
@@ -229,134 +239,97 @@ function App() {
               <div className="section-divider"></div>
             </section>
 
-            <section id="projects" className="py-20 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-50/50 dark:via-gray-900/50 to-transparent"></div>
-              <div className="section-divider"></div>
-              <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
-                <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text animate-on-scroll">
-                  Featured Projects
-                </h2>
-                
+            <section id="projects" className="relative py-20 md:py-32 px-4 md:px-6 overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-50/50 dark:via-gray-900/50 to-transparent" />
+              <div className="section-divider" />
+              <div className="max-w-7xl mx-auto relative z-10">
+                <div className="text-center mb-16 animate-on-scroll">
+                  <span className="text-cyan-400 font-medium tracking-widest text-sm">PORTFOLIO</span>
+                  <h2 className="text-4xl md:text-5xl font-bold mt-4 gradient-text">
+                    Featured Projects
+                  </h2>
+                  <p className="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">
+                    A selection of projects that showcase my skills and passion for building exceptional web experiences.
+                  </p>
+                </div>
+
                 {(() => {
-                  const featuredProjects = projects.filter(project => project.featured);
-                  const topProjects = featuredProjects.slice(0, 5);
-                  const remainingProjects = featuredProjects.slice(5);
-                  const displayedProjects = showAllProjects ? featuredProjects : topProjects;
+                  const featuredProjects = projects.filter((p) => p.featured);
+                  const initialCount = 4;
+                  const remainingCount = featuredProjects.length - initialCount;
+                  const displayedProjects = showAllProjects ? featuredProjects : featuredProjects.slice(0, initialCount);
 
                   return (
                     <>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6 sm:gap-8 lg:gap-10">
-                        {displayedProjects.map((project, index) => (
-                          <div 
-                            key={project.id} 
-                            className="animate-on-scroll group transition-all duration-700 ease-out"
-                            style={{ animationDelay: `${index * 0.05}s` }}
-                          >
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {displayedProjects.map((project, i) => {
+                          const titleParts = project.title.split(' - ');
+                          const projectTitle = titleParts[0] ?? project.title;
+                          const projectSubtitle = titleParts.slice(1).join(' - ') || project.category || '';
+                          return (
                             <a
+                              key={project.id}
                               href={project.demoUrl}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="block h-full"
+                              className={`animate-on-scroll group relative rounded-3xl overflow-hidden block ${project.featured ? 'md:col-span-1' : ''}`}
+                              style={{ animationDelay: `${Math.min(i * 0.1, 0.4)}s` }}
                             >
-                              <div className="glass-effect px-10 py-8 pb-8 rounded-3xl h-full flex flex-col relative overflow-visible cursor-pointer transition-[transform,box-shadow,border-color,background] duration-300 hover:scale-[1.01] hover:shadow-2xl hover:shadow-cyan-500/30 hover:border-cyan-500/60 border-2 border-transparent group-hover:bg-gradient-to-br group-hover:from-cyan-500/5 group-hover:to-purple-500/5">
-                                {/* Enhanced Glow Effect */}
-                                <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-purple-500/0 to-cyan-500/0 group-hover:from-cyan-500/20 group-hover:via-purple-500/20 group-hover:to-cyan-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-2xl -z-10"></div>
-                                
-                                {/* Image Section - Always Visible */}
-                                <div className="relative mb-6 overflow-hidden rounded-2xl">
-                                  <img
-                                    src={project.imageUrl}
-                                    alt={project.title}
-                                    loading="lazy"
-                                    decoding="async"
-                                    className="w-full h-64 md:h-72 object-cover transition-[transform,filter] duration-300 group-hover:scale-110 group-hover:brightness-110"
-                                  />
-                                  {/* Gradient Overlay */}
-                                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-                                  {/* Shine Effect - Removed for performance */}
-                                </div>
+                              <div className="absolute inset-0 bg-gradient-to-br from-cyan-600/20 to-purple-600/20 opacity-0 md:group-hover:opacity-100 transition-opacity duration-500 z-10" />
 
-                                {/* Title - Always Visible */}
-                                <h3 className="text-2xl md:text-3xl font-bold mb-4 text-gray-800 dark:text-gray-200 group-hover:text-cyan-400 dark:group-hover:text-cyan-400 transition-colors duration-300 relative">
-                                  {project.title}
-                                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-purple-400 group-hover:w-full transition-all duration-500"></span>
-                                </h3>
-
-                                {/* Dropdown Content - Hidden until hover */}
-                                <div className="overflow-hidden max-h-0 group-hover:max-h-[600px] transition-[max-height] duration-300 ease-out">
-                                  <div className="pt-2">
-                                    {/* Description */}
-                                    <p className="text-gray-600 dark:text-gray-300 mb-6 text-base leading-relaxed group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors duration-200 opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-[opacity,transform] duration-300 delay-50">
-                                      {project.description}
-                                    </p>
-
-                                    {/* Tech Stack - Enhanced */}
-                                    <div className="flex flex-wrap gap-2 mb-6 px-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100 transform translate-y-2 group-hover:translate-y-0 transition-[opacity,transform] min-w-0">
-                                      {project.technologies.slice(0, 4).map((tech, techIndex) => (
-                                        <span 
-                                          key={tech} 
-                                          className="glass-effect px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 border border-cyan-500/20 group-hover:border-cyan-500/60 group-hover:text-cyan-400 group-hover:bg-cyan-500/10 group-hover:shadow-lg group-hover:shadow-cyan-500/30 transition-[border-color,color,background-color,box-shadow] duration-200 transform group-hover:scale-[1.03] whitespace-nowrap"
-                                          style={{ transitionDelay: `${techIndex * 30 + 150}ms` }}
-                                        >
-                                          {tech}
-                                        </span>
-                                      ))}
-                                      {project.technologies.length > 4 && (
-                                        <span className="glass-effect px-4 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 border border-cyan-500/20 group-hover:border-cyan-500/60 group-hover:text-cyan-400 group-hover:bg-cyan-500/10 transition-[border-color,color,background-color] duration-200 whitespace-nowrap">
-                                          +{project.technologies.length - 4}
-                                        </span>
-                                      )}
-                                    </div>
-
-                                    {/* CTA Button - Enhanced */}
-                                    <div className="group/btn relative mt-auto opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150 transform translate-y-2 group-hover:translate-y-0 transition-[opacity,transform]">
-                                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-200"></div>
-                                      <div className="relative px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-xl font-semibold text-base overflow-hidden">
-                                        <span className="relative z-10 flex items-center justify-center gap-2">
-                                          View Project
-                                          <svg className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                          </svg>
-                                        </span>
-                                        <span className="absolute inset-0 bg-white/20 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-200 blur-xl"></span>
-                                        <span className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-purple-600 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-200"></span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-
-                                {/* Corner Accent */}
-                                <div className="absolute top-4 right-4 w-3 h-3 bg-gradient-to-br from-cyan-400 to-purple-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 group-hover:scale-150 group-hover:blur-sm"></div>
+                              <div className="relative h-72 overflow-hidden">
+                                <img
+                                  src={project.imageUrl}
+                                  alt={project.title}
+                                  loading="lazy"
+                                  decoding="async"
+                                  className="w-full h-full object-cover transition-transform duration-700 md:group-hover:scale-110"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-gray-900 dark:from-[#050810] via-gray-900/50 dark:via-[#050810]/50 to-transparent" />
                               </div>
+
+                              <div className="absolute inset-0 flex flex-col justify-end p-6 z-20">
+                                <div className="flex flex-wrap gap-2 mb-3 opacity-0 translate-y-4 md:group-hover:opacity-100 md:group-hover:translate-y-0 transition-all duration-300 delay-100">
+                                  {project.technologies.slice(0, 4).map((tag) => (
+                                    <span
+                                      key={tag}
+                                      className="px-3 py-1 rounded-full bg-white/10 backdrop-blur-sm text-xs text-white"
+                                    >
+                                      {tag}
+                                    </span>
+                                  ))}
+                                </div>
+
+                                <h3 className="text-xl font-bold text-white md:group-hover:text-transparent md:group-hover:bg-gradient-to-r md:group-hover:from-cyan-400 md:group-hover:to-purple-400 md:group-hover:bg-clip-text transition-all duration-300">
+                                  {projectTitle}
+                                </h3>
+                                <p className="text-sm text-gray-400 mb-2">{projectSubtitle}</p>
+
+                                <p className="text-sm text-gray-300 leading-relaxed opacity-0 max-h-0 md:group-hover:opacity-100 md:group-hover:max-h-24 transition-all duration-500 overflow-hidden">
+                                  {project.description}
+                                </p>
+
+                                <div className="flex items-center gap-2 mt-3 text-cyan-400 opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
+                                  <span className="text-sm">View Project</span>
+                                  <ExternalLink className="w-4 h-4" />
+                                </div>
+                              </div>
+
+                              <div className="absolute inset-0 rounded-3xl border border-white/10 md:group-hover:border-cyan-500/50 transition-colors duration-300 pointer-events-none z-30" />
                             </a>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
 
-                      {remainingProjects.length > 0 && (
-                        <div className="flex justify-center mt-12">
+                      {remainingCount > 0 && (
+                        <div className="flex justify-center mt-12 animate-on-scroll">
                           <button
+                            type="button"
                             onClick={() => setShowAllProjects(!showAllProjects)}
-                            className="group relative px-8 py-4 bg-slate-800/40 backdrop-blur-xl border border-slate-700/50 text-white rounded-full font-semibold hover:border-cyan-500/50 hover:bg-slate-800/60 transition-all duration-300 overflow-hidden"
+                            className="flex items-center gap-2 px-8 py-4 rounded-full glass-effect border border-white/10 hover:bg-white/10 hover:border-cyan-500/50 dark:hover:border-cyan-500/50 transition-all duration-300 text-gray-800 dark:text-white"
                           >
-                            <span className="relative z-10 flex items-center gap-3">
-                              {showAllProjects ? (
-                                <>
-                                  <span>Show Less</span>
-                                  <svg className="w-5 h-5 group-hover:-translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-                                  </svg>
-                                </>
-                              ) : (
-                                <>
-                                  <span>View {remainingProjects.length} More Projects</span>
-                                  <svg className="w-5 h-5 group-hover:translate-y-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                  </svg>
-                                </>
-                              )}
-                            </span>
-                            <span className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+                            <span>{showAllProjects ? 'Show Less' : `View ${remainingCount} More Projects`}</span>
+                            {showAllProjects ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
                           </button>
                         </div>
                       )}
@@ -364,110 +337,171 @@ function App() {
                   );
                 })()}
               </div>
-              <div className="section-divider"></div>
+              <div className="section-divider" />
             </section>
 
-            <section id="contact" className="py-20 pb-32 md:pb-20 bg-gray-50/50 dark:bg-gray-900/50 relative overflow-hidden">
+            <section id="contact" className="relative py-20 md:py-32 px-4 md:px-6 bg-gray-50/50 dark:bg-gray-900/50 overflow-hidden">
+              {/* Background - Simplified on mobile */}
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent via-purple-950/5 md:via-purple-950/10 dark:via-purple-950/10 md:dark:via-purple-950/20 to-transparent" />
               <div className="section-divider"></div>
-              <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl relative z-10">
-                <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text animate-on-scroll">
-                  Get In Touch
-                </h2>
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+              
+              <div className="max-w-7xl mx-auto relative z-10">
+                {/* Section Header */}
+                <div className="text-center mb-16 animate-on-scroll">
+                  <span className="text-cyan-400 dark:text-cyan-400 font-medium tracking-widest text-sm">LET'S CONNECT</span>
+                  <h2 className="text-4xl md:text-5xl font-bold mt-4 gradient-text">
+                    Get In Touch
+                  </h2>
+                  <p className="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">
+                    I'm always interested in new opportunities and exciting projects. Let's create something amazing together.
+                  </p>
+                </div>
+
+                <div className="grid lg:grid-cols-2 gap-12">
+                  {/* Contact Form */}
                   <div className="animate-on-scroll">
-                    <div className="glass-effect p-8 rounded-3xl h-full">
-                      <h3 className="text-3xl font-bold mb-6 gradient-text">Let's Work Together</h3>
-                      <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-10 leading-relaxed">
-                        I'm always interested in new opportunities and exciting projects. 
-                        Whether you have a question or just want to say hi, feel free to reach out!
-                      </p>
-                      <div className="space-y-6">
-                        <div className="group flex items-center space-x-4 p-4 rounded-2xl hover:bg-cyan-500/10 transition-all duration-300">
-                          <div className="w-14 h-14 glass-effect rounded-full flex items-center justify-center text-2xl group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-cyan-500/50 transition-all duration-300">
-                            📧
-                          </div>
-                          <div>
-                            <div className="font-semibold text-gray-800 dark:text-gray-200 mb-1">Email</div>
-                            <a 
-                              href="mailto:vogelsangmatt@gmail.com"
-                              className="text-gray-600 dark:text-gray-400 hover:text-cyan-400 dark:hover:text-cyan-400 transition-colors duration-300 text-sm md:text-base"
-                            >
-                              vogelsangmatt@gmail.com
-                            </a>
-                          </div>
-                        </div>
-                        <div className="group flex items-center space-x-4 p-4 rounded-2xl hover:bg-purple-500/10 transition-all duration-300">
-                          <div className="w-14 h-14 glass-effect rounded-full flex items-center justify-center text-2xl group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-purple-500/50 transition-all duration-300">
-                            📍
-                          </div>
-                          <div>
-                            <div className="font-semibold text-gray-800 dark:text-gray-200 mb-1">Location</div>
-                            <div className="text-gray-600 dark:text-gray-400 text-sm md:text-base">South Florida, USA</div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="animate-on-scroll">
-                    <div className="glass-effect p-8 rounded-3xl">
+                    <div className="p-8 rounded-3xl glass-effect border border-white/10 dark:border-white/10">
+                      <h3 className="text-2xl font-bold mb-6 gradient-text">Send a Message</h3>
+                      
                       <form 
                         action="https://formspree.io/f/mvgqglbw" 
                         method="POST"
                         className="space-y-6"
                       >
                         <div>
-                          <label htmlFor="name" className="block text-sm font-semibold mb-3 text-gray-700 dark:text-gray-300">Name</label>
+                          <label htmlFor="contact-name" className="block text-sm text-gray-600 dark:text-gray-400 mb-2">Name</label>
                           <input
-                            id="name"
+                            id="contact-name"
                             name="name"
                             type="text"
                             required
-                            className="w-full px-5 py-4 glass-effect border border-cyan-500/30 rounded-xl bg-white/5 dark:bg-black/20 text-gray-800 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 focus:outline-none transition-all duration-300 focus:shadow-lg focus:shadow-cyan-500/20"
+                            value={formData.name}
+                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                             placeholder="Your name"
+                            className="w-full px-5 py-4 glass-effect border border-cyan-500/30 dark:border-white/10 rounded-xl bg-white/5 dark:bg-white/5 text-gray-800 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 dark:focus:border-cyan-500/50 focus:outline-none transition-all duration-300"
                           />
                         </div>
+                        
                         <div>
-                          <label htmlFor="email" className="block text-sm font-semibold mb-3 text-gray-700 dark:text-gray-300">Email</label>
+                          <label htmlFor="contact-email" className="block text-sm text-gray-600 dark:text-gray-400 mb-2">Email</label>
                           <input
-                            id="email"
+                            id="contact-email"
                             name="email"
                             type="email"
                             required
-                            className="w-full px-5 py-4 glass-effect border border-cyan-500/30 rounded-xl bg-white/5 dark:bg-black/20 text-gray-800 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 focus:outline-none transition-all duration-300 focus:shadow-lg focus:shadow-cyan-500/20"
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                             placeholder="your@email.com"
+                            className="w-full px-5 py-4 glass-effect border border-cyan-500/30 dark:border-white/10 rounded-xl bg-white/5 dark:bg-white/5 text-gray-800 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 dark:focus:border-cyan-500/50 focus:outline-none transition-all duration-300"
                           />
                         </div>
+                        
                         <div>
-                          <label htmlFor="message" className="block text-sm font-semibold mb-3 text-gray-700 dark:text-gray-300">Message</label>
+                          <label htmlFor="contact-message" className="block text-sm text-gray-600 dark:text-gray-400 mb-2">Message</label>
                           <textarea
-                            id="message"
+                            id="contact-message"
                             name="message"
-                            rows={4}
                             required
-                            className="w-full px-5 py-4 glass-effect border border-cyan-500/30 rounded-xl bg-white/5 dark:bg-black/20 text-gray-800 dark:text-gray-200 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 focus:outline-none transition-all duration-300 focus:shadow-lg focus:shadow-cyan-500/20 resize-none"
-                            placeholder="Your message..."
-                          ></textarea>
+                            value={formData.message}
+                            onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                            placeholder="Tell me about your project..."
+                            rows={5}
+                            className="w-full px-5 py-4 glass-effect border border-cyan-500/30 dark:border-white/10 rounded-xl bg-white/5 dark:bg-white/5 text-gray-800 dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 dark:focus:border-cyan-500/50 focus:outline-none transition-all duration-300 resize-none"
+                          />
                         </div>
+
                         <button
                           type="submit"
-                          className="group relative w-full px-8 py-4 bg-gradient-to-r from-cyan-500 to-purple-500 text-white rounded-xl font-semibold hover:from-cyan-600 hover:to-purple-600 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-cyan-500/50 overflow-hidden"
+                          className="group relative w-full py-6 bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 text-white font-medium rounded-xl shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all duration-300 transform hover:scale-[1.02] overflow-hidden"
                         >
                           <span className="relative z-10 flex items-center justify-center gap-2">
+                            <Send className="w-4 h-4" />
                             Send Message
-                            <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                            </svg>
                           </span>
                           <span className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"></span>
                         </button>
                       </form>
                     </div>
                   </div>
+
+                  {/* Contact Info & Certifications */}
+                  <div className="space-y-8 animate-on-scroll">
+                    {/* Contact Cards */}
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      <a
+                        href="mailto:vogelsangmatt@gmail.com"
+                        className="p-6 rounded-2xl glass-effect border border-white/10 hover:border-cyan-500/30 transition-all group"
+                      >
+                        <div className="p-3 rounded-xl bg-gradient-to-br from-cyan-500/20 to-purple-500/20 w-fit mb-4">
+                          <Mail className="w-5 h-5 text-cyan-400" />
+                        </div>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Email</p>
+                        <p className="text-gray-800 dark:text-white font-medium group-hover:text-cyan-400 dark:group-hover:text-cyan-400 transition-colors">
+                          vogelsangmatt@gmail.com
+                        </p>
+                      </a>
+
+                      <div className="p-6 rounded-2xl glass-effect border border-white/10">
+                        <div className="p-3 rounded-xl bg-gradient-to-br from-purple-500/20 to-cyan-500/20 w-fit mb-4">
+                          <MapPin className="w-5 h-5 text-purple-400" />
+                        </div>
+                        <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">Location</p>
+                        <p className="text-gray-800 dark:text-white font-medium">South Florida, USA</p>
+                      </div>
+                    </div>
+
+                    {/* Resume Download */}
+                    <div className="p-6 rounded-2xl glass-effect border border-cyan-500/20 bg-gradient-to-br from-cyan-500/10 to-purple-500/10">
+                      <h4 className="text-lg font-semibold mb-2 text-gray-800 dark:text-white">Download Resume</h4>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                        Get a detailed overview of my experience and qualifications.
+                      </p>
+                      <button
+                        onClick={handleResumeDownload}
+                        className="group px-6 py-3 glass-effect border border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 rounded-xl transition-all duration-300 flex items-center gap-2"
+                      >
+                        <Download className="w-4 h-4" />
+                        Download PDF
+                      </button>
+                    </div>
+
+                    {/* Certifications */}
+                    <div>
+                      <h4 className="text-lg font-semibold mb-4 text-gray-800 dark:text-white">Certifications</h4>
+                      <div className="grid sm:grid-cols-2 gap-4">
+                        <div className="group relative rounded-2xl overflow-hidden border border-white/10 md:hover:border-cyan-500/30 transition-all md:hover:scale-[1.02]">
+                          <img
+                            src={umFullStackImg}
+                            alt="Full Stack Developer"
+                            className="w-full h-32 object-cover"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 dark:from-[#050810] via-gray-900/80 dark:via-[#050810]/80 to-transparent flex flex-col justify-end p-4">
+                            <p className="font-medium text-sm text-white">Full Stack Developer</p>
+                            <p className="text-xs text-gray-400">University of Miami</p>
+                          </div>
+                        </div>
+                        <div className="group relative rounded-2xl overflow-hidden border border-white/10 md:hover:border-purple-500/30 transition-all md:hover:scale-[1.02]">
+                          <img
+                            src={ibmDataAnalystImg}
+                            alt="Data Analyst"
+                            className="w-full h-32 object-cover"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-gray-900 dark:from-[#050810] via-gray-900/80 dark:via-[#050810]/80 to-transparent flex flex-col justify-end p-4">
+                            <p className="font-medium text-sm text-white">Data Analyst</p>
+                            <p className="text-xs text-gray-400">IBM</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
+              <div className="section-divider"></div>
             </section>
-
-            <Resume />
           </main>
         </ScrollAnimations>
         

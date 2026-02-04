@@ -1,8 +1,19 @@
 import { Github, Linkedin, Mail, Code, Zap, Globe, ArrowDown } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import subjectImage from '../../images/Subject1.png';
 import ParticleBackground from '../widgets/ParticleBackground';
 
 const HeroSection = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
   return (
     <section 
       id="home" 
@@ -26,8 +37,8 @@ const HeroSection = () => {
           animation: 'gradient-shift 15s ease infinite'
         }}></div>
 
-        {/* Three.js Particle Background */}
-        <ParticleBackground />
+        {/* Three.js Particle Background - Desktop only for performance */}
+        {!isMobile && <ParticleBackground />}
 
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-purple-500/10 pointer-events-none z-10"></div>

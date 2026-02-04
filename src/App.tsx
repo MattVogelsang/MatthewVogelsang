@@ -158,87 +158,6 @@ function App() {
               <div className="section-divider"></div>
             </section>
 
-            <section id="skills" className="py-20 bg-gray-50/50 dark:bg-gray-900/50 relative overflow-hidden">
-              <div className="section-divider"></div>
-              <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-                <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text animate-on-scroll">
-                  Skills & Technologies
-                </h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6">
-                  {skillCategories.flatMap((category) => {
-                    const iconMap: { [key: string]: React.ComponentType<{ className?: string }> } = {
-                      'JavaScript': SiJavascript,
-                      'TypeScript': SiTypescript,
-                      'SQL': SiPostgresql,
-                      'Python': SiPython,
-                      'React': FaReact,
-                      'Vue.js': SiVuedotjs,
-                      'Node.js': FaNode,
-                      'Express.js': SiExpress,
-                      'Tailwind CSS': SiTailwindcss,
-                      'Bootstrap': SiBootstrap,
-                      'WordPress': SiWordpress,
-                      'Sequelize': SiSequelize,
-                      'PostgreSQL': SiPostgresql,
-                      'Git': FaGitAlt,
-                      'Webpack': SiWebpack,
-                      'Vite': SiVite,
-                      'Vercel': SiVercel,
-                      'Netlify': SiNetlify,
-                      'Render': SiRender,
-                      'Stripe': SiStripe,
-                      'Jest/Testing Library': SiJest,
-                      'Figma': SiFigma,
-                      'Responsive Design': Layout,
-                      'Performance Optimization': Zap,
-                      'RESTful API': Globe,
-                      'CI/CD Pipelines': Settings,
-                      'UI/UX Principles': Palette
-                    };
-                    
-                    const categoryColors: { [key: string]: string } = {
-                      languages: 'from-cyan-400 to-cyan-600',
-                      frameworks: 'from-purple-400 to-purple-600',
-                      tools: 'from-blue-400 to-blue-600',
-                      other: 'from-green-400 to-green-600'
-                    };
-                    const gradientClass = categoryColors[category.id] || 'from-cyan-400 to-cyan-600';
-                    
-                    return category.skills.map((skill, index) => {
-                      const IconComponent = iconMap[skill.name] || Globe;
-                      
-                      return (
-                        <div
-                          key={`${category.id}-${skill.name}`}
-                          className="animate-on-scroll group"
-                          style={{ animationDelay: `${index * 0.03}s` }}
-                        >
-                          <div className="glass-effect p-4 sm:p-5 rounded-2xl h-full flex flex-col items-center justify-center text-center hover:scale-105 hover:border-cyan-500/50 transition-all duration-300 relative overflow-hidden">
-                            <div className={`absolute top-2 right-2 w-2 h-2 rounded-full bg-gradient-to-r ${gradientClass} opacity-60 group-hover:opacity-100 transition-opacity duration-300`}></div>
-                            
-                            <div className="mb-3 flex items-center justify-center">
-                              <IconComponent 
-                                className="w-12 h-12 sm:w-16 sm:h-16 text-gray-700 dark:text-gray-300 group-hover:text-cyan-400 dark:group-hover:text-cyan-400 transition-colors duration-300" 
-                              />
-                            </div>
-                            
-                            <div className="font-semibold text-sm sm:text-base text-gray-800 dark:text-gray-200 group-hover:text-cyan-400 dark:group-hover:text-cyan-400 transition-colors duration-300">
-                              {skill.name}
-                            </div>
-                            
-                            <div className="text-xs text-gray-500 dark:text-gray-400 opacity-70 group-hover:opacity-100 transition-opacity duration-300 mt-2">
-                              {category.name}
-                            </div>
-                          </div>
-                        </div>
-                      );
-                    });
-                  })}
-                </div>
-              </div>
-              <div className="section-divider"></div>
-            </section>
-
             <section id="projects" className="relative py-20 md:py-32 px-4 md:px-6 overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-gray-50/50 dark:via-gray-900/50 to-transparent" />
               <div className="section-divider" />
@@ -338,6 +257,87 @@ function App() {
                 })()}
               </div>
               <div className="section-divider" />
+            </section>
+
+            <section id="skills" className="py-20 bg-gray-50/50 dark:bg-gray-900/50 relative overflow-hidden">
+              <div className="section-divider"></div>
+              <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+                <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text animate-on-scroll">
+                  Skills & Technologies
+                </h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 sm:gap-6">
+                  {skillCategories.flatMap((category) => {
+                    const iconMap: { [key: string]: React.ComponentType<{ className?: string }> } = {
+                      'JavaScript': SiJavascript,
+                      'TypeScript': SiTypescript,
+                      'SQL': SiPostgresql,
+                      'Python': SiPython,
+                      'React': FaReact,
+                      'Vue.js': SiVuedotjs,
+                      'Node.js': FaNode,
+                      'Express.js': SiExpress,
+                      'Tailwind CSS': SiTailwindcss,
+                      'Bootstrap': SiBootstrap,
+                      'WordPress': SiWordpress,
+                      'Sequelize': SiSequelize,
+                      'PostgreSQL': SiPostgresql,
+                      'Git': FaGitAlt,
+                      'Webpack': SiWebpack,
+                      'Vite': SiVite,
+                      'Vercel': SiVercel,
+                      'Netlify': SiNetlify,
+                      'Render': SiRender,
+                      'Stripe': SiStripe,
+                      'Jest/Testing Library': SiJest,
+                      'Figma': SiFigma,
+                      'Responsive Design': Layout,
+                      'Performance Optimization': Zap,
+                      'RESTful API': Globe,
+                      'CI/CD Pipelines': Settings,
+                      'UI/UX Principles': Palette
+                    };
+                    
+                    const categoryColors: { [key: string]: string } = {
+                      languages: 'from-cyan-400 to-cyan-600',
+                      frameworks: 'from-purple-400 to-purple-600',
+                      tools: 'from-blue-400 to-blue-600',
+                      other: 'from-green-400 to-green-600'
+                    };
+                    const gradientClass = categoryColors[category.id] || 'from-cyan-400 to-cyan-600';
+                    
+                    return category.skills.map((skill, index) => {
+                      const IconComponent = iconMap[skill.name] || Globe;
+                      
+                      return (
+                        <div
+                          key={`${category.id}-${skill.name}`}
+                          className="animate-on-scroll group"
+                          style={{ animationDelay: `${index * 0.03}s` }}
+                        >
+                          <div className="glass-effect p-4 sm:p-5 rounded-2xl h-full flex flex-col items-center justify-center text-center hover:scale-105 hover:border-cyan-500/50 transition-all duration-300 relative overflow-hidden">
+                            <div className={`absolute top-2 right-2 w-2 h-2 rounded-full bg-gradient-to-r ${gradientClass} opacity-60 group-hover:opacity-100 transition-opacity duration-300`}></div>
+                            
+                            <div className="mb-3 flex items-center justify-center">
+                              <IconComponent 
+                                className="w-12 h-12 sm:w-16 sm:h-16 text-gray-700 dark:text-gray-300 group-hover:text-cyan-400 dark:group-hover:text-cyan-400 transition-colors duration-300" 
+                              />
+                            </div>
+                            
+                            <div className="font-semibold text-sm sm:text-base text-gray-800 dark:text-gray-200 group-hover:text-cyan-400 dark:group-hover:text-cyan-400 transition-colors duration-300">
+                              {skill.name}
+                            </div>
+                            
+                            <div className="text-xs text-gray-500 dark:text-gray-400 opacity-70 group-hover:opacity-100 transition-opacity duration-300 mt-2">
+                              {category.name}
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    });
+                  })}
+                </div>
+              </div>
+              <div className="section-divider"></div>
             </section>
 
             <section id="contact" className="relative py-20 md:py-32 px-4 md:px-6 bg-gray-50/50 dark:bg-gray-900/50 overflow-hidden">
